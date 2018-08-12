@@ -369,17 +369,6 @@ checkbox-highlighted: chrome.png
 	corner-bl: 256,191,1,1
 	corner-br: 287,191,1,1
 
-	#panel-black: chrome.png
-		#background: 66,2,60,60
-		#border-r: 126,2,2,60
-		#border-l: 64,2,2,60
-		#border-b: 66,62,60,2
-		#border-t: 66,0,60,2
-		#corner-tl: 64,0,2,2
-		#corner-tr: 126,0,2,2
-		#corner-bl: 64,62,2,2
-		#corner-br: 126,62,2,2
-
 panel-black: oldbackground.png
 	background: 1,1,510,510
 	border-r: 0,1,1,511
