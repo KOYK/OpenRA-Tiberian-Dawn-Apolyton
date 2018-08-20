@@ -1,26 +1,3 @@
-	#camoUpgrade:
-	#	Inherits@1: ^ExistsInWorld
-	#	Inherits@2: ^UpgradesGlobal
-	#	Tooltip:
-	#		Name: Upgrade Camo
-	#		Description: Upgrade: Camo Net.\nAdd a camouflage net to this pillbox to hide it from enemy vision.
-	#	Buildable:
-	#		Queue: pillbox
-	#		BuildPaletteOrder: 40
-	#		Prerequisites: pbox
-	#	RenderSprites:
-	#		Image: ltnk
-
-	#SHarvrUpgrade:
-
-	#HardrHarvrUpgrade:
-
-	#AdvPowerUpgrade:
-
-	#IonCanUpgrade:
-
-	#TowMslHomveUpgrade:
-
 RESEARCH_ADV_NUKE:
 	Tooltip:
 		Name: Advance Reactors
@@ -48,6 +25,24 @@ RESEARCH_ADV_NUKE:
 	AlwaysVisible:
 	Interactable:
 	ProvidesPrerequisite@research_adv_nuke:
+
+	#camoUpgrade:
+	#	Inherits@1: ^ExistsInWorld
+	#	Inherits@2: ^UpgradesGlobal
+	#	Tooltip:
+	#		Name: Upgrade Camo
+	#		Description: Upgrade: Camo Net.\nAdd a camouflage net to this pillbox to hide it from enemy vision.
+	#	Buildable:
+	#		Queue: pillbox
+	#		BuildPaletteOrder: 40
+	#		Prerequisites: pbox
+	#	RenderSprites:
+	#		Image: ltnk
+	#SHarvrUpgrade:
+	#HardrHarvrUpgrade:
+	#AdvPowerUpgrade:
+	#IonCanUpgrade:
+	#TowMslHomveUpgrade:
 
 RESEARCH_STL_HARV:
 	Tooltip:

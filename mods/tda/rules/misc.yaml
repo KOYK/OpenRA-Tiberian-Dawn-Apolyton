@@ -51,10 +51,15 @@ TibShimmering:
 		Speed: 99999
 		Crushes: byall
 		SharesCell: True
+		Locomotor:
 		TerrainSpeeds:
 			RedTiberium: 100
 			BlueTiberium: 100
 			Tiberium: 100
+			Clear: 0
+			Rough: 0
+			Road: 0
+			Beach: 0
 
 CRATEHEAL:
 	Inherits: ^Crate

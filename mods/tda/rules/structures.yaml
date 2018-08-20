@@ -225,12 +225,12 @@ NUKE:
 		Name: FaultyFailSafe
 		Ammo: 1
 		PipCount: 0
-# too mutch sounds blocking other sounds. i need ambient sounds with range
-	# AmbientSound:
-		# SoundFiles: power.aud
-		# Delay: 5
 	Selectable:  
 		Bounds: 48,48
+	#too mutch sounds blocking other sounds. i need ambient sounds with range
+	#	AmbientSound:
+	#		SoundFiles: power.aud
+	#		Delay: 5
 
 NUK2:
 	Inherits: ^BaseBuilding
@@ -258,7 +258,7 @@ NUK2:
 	WithBuildingBib:
 	Power:
 		Amount: 200
-# ive got the power ntun ntuuun ntuun ntuuun
+	#ive got the power ntun ntuuun ntuun ntuuun
 	ScalePowerWithHealth:
 	Targetable:
 		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagPP
@@ -275,10 +275,10 @@ NUK2:
 		PipCount: 0
 	Selectable:  
 		Bounds: 48,48
-# too mutch sounds blocking other sounds. i need ambient sounds with range
-	# AmbientSound:
-		# SoundFiles: power2.aud
-		# Delay: 5
+	#too mutch sounds blocking other sounds. i need ambient sounds with range
+	#	AmbientSound:
+	#		SoundFiles: power2.aud
+	#		Delay: 5
 
 PROC:
 	Inherits: ^BaseBuilding
@@ -372,7 +372,7 @@ SILO:
 		PipCount: 10
 		PipColor: Green
 		Capacity: 2800
-# you are just full of the stuff arent you?
+	#you are just full of the stuff arent you?
 	-EmitInfantryOnSell:
 	Power:
 		Amount: -10
@@ -1474,11 +1474,11 @@ OBLI:
 		RequiresCondition: !disabled
 	Power:
 		Amount: -100
-	# WithIdleOverlay@LIGHTS:
-		# Sequence: active-lights
-		# Palette: PlayerColorLights
-		# IsPlayerPalette: true
-# this above crashes the game
+	#WithIdleOverlay@LIGHTS:
+	#	Sequence: active-lights
+	#	Palette: PlayerColorLights
+	#	IsPlayerPalette: true
+	#this above crashes the game
 
 GTWR:
 	Inherits: ^Defense
@@ -1779,9 +1779,9 @@ CYCL:
 		Types: chain
 	WithWallSpriteBody:
 		Type: chain
-	# Immobile:
-		# OccupiesSpace: false
-# preserved for electric death
+	#Immobile:
+	#	OccupiesSpace: false
+	#preserved for electric death
 
 BRIK:
 	Inherits: ^Wall
