@@ -2,7 +2,7 @@
 # see travis-ci.org for details
 
 language: csharp
-mono: 4.6.1
+mono: 6.4.0
 sudo: false
 
 addons:
