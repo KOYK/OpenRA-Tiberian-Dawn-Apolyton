@@ -1,0 +1,238 @@
+Sniper:
+	Inherits@1: ^FireTrailS
+	Inherits@2: ^ImpactHitForceBulletLight
+	Inherits@3: ^Sniper
+	Report: ramgun2.aud
+	ValidTargets: Ground, Infantry
+	InvalidTargets: Vehicle, Water, Structure, Wall, Husk, Tank
+	ReloadDelay: 5
+	Range: 8c0
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 42
+		Damage: 10000
+		ValidTargets: Infantry
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+
+Sniper2:
+	Inherits@1: ^ImpactHitForceBulletLight
+	Inherits@3: ^Sniper
+	AfterFireSound: sniperreload.aud
+	AfterFireSoundDelay: 4
+	ValidTargets: Ground, Infantry
+	InvalidTargets: Vehicle, Water, Structure, Wall, Husk, Tank
+	ReloadDelay: 70
+	Range: 10c0
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 42
+		Damage: 400
+		ValidTargets: Infantry
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+
+SilencedPPK:
+	Inherits@1: ^FireTrailS
+	Inherits@2: ^ImpactHitForceBulletLight
+	Inherits@3: ^Sniper
+	ReloadDelay: 40
+	Range: 8c0
+	Report: silencer.aud
+	ValidTargets: Ground, Infantry
+	InvalidTargets: Vehicle, Tank, Water, Structure, Wall, Husk
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: TargetDamage
+		Spread: 128
+		Damage: 30
+		ValidTargets: Infantry
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+
+HighV:
+	Inherits@1: ^FireTrailS
+	Inherits@2: ^ImpactHitForceBulletsLight
+	Inherits@3: ^Gun
+	ReloadDelay: 25
+	Range: 6c0
+	Report: gun8.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 683
+		Damage: 120
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piffs
+
+HighVRA:
+	Inherits@1: ^FireTrailS
+	Inherits@2: ^ImpactHitForceBulletsLight
+	Inherits@3: ^Gun
+	ReloadDelay: 25
+	Range: 6c0
+	Report: gun13.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 683
+		Damage: 120
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piffs
+
+HeliAGGun:
+	Inherits@1: ^FireTrailS
+	Inherits@2: ^ImpactHitForceBulletsLight
+	Inherits@3: ^Gun
+	ReloadDelay: 20
+	Burst: 2
+	BurstDelays: 0
+	Range: 4c0
+	MinRange: 0c768
+	ValidTargets: Infantry
+	InvalidTargets: Vehicle, Water, Structure, Wall, Husk
+	Report: gun5.aud
+	Projectile: Bullet
+		Speed: 1c682
+		Blockable: false
+	Warhead@1Dam: SpreadDamage
+		Spread: 256
+		Damage: 156
+		ValidTargets: Infantry
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piffs
+
+Pistol:
+	Inherits@1: ^ImpactSoundsBullet
+	Inherits@2: ^ImpactHitForceBulletLight
+	Inherits@3: ^Gun
+	ReloadDelay: 7
+	Range: 3c0
+	InvalidTargets: Wall
+	Report: gun18.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: 35
+		InvalidTargets: Wall
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piff
+
+USP45:
+	Inherits@1: ^ImpactSoundsBullet
+	Inherits@2: ^ImpactHitForceBulletLight
+	Inherits@3: ^Gun
+	ReloadDelay: 20
+	Range: 3c0
+	InvalidTargets: Wall
+	Report: usp45.wav
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: 35
+		InvalidTargets: Wall
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piff
+
+M16:
+	Inherits@1: ^ImpactSoundsBullet
+	Inherits@2: ^ImpactHitForceBulletLight
+	Inherits@3: ^Gun
+	ReloadDelay: 35
+	Range: 4c0
+	ValidTargets: Vehicle, Infantry, Ground
+	InvalidTargets: Wall, GroupedInfantry, Tank, Structure
+	Report: mgun2.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: 18
+		InvalidTargets: Wall, Tank, Structure
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piff
+
+MachineGun:
+	Inherits@1: ^ImpactSoundsBullet
+	Inherits@2: ^ImpactHitForceBulletsLight
+	Inherits@3: ^Gun
+	ReloadDelay: 20
+	Burst: 5
+	InvalidTargets: Wall
+	Range: 4c0
+	Report: mgun11.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: 90
+		InvalidTargets: Wall
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piffs
+
+Vulcan:
+	Inherits@1: ^FireTrailS
+	Inherits@2: ^ImpactHitForceBulletsLight
+	Inherits@3: ^Gun
+	ValidTargets: Ground, Water
+	Range: 8c0
+	Burst: 9
+	BurstDelays: 2
+	FirstBurstTargetOffset: -2984,0,0
+	FollowingBurstTargetOffset: 746,0,0
+	ReloadDelay: 125
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 426
+		Damage: 156
+		ValidTargets: Ground, Water
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piffs
+
+HeavyMinigun:
+	Inherits@1: ^FireTrailS
+	Inherits@2: ^ImpactHitForceBulletsLight
+	Inherits@3: ^Gun
+	ValidTargets: Air
+	Range: 14c0
+	ReloadDelay: 15
+	MinRange: 1c0
+	Report: heavyminigun.wav
+	Projectile: Bullet
+		Speed: 1c682
+		LaunchAngle: 2
+	Warhead@1Dam: SpreadDamage
+		Spread: 426
+		Damage: 60
+		ValidTargets: Air
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: piffs
+
+APCGun:
+	Inherits@1: ^ImpactSoundsBullet
+	Inherits@2: ^ImpactHitForceBulletsLight
+	Inherits@3: ^Gun
+	ReloadDelay: 18
+	Range: 5c0
+	Report: gun20.aud
+	ValidTargets: Ground
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: 144
+		ValidTargets: Ground
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: small_poof

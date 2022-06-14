@@ -1,0 +1,2061 @@
+#############################################################################################################
+#											Buildings														#
+#############################################################################################################
+
+FACT:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Valued:
+		Cost: 3500
+	Tooltip:
+		Name: Construction Yard
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 20000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 10
+	RevealsShroud:
+		Range: 14c0
+	WithBuildingBib:
+	SpawnActorsOnSell:
+		ActorTypes: e6,e6,commander,e1,e1,e1,e1,e1,e1
+	Production:
+		Produces: Building.GDI, Building.Nod, Building.Nodda, Defence.GDI, Defence.Nod, Defence.Nodda
+	Transforms:
+		IntoActor: mcv
+		Offset: 1,1
+		Facing: 108
+		RequiresCondition: factundeploy && !build-incomplete
+	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
+		Condition: factundeploy
+		Prerequisites: global-factundeploy
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 0,512,0
+		ExitCell: 1,3
+		ExitDelay: 3
+	ProductionQueue@GDIBuilding:
+		Type: Building.GDI
+		Factions: gdi
+		Group: Building
+		LowPowerModifier: 200
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@NodBuilding:
+		Type: Building.Nod
+		Factions: nod
+		Group: Building
+		LowPowerModifier: 200
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@NoddaBuilding:
+		Type: Building.Nodda
+		Factions: nodda
+		Group: Building
+		LowPowerModifier: 200
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@GDIDefense:
+		Type: Defence.GDI
+		Factions: gdi
+		Group: Defence
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@NodDefense:
+		Type: Defence.Nod
+		Factions: nod
+		Group: Defence
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@NoddaDefense:
+		Type: Defence.Nodda
+		Factions: nodda
+		Group: Defence
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	BaseBuilding:
+	ProductionBar@BuildingGDI:
+		ProductionType: Building.GDI
+	ProductionBar@BuildingNod:
+		ProductionType: Building.Nod
+	ProductionBar@BuildingNodda:
+		ProductionType: Building.Nodda
+	ProductionBar@DefenceGDI:
+		ProductionType: Defence.GDI
+	ProductionBar@DefenceNod:
+		ProductionType: Defence.Nod
+	ProductionBar@DefenceNodda:
+		ProductionType: Defence.Nodda
+	WithBuildingPlacedAnimation:
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		Description: Builds structures
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack, AItagCONS
+	Selectable:
+		Bounds: 72,48
+	BaseProvider:
+		Range: 14c0
+
+OUTPOST:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^1x1Shape
+	Inherits@RA: ^PlayerRApaletteBuilding
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Outpost
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+		LocalCenterOffset: 0,0,0
+	Health:
+		HP: 2300
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 10c0
+	BaseBuilding:
+	BaseProvider:
+		InitialDelay: 750
+		Range: 7c0
+	Power:
+		Amount: 0
+	Buildable:
+		Description: just an other outpost, off you go now
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack
+	Selectable:
+
+NUKE:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@POWER_OUTAGE: ^DisabledByPowerOutage
+	ProvidesPrerequisite:
+		Prerequisite: anypower
+	Building:
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 4000
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+	ScalePowerWithHealth:
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagPP
+	Explodes@Faulty:
+		LoadedChance: 100
+		Chance: 5
+		Type: CenterPosition
+		Weapon: FaultyFailSafe
+		EmptyWeapon: UnitExplodeSmall
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	Explodes@NormalAlways:
+		Chance: 100
+		Type: Footprint
+		Weapon: UnitExplodeSmall
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	Explodes@FaultyUP:
+		LoadedChance: 100
+		Chance: 10
+		Type: CenterPosition
+		Weapon: FaultyFailSafe
+		EmptyWeapon: UnitExplodeSmall
+		RequiresCondition: PowerPlantUpgrade.proximity
+	Explodes@NormalAlwaysUP:
+		Chance: 100
+		Type: Footprint
+		Weapon: UnitExplodeSmall
+		RequiresCondition: PowerPlantUpgrade.proximity
+	Voiced:
+		VoiceSet: Buildings
+		Volume: 2
+	Selectable:
+		Bounds: 48,48
+		Voice: PowerPlant
+	Production:
+		Produces: PowerPlantUpgrade.Nod, PowerPlantUpgrade.Nodda, PowerPlantUpgrade.GDI
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	Sellable:
+		RequiresCondition: !PowerPlantUpgrade.proximity || PowerPlantUpgrade.proximity
+	Exit:
+	ProductionQueue@Nod:
+		Type: PowerPlantUpgrade.Nod
+		Group: Research.Nod
+		LowPowerModifier: 300
+		Factions: nod
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@Nodda:
+		Type: PowerPlantUpgrade.Nodda
+		Group: Research.Nodda
+		LowPowerModifier: 300
+		Factions: nodda
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@GDI:
+		Type: PowerPlantUpgrade.GDI
+		Group: Research.GDI
+		LowPowerModifier: 300
+		Factions: gdi
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	Power@UPGRADED_ON:
+		Amount: 45
+		RequiresCondition: PowerPlantUpgrade.proximity
+	Valued:
+		Cost: 500
+	GrantConditionOnDamageState@UPGRADED_ON:
+		ValidDamageStates: Heavy, Critical
+		Condition: Damaged
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+		DeathSequence: dead
+		FallbackSequence: dead
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	WithDeathAnimation@UPGRADED_ON:
+		UseDeathTypeSuffix: False
+		DeathSequence: upgraded_dead
+		FallbackSequence: upgraded_dead
+		RequiresCondition: PowerPlantUpgrade.proximity
+	ExternalCondition@Upgrade:
+		Condition: PowerPlantUpgrade.proximity
+	ProximityExternalCondition@PowerPlantEXIST:
+		Condition: PowerPlantEXIST.proximity
+		Range: 1c256
+	WithSpriteBody:
+		StartSequence: make
+		Sequence: idle
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	WithSpriteBody@UPGRADED_ON:
+		StartSequence: upgraded_make
+		Sequence: upgraded_idle
+		RequiresCondition: PowerPlantUpgrade.proximity && !Damaged
+	WithIdleOverlay@DAMAGED_UPGRADED_ON:
+		Sequence: upgraded_damaged-idle
+		StartSequence: upgraded_make
+		RequiresCondition: PowerPlantUpgrade.proximity && Damaged
+	ProductionBar@Nod:
+		ProductionType: PowerPlantUpgrade.Nod
+		RequiresCondition: !PowerPlantUpgrade.proximity
+		Color: 8c00ff
+	ProductionBar@Nodda:
+		ProductionType: PowerPlantUpgrade.Nodda
+		RequiresCondition: !PowerPlantUpgrade.proximity
+		Color: 8c00ff
+	ProductionBar@GDI:
+		ProductionType: PowerPlantUpgrade.GDI
+		RequiresCondition: !PowerPlantUpgrade.proximity
+		Color: 8c00ff
+	#too mutch sounds blocking other sounds. i need ambient sounds with range
+	#	AmbientSound:
+	#		SoundFiles: power.aud
+	#		Delay: 5
+
+NUK2:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@POWER_OUTAGE: ^DisabledByPowerOutage
+	ProvidesPrerequisite:
+		Prerequisite: anypower
+	Building:
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 4000
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+	#ive got the power ntun ntuuun ntuun ntuuun
+	ScalePowerWithHealth:
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagPP
+	Explodes@Faulty:
+		LoadedChance: 100
+		Chance: 10
+		Type: CenterPosition
+		Weapon: FaultyFailSafe
+		EmptyWeapon: UnitExplodeSmall
+	Explodes@NormalAlways:
+		Chance: 100
+		Type: Footprint
+		Weapon: UnitExplodeSmall
+	Selectable:
+		Bounds: 48,48
+	#too mutch sounds blocking other sounds. i need ambient sounds with range
+	#	AmbientSound:
+	#		SoundFiles: power2.aud
+	#		Delay: 5
+
+PROC:
+	Inherits: ^BaseBuilding
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Tiberium Refinery
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 10000
+	RevealsShroud:
+		Range: 6c0
+	WithBuildingBib:
+	Refinery:
+		DockAngle: 112
+		DockOffset: 0,2
+		IsDragRequired: True
+		DragOffset: -554,512,0
+		DragLength: 12
+		TickRate: 15
+	StoresResources:
+		PipColor: Green
+		PipCount: 5
+		Capacity: 5000
+	Selectable:
+		Bounds: 72,56
+		DecorationBounds: 73,72
+	CustomSellValue:
+		Value: 500
+	WithResourceLevelOverlay:
+		RequiresCondition: !build-incomplete
+	Power:
+		Amount: -15
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: proc
+	SelectionDecorations:
+	InfiltrateForCash:
+		Percentage: 60
+		Minimum: 1000
+		Maximum: 2147483647
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagREF
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~anypower, ~original_rules_or_coop
+		Queue: Building.GDI, Building.Nod, Building.Nodda
+		Description: Processes raw Tiberium\ninto useable resources
+		BuildDuration: 850
+		BuildDurationModifier: 100
+	FreeActorWithDelivery:
+		Actor: HARV
+		DeliveryOffset: 1,2
+		DeliveringActor: osprey.delivery
+		Facing: 160
+
+REF_TURBO_ON:
+	Inherits: PROC
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~anypower, ~turbo_tiberium
+		Queue: Building.GDI, Building.Nod, Building.Nodda
+		Description: Processes raw Tiberium\ninto useable resources
+		BuildDuration: 850
+		BuildDurationModifier: 100
+	FreeActorWithDelivery:
+		Actor: HARV_BOOST_ON
+		DeliveryOffset: 1,2
+		DeliveringActor: osprey.delivery
+		Facing: 160
+	RenderSprites:
+		Image: proc
+
+REF_TURBO_OFF:
+	Inherits: PROC
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~anypower, ~!turbo_tiberium
+		Queue: Building.GDI, Building.Nod, Building.Nodda
+		Description: Processes raw Tiberium\ninto useable resources
+		BuildDuration: 850
+		BuildDurationModifier: 100
+	FreeActorWithDelivery:
+		Actor: HARV_BOOST_OFF
+		DeliveryOffset: 1,2
+		DeliveringActor: osprey.delivery
+		Facing: 160
+	RenderSprites:
+		Image: proc
+
+SILO:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x1Shape
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Tiberium Silo
+	Buildable:
+		BuildPaletteOrder: 45
+		Prerequisites: ~proc
+		Queue: Defence.GDI, Defence.Nod, Defence.Nodda
+		Description: Stores processed Tiberium
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	-GivesBuildableArea:
+	Health:
+		HP: 1000
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+		HasMinibib: True
+	RenderSprites:
+	WithSpriteBody:
+	-WithSpriteBody:
+	WithResourceLevelSpriteBody:
+		Sequence: stages
+	StoresResources:
+		PipCount: 10
+		PipColor: Green
+		Capacity: 2000
+	#you are just full of the stuff arent you?
+	Power:
+		Amount: 0
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	SelectionDecorations:
+	Selectable:
+		Bounds: 48,24
+		DecorationBounds: 49,30
+
+HPAD:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	ProximityExternalCondition:
+		Condition: OnPad
+		Range: 1c0
+		ValidStances: Ally
+		AffectsParent: False
+	Sellable:
+		RefundPercent: 30
+		RequiresCondition: !Repairing
+	ExternalCondition@REPAIRING:
+		Condition: Repairing
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Helipad
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~anyhq
+		Queue: Building.GDI, Building.Nod
+		Description: Produces, rearms and\nrepairs helicopters
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Health:
+		HP: 3000
+	RevealsShroud:
+		Range: 5c0
+	ProductionFromMapEdge:
+		Produces: Aircraft.GDI, Aircraft.Nod, Aircraft.Nodda
+	Reservable:
+	Exit:
+		SpawnOffset: 0,-256,0
+	RallyPoint:
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	ProductionQueue@GDI:
+		Type: Aircraft.GDI
+		Factions: gdi
+		Group: Aircraft
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@Nod:
+		Type: Aircraft.Nod
+		Factions: nod
+		Group: Aircraft
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@Nodda:
+		Type: Aircraft.Nodda
+		Factions: nodda
+		Group: Aircraft
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@GDI:
+		ProductionType: Aircraft.GDI
+	ProductionBar@Nod:
+		ProductionType: Aircraft.Nod
+	ProductionBar@Nodda:
+		ProductionType: Aircraft.Nodda
+	Power:
+		Amount: -5
+	ProvidesPrerequisite@buildingname:
+	InfiltrateForSupportPower:
+		Proxy: aircraft.upgraded
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack, SpyInfiltrate
+	Selectable:
+		Bounds: 48,48
+
+HQ:
+	Inherits: ^BaseBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
+		Type: Rectangle
+			TopLeft: -1024, -384
+			BottomRight: 1024, 1024
+	Health:
+		HP: 5000
+	ProvidesPrerequisite:
+		Prerequisite: anyhq
+	Building:
+		Footprint: X_ xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Voiced:
+		VoiceSet: Buildings
+		Volume: 2
+	Selectable:
+		Bounds: 48,40,0,9
+		DecorationBounds: 48,53,0,-4
+		Voice: Radar
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	RevealsShroud:
+		Range: 6c0
+	WithBuildingBib:
+	ProvidesRadar:
+		RequiresCondition: !disabled
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 6c0
+	InfiltrateForExploration:
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagHQ
+	AmbientSound:
+		SoundFiles: low_radio.aud
+		Delay: 5
+	Exit:
+	WithDecoration@POWERDOWN:
+		Image: poweroff
+		Sequence: offline
+		Palette: chrome
+		RequiresCondition: powerdown
+		ReferencePoint: Center
+	PowerMultiplier@POWERDOWN:
+		RequiresCondition: powerdown
+		Modifier: 0
+
+FIX:
+	Inherits: ^BaseBuilding
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -683
+			BottomRight: 1536, 768
+	HitShape@TOPANDBOTTOM:
+		TargetableOffsets: 840,0,0, -1060,0,0
+		Type: Rectangle
+			TopLeft: -640, -980
+			BottomRight: 640, 1110
+	ProximityExternalCondition:
+		Condition: OnPad
+		Range: 1c0
+		ValidStances: Ally
+		AffectsParent: False
+	Sellable:
+		RefundPercent: 30
+		RequiresCondition: !Repairing
+	ExternalCondition@REPAIRING:
+		Condition: Repairing
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Repair Facility
+	ProvidesPrerequisite:
+		Prerequisite: anyfix
+	Building:
+		Footprint: _X_ xxx _X_
+		Dimensions: 3,3
+	Selectable:
+		Bounds: 64,34,0,3
+		DecorationBounds: 72,48
+	SelectionDecorations:
+	Health:
+		HP: 2000
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+		HasMinibib: True
+	Reservable:
+	RepairsUnits:
+		Interval: 15
+		PlayerExperience: 0
+	RallyPoint:
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	Power:
+		Amount: -5
+	ProvidesPrerequisite@buildingname:
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack, AItagFIX
+
+#############################################################################################################
+#											Defences														#
+#############################################################################################################
+
+SBAG:
+	Inherits: ^Wall
+	Valued:
+		Cost: 100
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Sandbag Barrier
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~barracks
+		Queue: Defence.GDI, Defence.Nod, Defence.Nodda
+		Description: Stops infantry and light vehicles.\nCan be crushed by tanks.
+		BuildDurationModifier: 200
+	Armor:
+		Type: Light
+	LineBuild:
+		Range: 28
+		NodeTypes: sandbag
+	LineBuildNode:
+		Types: sandbag
+	WithWallSpriteBody:
+		Type: sandbag
+	ProximityExternalCondition@COVER:
+		Condition: Infantry.sandbag
+		Range: 1c255
+	ConditionManager:
+
+CYCL:
+	Inherits: ^Wall
+	Valued:
+		Cost: 50
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Chain Link Barrier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~fact
+		Queue: Defence.GDI, Defence.Nod, Defence.Nodda
+		Description: Stops infantry.\nCan be crushed by vehicles and tanks.
+		BuildDurationModifier: 200
+	Armor:
+		Type: Light
+	Crushable:
+		CrushClasses: lightwall
+	LineBuild:
+		Range: 28
+		NodeTypes: chain
+	LineBuildNode:
+		Types: chain
+	WithWallSpriteBody:
+		Type: chain
+	#Immobile:
+	#	OccupiesSpace: false
+	#preserved for electric death
+
+BRIK:
+	Inherits: ^Wall
+	Valued:
+		Cost: 150
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~vehicleproduction
+		Queue: Defence.GDI, Defence.Nod, Defence.Nodda
+		Description: Stops infantry and most tanks.\nBlocks some projectiles.
+		BuildDurationModifier: 200
+	Health:
+		HP: 250
+	Armor:
+		Type: Heavy
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		Range: 28
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
+	WithWallSpriteBody:
+		Type: concrete
+	RenderSprites:
+		-Palette: staticterrain
+	SelfHealing:
+		Delay: 10
+		HealIfBelow: 50
+		DamageCooldown: 200
+
+VGATE:
+	Inherits: ^Gate
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -1536
+			BottomRight: 512, 1536
+	Building:
+		Footprint: x x x
+		Dimensions: 1,3
+	WithGateSpriteBody:
+		WallConnections: 0,-1, 0,3
+	LineBuildNode:
+		Connections: 0,-1, 0,1
+	Tooltip:
+		Name: Vertical Gate
+	Gate:
+
+HGATE:
+	Inherits: ^Gate
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 512
+	Building:
+		Footprint: xxx
+		Dimensions: 3,1
+	WithGateSpriteBody:
+		WallConnections: -1,0, 3,0
+	LineBuildNode:
+		Connections: -1,0, 1,0
+	Tooltip:
+		Name: Horizontal Gate
+	Gate:
+
+TGD:
+	Inherits: ^BaseBuilding
+	Tooltip:
+		Name: Tiberium Growth Decelerator
+	Building:
+		TerrainTypes: BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		AllowInvalidPlacement: False
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~proc, ~turbo_tiberium
+		Queue: Defence.GDI, Defence.Nod, Defence.Nodda
+		BuildDuration: 1440
+		BuildDurationModifier: 40
+		Description: Large chamber made for housing a\nsingle tiberium tree.\nDecelerates tiberium growth.\nCollects the surplus tiberium inside the chamber and\ngives a small percentage to the owner.\n Can't be sold
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 8
+	OwnerLostAction:
+		Action: ChangeOwner
+		Owner: Neutral
+	GrantConditionOnTerrain@RED:
+		Condition: OnRedTib
+		TerrainTypes: RedTibTreeTerrain
+	GrantConditionOnTerrain@BLUE:
+		Condition: OnBlueTib
+		TerrainTypes: BlueTibTreeTerrain
+	GrantConditionOnTerrain@GREEN:
+		Condition: OnGreenTib
+		TerrainTypes: GreenTibTreeTerrain
+	-Sellable:
+	Valued:
+		Cost: 1000
+	Health:
+		HP: 240000
+	RevealsShroud:
+		Range: 6c0
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Power:
+		Amount: 0
+	RenderSprites:
+		Image: spikedummy
+	Replacement:
+		ReplaceableTypes: Spike
+	ProximityExternalCondition@SPIKE:
+		ValidStances: Ally, Neutral, Enemy
+		Condition: Spike.proximity
+		Range: 10c0
+		AffectsParent: True
+	SpawnActorOnDeath@RED:
+		Actor: tgdred
+		Probability: 100
+		OwnerType: Victim
+		InternalOwner: Neutral
+		SkipMakeAnimations: True
+		RequiresLobbyCreeps: False
+		SpawnAfterDefeat: True
+		RequiresCondition: OnRedTib
+	SpawnActorOnDeath@GREEN:
+		Actor: tgdgreen
+		Probability: 100
+		OwnerType: Victim
+		InternalOwner: Neutral
+		SkipMakeAnimations: True
+		RequiresLobbyCreeps: False
+		SpawnAfterDefeat: True
+		RequiresCondition: OnGreenTib
+	SpawnActorOnDeath@BLUE:
+		Actor: tgdblue
+		Probability: 100
+		OwnerType: Victim
+		InternalOwner: Neutral
+		SkipMakeAnimations: True
+		RequiresLobbyCreeps: False
+		SpawnAfterDefeat: True
+		RequiresCondition: OnBlueTib
+	DamagedByTerrain:
+		Damage: 10000
+		DamageTypes: Tiberium
+		DamageInterval: 1
+		Terrain: BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+	-Explodes:
+	-ActorLostNotification:
+	-ShakeOnDeath:
+	-SoundOnDamageTransition:
+	WithRangeCircle:
+		Range: 10c0
+		Color: D46F6F
+	-GivesBounty:
+	SelectionDecorations:
+		RenderSelectionBars: False
+
+^TGD_AFTER_DEATH_BASE:
+	Explodes:
+		Type: Footprint
+		Weapon: UnitExplodeSmall
+	ActorLostNotification:
+		Notification: BuildingLost
+	ShakeOnDeath:
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack
+	Health:
+		HP: 500
+	SoundOnDamageTransition:
+		DamagedSounds: xplos.aud
+		DestroyedSounds: crumble.aud
+	CashTrickler:
+		Interval: 1500
+		InitialDelay: 1500
+	RenderSprites:
+		Image: spike
+	SelectionDecorations:
+		RenderSelectionBars: True
+
+TGDRED:
+	Inherits@1: TGD
+	Inherits@2: ^TGD_AFTER_DEATH_BASE
+	Tooltip:
+		Name: Red Tiberium Growth Decelerator
+	Building:
+		TerrainTypes: RedTibTreeTerrain
+	GrantConditionOnTerrain@RED:
+		Condition: OnRedTib
+		TerrainTypes: RedTibTreeTerrain
+	SpawnActorOnDeath@RED:
+		Actor: dummy_red_tib_tree
+		Probability: 100
+		OwnerType: InternalName
+		InternalOwner: Neutral
+		SkipMakeAnimations: True
+		RequiresLobbyCreeps: False
+		SpawnAfterDefeat: True
+		RequiresCondition: OnRedTib
+	-Buildable:
+	-DamagedByTerrain:
+	CashTrickler:
+		Amount: 1800
+
+TGDGREEN:
+	Inherits@1: TGD
+	Inherits@2: ^TGD_AFTER_DEATH_BASE
+	Tooltip:
+		Name: Green Tiberium Growth Decelerator
+	Building:
+		TerrainTypes: GreenTibTreeTerrain
+	GrantConditionOnTerrain@GREEN:
+		Condition: OnGreenTib
+		TerrainTypes: GreenTibTreeTerrain
+	SpawnActorOnDeath@GREEN:
+		Actor: dummy_green_tib_tree
+		Probability: 100
+		OwnerType: InternalName
+		InternalOwner: Neutral
+		SkipMakeAnimations: True
+		RequiresLobbyCreeps: False
+		SpawnAfterDefeat: True
+		RequiresCondition: OnGreenTib
+	-Buildable:
+	-DamagedByTerrain:
+	CashTrickler:
+		Amount: 800
+
+TGDBLUE:
+	Inherits@1: TGD
+	Inherits@2: ^TGD_AFTER_DEATH_BASE
+	Tooltip:
+		Name: Blue Tiberium Growth Decelerator
+	Building:
+		TerrainTypes: BlueTibTreeTerrain
+	GrantConditionOnTerrain@BLUE:
+		Condition: OnBlueTib
+		TerrainTypes: BlueTibTreeTerrain
+	SpawnActorOnDeath@BLUE:
+		Actor: dummy_blue_tib_tree
+		Probability: 100
+		OwnerType: InternalName
+		InternalOwner: Neutral
+		SkipMakeAnimations: True
+		RequiresLobbyCreeps: False
+		SpawnAfterDefeat: True
+		RequiresCondition: OnBlueTib
+	-Buildable:
+	-DamagedByTerrain:
+	CashTrickler:
+		Amount: 1400
+
+#############################################################################################################
+#											Vehicles														#
+#############################################################################################################
+
+MCV:
+	Inherits: ^VehicleWithoutVeterancy
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Mobile Construction Vehicle
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~anyfix, ~techlevel.medium
+		Queue: Vehicle.GDI, Vehicle.Nod, Vehicle.Nodda
+		Description: Deploys into another Construction Yard.\n  Unarmed
+	Selectable:
+		Priority: 4
+		DecorationBounds: 36,36
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 1200
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 8c0
+	Transforms:
+		IntoActor: fact
+		Offset: -1,-1
+		Facing: 108
+		TransformSounds: constru2.aud, hvydoor1.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+		RequiresCondition: !solesurvivorgame
+	GrantConditionOnPrerequisite:
+		Condition: solesurvivorgame
+		Prerequisites: solesurvivor
+	DamageMultiplier@SOLE:
+		Modifier: 9000
+		RequiresCondition: solesurvivorgame
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	BaseBuilding:
+	SpawnActorOnDeath:
+		Actor: MCV.Husk
+	-ProducibleWithLevel:
+	SelectionDecorations:
+	Targetable:
+		TargetTypes: Ground, Tank, Repair, AItagCONS
+	#GrantConditionOnBotOwner:
+	#	Condition: BotControl
+	#	Bots: Shpooky
+	#to limit the mcv to 1, but Buildable trait it dosnt accept conditions
+MCV.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Mobile Construction Vehicle (Destroyed)
+	TransformOnCapture:
+		IntoActor: mcv
+	RenderSprites:
+		Image: mcv.destroyed
+
+MOV:
+	Inherits: ^VehicleWithoutVeterancy
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@RA: ^PlayerRApaletteVehicle
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Mobile Outpost Vehicle
+	Buildable:
+		BuildPaletteOrder: 101
+		Prerequisites: ~outpost_on, ~techlevel.medium
+		Queue: Building.GDI, Building.Nod, Building.Nodda
+		Description: Deploys into an Outpost.\n  Unarmed
+	Selectable:
+		Priority: 4
+		DecorationBounds: 36,36
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 200
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 8c0
+	Transforms:
+		IntoActor: outpost
+		Facing: 108
+		TransformSounds: constru2.aud, hvydoor1.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	BaseBuilding:
+	SpawnActorOnDeath:
+		Actor: MOV.Husk
+	-ProducibleWithLevel:
+	SelectionDecorations:
+	Targetable:
+		TargetTypes: Ground, Tank, Repair, AItagCONS
+MOV.Husk:
+	Inherits: ^HuskRApalette
+	Tooltip:
+		Name: Mobile Outpost Vehicle (Destroyed)
+	TransformOnCapture:
+		IntoActor: mov
+	RenderSprites:
+		Image: mov.destroyed
+		PlayerPalette: playerRA
+
+TRUK:
+	Inherits: ^VehicleWithoutVeterancy
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@RA: ^PlayerRApaletteVehicle
+	Buildable:
+		Queue: Vehicle.GDI, Vehicle.Nod, Vehicle.Nodda
+		BuildPaletteOrder: 20
+		Prerequisites: ~techlevel.low
+		Description: Transports cash to other players.\n  Unarmed
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Supply Truck
+	Health:
+		HP: 110
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 128
+	RevealsShroud:
+		Range: 4c0
+	DeliversCash:
+		Payload: 500
+		PlayerExperience: 50
+	SpawnActorOnDeath:
+		Actor: moneycratemp
+	RenderSprites:
+		Scale: 0.9
+	-ProducibleWithLevel:
+
+HARV:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	RenderSprites:
+		FactionImages:
+			nod: harv.nod
+			nodda: harv.nod
+			gdi: harv.gdi
+		Image: harv
+	Cloak:
+		InitialDelay: 90
+		CloakDelay: 90
+		CloakSound: trans1.aud
+		UncloakSound: trans1.aud
+		RequiresCondition: !cloak-force-disabled && stl_harv
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	GrantConditionOnPrerequisite@1:
+		Condition: stl_harv
+		Prerequisites: research_stl_harv
+	GrantConditionOnPrerequisite@2:
+		Condition: arm_harv
+		Prerequisites: research_arm_harv
+	DamageMultiplier@FromResearch:
+		Modifier: 80
+		RequiresCondition: arm_harv && !HarvesterTruce
+	DamageMultiplier@FromLobby:
+		Modifier: 0
+		RequiresCondition: HarvesterTruce
+	GrantConditionOnPrerequisite@HarvesterTruce:
+		Condition: HarvesterTruce
+		Prerequisites: HarvesterTruce
+	Tooltip:
+		Name: Harvester
+		GenericName: Harvester
+		RequiresCondition: !stl_harv && !arm_harv
+	Tooltip@Stealth:
+		Name: Stealth Harvester
+		GenericName: Harvester
+		RequiresCondition: stl_harv && !arm_harv
+	Tooltip@Heavy:
+		Name: Heavy Harvester
+		GenericName: Harvester
+		RequiresCondition: arm_harv && !stl_harv
+	Tooltip@Heavy_Stealth:
+		Name: Heavy Stealth Harvester
+		GenericName: Harvester
+		RequiresCondition: arm_harv && arm_harv
+	WithDecoration@TIB_ARMOR:
+		Image: pips
+		Sequence: pip-tib_armor
+		ReferencePoint: Top, Left
+		RequiresCondition: arm_harv
+		ValidStances: Ally
+		RequiresSelection: True
+	Valued:
+		Cost: 1400
+	Selectable:
+		Priority: 7
+		DecorationBounds: 36,36
+	Mobile:
+		Speed: 85
+	Health:
+		HP: 600
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 4c0
+	-ProducibleWithLevel:
+	Explodes:
+		Weapon: TiberiumExplosion
+	#Code below for when we can detect tiberium type thats being carried. Note to self: keep on dreaming
+	#	Explodes@Green:
+	#		Weapon: TiberiumExplosionGreen
+	#		RequiresCondition: tibgreen
+	#	Explodes@Blue:
+	#		Weapon: TiberiumExplosionBlue
+	#		RequiresCondition: tibblue
+	#	Explodes@Red:
+	#		Weapon: TiberiumExplosionRed
+	#		RequiresCondition: tibred
+	SelectionDecorations:
+	Targetable:
+		TargetTypes: Ground, Tank, Repair, AItagHarv
+		RequiresCondition: !HarvesterTruce
+	Targetable@HarvesterTruceON:
+		TargetTypes: null
+		RequiresCondition: HarvesterTruce
+	GrantConditionOnBotOwner:
+		Condition: BotControl
+		Bots: Cabal, watson, hal9001, blitzkrieg, MeatGrinder
+	CashTrickler:
+		ShowTicks: false
+		RequiresCondition: BotControl
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	Harvester:
+		Resources: Tiberium, BlueTiberium, RedTiberium
+		PipCount: 7
+		Capacity: 20
+		BaleLoadDelay: 12
+		BaleUnloadDelay: 6
+		SearchFromProcRadius: 25
+		SearchFromHarvesterRadius: 15
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~proc, ~original_rules_or_coop
+		Queue: Vehicle.GDI, Vehicle.Nod, Vehicle.Nodda
+		Description: Collects Tiberium for processing.\n Obtainable upgrades\n  Stealth Generators, Tiberium Armor\n  Unarmed
+		BuildDuration: 675
+		BuildDurationModifier: 100
+	SpawnActorOnDeath:
+		Actor: HARV.Husk
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+
+HARV.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Harvester (Destroyed)
+	TransformOnCapture:
+		IntoActor: harv
+	RenderSprites:
+		Image: harv.destroyed
+
+HARV_BOOST_ON:
+	Inherits: HARV
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	RenderSprites:
+		Image: harv
+	Harvester:
+		Resources: Tiberium, BlueTiberium, RedTiberium
+		PipCount: 7
+		Capacity: 20
+		BaleLoadDelay: 12
+		BaleUnloadDelay: 1
+		SearchFromProcRadius: 25
+		SearchFromHarvesterRadius: 15
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~proc, ~turbo_tiberium
+		Queue: Vehicle.GDI, Vehicle.Nod, Vehicle.Nodda
+		Description: Collects Tiberium for processing.\n Obtainable upgrades\n  Stealth Generators, Tiberium Armor\n  Unarmed
+		BuildDuration: 675
+		BuildDurationModifier: 100
+	SpawnActorOnDeath:
+		Actor: HARV_BOOST_ON.Husk
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+HARV_BOOST_ON.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Harvester ON(Destroyed)
+	TransformOnCapture:
+		IntoActor: harv_boost_on
+	RenderSprites:
+		Image: harv.destroyed
+
+HARV_BOOST_OFF:
+	Inherits: HARV
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	RenderSprites:
+		Image: harv
+	Harvester:
+		Resources: Tiberium, BlueTiberium, RedTiberium
+		PipCount: 7
+		Capacity: 20
+		BaleLoadDelay: 12
+		BaleUnloadDelay: 6
+		SearchFromProcRadius: 25
+		SearchFromHarvesterRadius: 15
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~proc, ~!turbo_tiberium
+		Queue: Vehicle.GDI, Vehicle.Nod, Vehicle.Nodda
+		Description: Collects Tiberium for processing.\n Obtainable upgrades\n  Stealth Generators, Tiberium Armor\n  Unarmed
+		BuildDuration: 675
+		BuildDurationModifier: 100
+	SpawnActorOnDeath:
+		Actor: HARV_BOOST_OFF.Husk
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+HARV_BOOST_OFF.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Harvester OFF(Destroyed)
+	TransformOnCapture:
+		IntoActor: harv_boost_off
+	RenderSprites:
+		Image: harv.destroyed
+
+MHQ:
+	Inherits: ^Vehicle
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Mobile HQ
+	Health:
+		HP: 200
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 85
+	RevealsShroud:
+		Range: 6c0
+	WithIdleOverlay@SPINNER:
+		Sequence: spinner
+		Offset: -256,0,256
+	Passenger:
+		Weight: 10
+	Buildable:
+		Description: Mobile base of operations
+
+#############################################################################################################
+#											Infantry														#
+#############################################################################################################
+
+SOLESURVIVOR:
+	Inherits: E1
+	RenderSprites:
+		Image: e1
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	Valued:
+		Cost: 1000
+	-Buildable:
+	Health:
+		HP: 150
+	Tooltip:
+		Name: Sole Survivor
+	ConditionManager:
+	ProvidesPrerequisite:
+		Prerequisite: solesurvivor
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+
+E1:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 50
+	Tooltip:
+		Name: Minigunner
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry.GDI, Infantry.Nod, Infantry.Nodda
+		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+		BuildDuration: 90
+	Mobile:
+		Speed: 57
+	Health:
+		HP: 50
+	Armament:
+		Name: primary
+		Weapon: M16
+		FireDelay: 3
+	Armament@VehicleGrenade:
+		Name: secondary
+		Weapon: VehicleGrenade
+		LocalOffset: 0,0,427
+		FireDelay: 16
+	AmmoPool@VehGrenadeANDBullets:
+		Name: VehGrenadeANDBulletsA
+		Ammo: 2
+		PipCount: 0
+	Armament@Gren:
+		Name: secondary
+		Weapon: FragGrenade
+		LocalOffset: 0,0,427
+		FireDelay: 15
+	AttackFrontal:
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4,idle5
+		AttackSequences:
+			primary: shoot
+			secondary: throw
+	Armament@PILLBOX:
+		Name: pillbox
+		Weapon: HighVRA
+		MuzzleSequence: garrison-muzzle
+	Armament@GUARDTOWER:
+		Name: guardtower
+		Weapon: HighV
+		MuzzleSequence: garrison-muzzle
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+	ReloadAmmoPool@1:
+		AmmoPool: VehGrenadeANDBulletsA
+		Delay: 4
+		Count: 1
+		ResetOnFire: False
+
+E3:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Rocket Soldier
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Infantry.Nod, Infantry.Nodda, Infantry.GDI
+		Description: Anti-tank/Anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
+		BuildDuration: 120
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 45
+	AutoTarget:
+		ScanRadius: 6
+	Armament:
+		Weapon: Rockets
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	Armament@PILLBOX:
+		Name: pillbox
+		Weapon: Rockets
+	Armament@GUARDTOWER:
+		Name: guardtower
+		Weapon: Rockets
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+
+E6:
+	Inherits@1: ^Infantry
+	Inherits@CapMan: ^CaptureManager
+	GrantCondition@CapturesBuilding:
+		Condition: CapturesBuilding
+	GrantCondition@CapturesTransport:
+		Condition: CapturesTransport
+	EngineerRepair:
+	RepairsBridges:
+	CaptureNotification:
+		Notification: BuildingCaptured
+		NewOwnerVoice: True
+		LoseNotification: BuildingLost
+		LoseNewOwnerVoice: False
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Engineer
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Infantry.GDI, Infantry.Nod, Infantry.Nodda
+		Description: Damages and captures enemy structures.\n  Unarmed
+		BuildDuration: 150
+	Mobile:
+		Speed: 36
+	Health:
+		HP: 75
+	Passenger:
+		PipType: Yellow
+	-ProducibleWithLevel:
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+
+RMBO:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CapMan: ^CaptureManager
+	GrantCondition:
+		Condition: CapturesTransport
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Commando
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~anytech, ~techlevel.high
+		Queue: Infantry.GDI, Infantry.Nod, Infantry.Nodda
+		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		BuildLimit: 1
+		BuildDuration: 600
+	Mobile:
+		Speed: 60
+		Voice: Move
+	Guard:
+		Voice: Move
+	Health:
+		HP: 500
+	Passenger:
+		PipType: Red
+		Voice: Move
+	RevealsShroud:
+		Range: 6c0
+	AutoTarget:
+		ScanRadius: 8
+	Demolition:
+		DetonationDelay: 45
+		Voice: Demolish
+	Armament:
+		Weapon: Sniper
+	AttackFrontal:
+		Voice: Attack
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2,idle3
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: CommandoVoice
+	Armament@PILLBOX:
+		Name: pillbox
+		Weapon: Sniper
+	Armament@GUARDTOWER:
+		Name: guardtower
+		Weapon: Sniper
+
+RENEGATE:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Renegade
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~anytech, ~techlevel.high
+		Queue: Infantry.GDI, Infantry.Nod, Infantry.Nodda
+		Description: Uncontrollable Lethal Commando Unit.\nIt will wonder around wreaking havoc\n Strong vs all ground targets\n Weak vs air and ani infantry units
+		BuildLimit: 1
+		BuildDuration: 600
+	#\n Crates will give him new weapons
+	Mobile:
+		Speed: 60
+		Voice: Move
+	Health:
+		HP: 500
+	RevealsShroud:
+		Range: 6c0
+	AutoTarget:
+		ScanRadius: 8
+	Armament@SNIPER:
+		Weapon: Sniper
+	Armament@GRENADELAUNCHER:
+		Weapon: GrenadeLauncher
+		LocalOffset: 100,0,200
+	AttackFrontal:
+		Voice: Attack
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2,idle3
+	VoiceAnnouncement:
+		RequiresCondition: produced
+		Voice: Build
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: CommandoVoice
+	AttackWander:
+		WanderMoveRadius: 30
+	AutoTarget:
+		InitialStance: AttackAnything
+		InitialStanceAI: AttackAnything
+		EnableStances: False
+	RejectsOrders:
+	Interactable:
+	GrantCondition@RenegadeOut:
+		Condition: renegadeout
+
+COMMANDER:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Base Commander
+	Buildable:
+		BuildPaletteOrder: 70
+		Queue: Infantry.Nod, Infantry.Nodda, Infantry.GDI
+		Description: Anti-tank/Anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
+		Prerequisites: ~disabled
+		BuildDuration: 150
+	Mobile:
+		Speed: 36
+	Health:
+		HP: 75
+	AutoTarget:
+		ScanRadius: 6
+	Armament:
+		Weapon: USP45
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	Armament@PILLBOX:
+		Name: pillbox
+		Weapon: USP45
+	Armament@GUARDTOWER:
+		Name: guardtower
+		Weapon: USP45
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+
+#############################################################################################################
+#											 Navy															#
+#############################################################################################################
+
+BOAT:
+	Inherits: ^Ship
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Gunboat
+	Health:
+		HP: 700
+	Armor:
+		Type: Heavy
+	TDGunboat:
+		Speed: 28
+	-Mobile:
+	RevealsShroud:
+		Range: 7c0
+		Type: CenterPosition
+	Turreted:
+		TurnSpeed: 5
+		Offset: 0,896,171
+	Armament:
+		Weapon: BoatMissile
+		LocalOffset: 85,-85,0, 85,85,0
+	AttackTDGunboatTurreted:
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 2
+	WithGunboatBody:
+		Sequence: left # Just a work-around to avoid crash
+	Selectable:
+		Bounds: 42,24
+		DecorationBounds: 42,24
+	AutoTarget:
+		AllowMovement: false
+	RejectsOrders:
+	SelectionDecorations:
+	GrantConditionOnDamageState@HEAVY:
+		Condition: heavy-damage
+		ValidDamageStates: Heavy
+	GrantConditionOnDamageState@CRITICAL:
+		Condition: critical-damage
+		ValidDamageStates: Critical
+	SpeedMultiplier@HEAVYDAMAGE:
+		RequiresCondition: heavy-damage
+		Modifier: 75
+	SpeedMultiplier@CRITICALDAMAGE:
+		RequiresCondition: critical-damage
+		Modifier: 50
+
+GUNBOAT:
+	Inherits: ^Ship
+	Buildable:
+		Queue: Ship, Ship.Nod, Ship.Nodda, Ship.GDI
+		BuildPaletteOrder: 1000
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Gunboat
+	Health:
+		HP: 700
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 2
+		Speed: 42
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 7
+		Offset: 2250,0,200
+	Armament:
+		Weapon: TurretGunBoatGun
+		LocalOffset: 550,0,0
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 24,24
+	WithSpriteTurret:
+	AutoTarget:
+	WithFacingSpriteBody:
+	AttackMove:
+	RenderSprites:
+		PlayerPalette: playerRA
+	#LeavesTrails:
+	#	Image: ship_trail
+	#	Sequences: idle
+	#	Palette: terrain
+	#	TerrainTypes: Water
+	#	Type: CenterPosition 
+	#	VisibleThroughFog: False
+	#	TrailWhileStationary: False
+	#	StationaryInterval: 0
+	#	TrailWhileMoving: True
+	#	MovingInterval: 0
+	#	StartDelay: 0
+	#	Offsets: -3000,0,0
+	#Collection of 3D World Vector	Trail spawn positions relative to actor position. (forward, right, up) triples
+	#	SpawnAtLastPosition: True
+	#	RequiresCondition: 
+	#[12:46] <+pchote> the center of the deck needs to match the center of rotation of the actor
+	#[12:46] <+pchote> if the center moves with facing then you can't position anything properl
+	#[12:46] <+pchote> y
+	#[12:47] <+pchote> and your camera angles need to match the rules too
+	#<Nolt_Phone> Look up for the coordinate of the camera aiming point, group your entire model, and align it to it (note: he talks about 3DsMax)
+LST:
+	Inherits: ^Ship
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Landing Craft
+	Buildable:
+		Queue: Ship, Ship.Nod, Ship.Nodda, Ship.GDI
+		BuildPaletteOrder: 1000
+	Mobile:
+		InitialFacing: 0
+		TurnSpeed: 4
+		Speed: 142
+		RequiresCondition: !notmobile
+		Locomotor: lcraft
+	LeavesTrails:
+		Image: wake1
+		TerrainTypes: Water
+		TrailWhileStationary: true
+		Palette: playerRA
+		SpawnAtLastPosition: true
+	Health:
+		HP: 400
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	WithFacingSpriteBody:
+	WithRoof:
+	WithCargo:
+		DisplayTypes: Infantry, Vehicle
+		LocalOffset: 390,-256,0, 390,256,0, 0,0,0, -390,-256,0, -390,256,0
+	Cargo:
+		Types: Infantry, Vehicle
+		MaxWeight: 5
+		PipCount: 5
+		PassengerFacing: 2
+		LoadingCondition: notmobile
+	RenderSprites:
+		PlayerPalette: playerRA
+		Scale: 0.8
+	Selectable:
+		Bounds: 48,48
+
+#############################################################################################################
+#											Airforce														#
+#############################################################################################################
+
+TRAN:
+	Inherits@1: ^Helicopter
+	Inherits@ConMan: ^ConditionManager
+	Inherits@CapMan: ^CaptureManager
+	GrantCondition@CapturableTransport:
+		Condition: CapturableTransport
+	-GainsExperience:
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Chinook Transport
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: hpad
+		Queue: Aircraft.GDI, Aircraft.Nod
+		Description: Infantry Transport Helicopter.\n  Unarmed
+	Aircraft:
+		IdleBehavior: Land
+		TurnSpeed: 5
+		Speed: 140
+		InitialFacing: 0
+		LandableTerrainTypes: Clear,Rough,Road,Ore,Beach,Tiberium,BlueTiberium,RedTiberium
+		AltitudeVelocity: 0c100
+		TurnToLand: true
+		Repulsable: true
+	Health:
+		HP: 90
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 597,0,85
+		Sequence: rotor
+		RequiresCondition: airborne
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 597,0,85
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -597,0,171
+		Sequence: rotor2
+		RequiresCondition: airborne
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -597,0,171
+		Sequence: slow-rotor2
+		RequiresCondition: !airborne
+	Cargo:
+		Types: Infantry, Doctor
+		MaxWeight: 10
+		PipCount: 10
+		PassengerFacing: 224
+	SpawnActorOnDeath:
+		Actor: TRAN.Husk
+	Explodes:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	SelectionDecorations:
+	-ProducibleWithLevel:
+	Selectable:
+		DecorationBounds: 41,41
+		Class: Chinook
+TRAN.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Chinook Transport
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 140
+	RevealsShroud:
+		Range: 8c0
+		Type: CenterPosition
+	WithIdleOverlay@ROTOR1:
+		Offset: 597,0,85
+		Sequence: rotor
+	WithIdleOverlay@ROTOR2:
+		Offset: -597,0,171
+		Sequence: rotor2
+	RenderSprites:
+		Image: tran
+
+OSPREY:
+	Inherits@1: ^Helicopter
+	Inherits@ConMan: ^ConditionManager
+	Inherits@CapMan: ^CaptureManager
+	GrantCondition@CapturableTransport:
+		Condition: CapturableTransport
+	-GainsExperience:
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: V-22 Osprey
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: vehicleproduction
+		Queue: Aircraft.GDI, Aircraft.Nod, Aircraft.Nodda
+		Description: Vehicle And Infantry Transport Helicopter.\n  Unarmed
+	Aircraft:
+		IdleBehavior: Land
+		TurnSpeed: 5
+		Speed: 140
+		InitialFacing: 0
+		LandableTerrainTypes: Clear,Rough,Road,Ore,Beach,Tiberium,BlueTiberium,RedTiberium
+		AltitudeVelocity: 0c100
+		Repulsable: true
+		CruiseAltitude: 2160
+		TurnToLand: true
+		AirborneCondition: airborne
+	Carryall:
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 10
+		LocalOffset: -10, -60, -70
+		DropRange: 3c0
+	Health:
+		HP: 90
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 0,845,650
+		Sequence: rotor
+		RequiresCondition: airborne
+	#Offset ^forward, right, up^
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 0,845,650
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: 0,-845,650
+		Sequence: rotor2
+		RequiresCondition: airborne
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: 0,-845,650
+		Sequence: slow-rotor2
+		RequiresCondition: !airborne
+	SpawnActorOnDeath:
+		Actor: OSPREY.Husk
+	Explodes:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	SelectionDecorations:
+	-ProducibleWithLevel:
+	RenderSprites:
+		PlayerPalette: playerRA
+	Cargo:
+		Types: Infantry, Doctor
+		MaxWeight: 5
+		PipCount: 5
+		PassengerFacing: 128
+	Selectable:
+		DecorationBounds: 66,52
+OSPREY.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: V-22 Osprey
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 140
+	RevealsShroud:
+		Range: 8c0
+		Type: CenterPosition
+	WithIdleOverlay@ROTOR1:
+		Offset: 0,847,50
+		Sequence: rotor
+	WithIdleOverlay@ROTOR2:
+		Offset: 0,-847,50
+		Sequence: rotor2
+	RenderSprites:
+		Image: osprey
+		PlayerPalette: playerRA
+	FallsToEarth:
+		Velocity: 0c100
+
+OSPREY.delivery:
+	Inherits: OSPREY
+	Tooltip:
+		Name: V-22 Osprey
+	Aircraft:
+		IdleBehavior: LeaveMap
+		TurnSpeed: 5
+		Speed: 326
+		InitialFacing: 0
+		LandableTerrainTypes: Clear,Rough,Road,Ore,Beach,Tiberium,BlueTiberium,RedTiberium
+		AltitudeVelocity: 0c100
+		TurnToLand: false
+		Repulsable: false
+		CruiseAltitude: 2160
+		CanHover: true
+		AirborneCondition: airborne
+	RenderSprites:
+		PlayerPalette: playerRA
+		Image: osprey
+	RejectsOrders:
+	DamageMultiplier@INVULNERABLE:
+		Modifier: 0
+	RevealsShroud:
+		Range: 0c0
+		Type: CenterPosition
+	-Selectable:
+	-Buildable:
+	-Targetable@GROUND:
+	-Targetable@AIRBORNE:
+	Interactable:
+
+#############################################################################################################
+#											Inherits														#
+#############################################################################################################
+
+BARRACKS:
+	AlwaysVisible:
+	Tooltip:
+		Name: Infantry Production
+	Buildable:
+		Description: Infantry Production
+	Interactable:
+
+VEHICLEPRODUCTION:
+	AlwaysVisible:
+	Tooltip:
+		Name: Vehicle Production
+	Buildable:
+		Description: Vehicle Production
+	Interactable:
+
+ANYPOWER:
+	AlwaysVisible:
+	Tooltip:
+		Name: Power Plant
+	Buildable:
+		Description: Power Plant
+	Interactable:
+
+ANYHQ:
+	AlwaysVisible:
+	Tooltip:
+		Name: a communications center
+	Buildable:
+		Description: a communications center
+	Interactable:
+
+ANYTECH:
+	AlwaysVisible:
+	Tooltip:
+		Name: a Tech center
+	Buildable:
+		Description: a Tech center
+	Interactable:
+
+ANYFIX:
+	AlwaysVisible:
+	Tooltip:
+		Name: Repair Facility
+	Buildable:
+		Description: Repairs vehicles
+	Interactable:

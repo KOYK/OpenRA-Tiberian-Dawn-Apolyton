@@ -1,0 +1,61 @@
+gunboat:
+	idle:
+		Facings: 32
+	turret: gunboatgun
+		Facings: 32
+	muzzle: gunfire2
+		Length: *
+	icon: boaticnh.tem
+		AddExtension: False
+
+ss:
+	idle:
+		Facings: 16
+	icon: ssicon
+
+ca:
+	idle:
+		Facings: 16
+	turret: turr
+		Facings: 32
+	muzzle: gunfire2
+		Length: 5
+	icon: caicon
+
+dd:
+	idle:
+		Facings: 16
+	primary: ssam
+		Facings: 32
+	secondary: mgun
+		Facings: 32
+	icon: ddicon
+
+pt:
+	idle:
+		Facings: 16
+	turret: mgun
+		Facings: 32
+	muzzle: gunfire2
+		Length: 5
+	icon: pticon
+
+lstra:
+	idle:
+	open:
+		Start: 1
+		Length: 4
+		Tick: 150
+	close:
+		Frames: 4, 3, 2, 1
+		Length: 4
+		Tick: 150
+	unload:
+		Start: 4
+		ZOffset: -511
+	icon: lsticon
+
+msub:
+	idle:
+		Facings: 16
+	icon: msubicon

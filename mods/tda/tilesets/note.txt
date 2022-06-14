@@ -1,0 +1,4 @@
+move all the TD terrain rules on the maps, so they will load with the maps.
+get all terrain rules from RA and use them in TDA for compability with RA maps.
+
+ that way when players are creating new maps they wont get confused, and also I will be able to use RA maps for TDA, simple and easy good work my self!

@@ -1,0 +1,208 @@
+strap your nuts and lets go
+
+159-B:
+Engine: Update to release-20200503
+Balance: Removed the adv.power plant research, and added per power plant upgrade (you select the power plant and then click the upgrade).
+Balance: In order to upgrade power plants you need a communication center builded.
+Visual: new icons for the build menu.
+Mod: Added save\load system.
+Fixed: Dead animation not showing some times when buildings die.
+Balance: Faulty Fail Safe Chance for power plant decresed to 5 and 10 from 15 and 30
+Added: Selection sounds for power plant
+Changed: GDI sniper isignia icon
+Changed: Super Weapons enemy reveal range to be smaller.
+Added: bounties on planes.
+Fixed: the long standing issue with infantry creating corpse animations when walking on tiberium.
+Changed: build radius of con yard into 14.
+Changed: vision radius of con yards to 14.
+Changed: building placement distance, now players can place everywhere inside their build radius.
+Changed: capture blink rate to 10
+Changed: engineer capture delay to 4 seconds.
+Removed: engineer capture proggress bar.
+Changed: lobby options
+Changed: MOV to be always available from the con yard.
+Changed: walls to disallow placement outside building radius.
+Changed: BRIK walls build time to 12 seconds, SBAG 8 and CYCL to 4.
+Changed: Nod C17 will now come from the player starting position into the map, also changed speed to be faster.
+Visual: Added new explosion effects.
+
+159-A:
+Balance: Units under attacked by flame or chem weapons won't go in to prone any more (if a flamethrower is firing at you, going in to prone wont help you, because you will be dead by then, and the same thing with bio weapons).
+Visual: Removed ammo pip from sam site.
+Balance: Seperated power plants for each faction.
+Balance: Huge number of changes in power, health and value of all buildings.
+Engine: Update from release-20180923 to release-20190314 (got help from abcdefg and Mustapha :)
+Balance: Engineers wont fix husks any more.
+Balance: Engineers and commando can capture transport helis (they get consume tho) Like in the original TD.
+Visual: Added new explosion effect to anti tank mines.
+Added: Modified shipyards from ra.
+Visual: Added the Nod logo to the sub pen ( including damaged version as always, some times I amaze my self ;).
+Added: New tiberium weapon logic, all tiberium weapons do damage over time.
+Balance: Chem tank and chem trooper do same damage as their flame weapon counter parts.
+Added: New navy units, hovercraft (using the openra asset, I edited tho to fix some visual issues), And added a new gunboat ship (beta).
+Visual: added new rallypoint buey for the shipyards.
+Visual: added new C17 aircraft for nod.
+Mod: Re-organized yaml files by adding new and deleting the old ones.
+Mod: I added and changed some traits to be more lets say global and generalized (why i am telling you this? well I am kinda proud of my organizing work I did so far).
+Visual: added a soft water animation* to the deeper parts of the water tiles
+Fixed: some palette data, nothing visual.
+Added: 7 new dificulties for bots. Very Easy, Easy, Normal, Hard, Very Hard, Impossible, Nightmare
+Added: 6 Missing Ford (crossing) tiles in temperat tileset, After painfully converting, cuting, color changing them one by one :'(
+Added: A new Category for tiles that are being used as dummy tiles. The new Category name is: System (do Not Use).
+Fixed: The following don't use terrain palette any more: Crates, ^TibTree, ^Wall, ^TechBuilding, ^DINO
+Added: Imported the full snow tileset from RA, you will ask why not do that for the rest of the tilesets? well have you ever notice why RA terrain color is so.. lets say cold? well if you take a look at the palettes, RA uses less colors for terrain, but TD uses more colors for terrain and that means TD terrain is more colorfull. Since snow comes from RA palette, even if you replace the palette with the TD one(using a program), you will still get an approximation with the same "less" colors, so its the same thing. Not sure how many people know about this.
+Added: Power down hotkey.
+Balance: Oil Derrick no longer can be repaired after they are destroyed.
+Balance: Oil Derrick now gives $500 and only to the first player who captures it.
+Balance: Oil Derrick will now give $10 every second.
+Fixed: Oil Derrick now uses burn and smoke animation again when gets destroyed.
+Fixed: Spellling and typos for renegade and commando icons and description.
+Added: RevealOnFire for all artillery type Units.
+Fixed: spec ops unit's spreed damage, now the damage area of effect is 0c1.
+Balance: Defences or Defenses are no longer capturable.
+Added: You can sent supply trucks to enemy players by using ctrl and click.
+Fixed: Updated repair\healing logic to a working contidion again.
+Added: AI trained units will start with Rank based on thier dificulty, starting from AI Level 5
+Added: New Speed option called FTL
+
+
+TODO:
+THIS IS A TO DO LIST, MANY OF THE THINGS YOU READ WILL NOT MAKE SENCE, THIS LIST IS FOR ME MOSTLY BUT I SHARE IT WITH YOU SO YOU CAN HAVE AN IDEA WHAT IS GOING TO BE ADDED OR CHANGED OR DROPED.
+
+Finish RA compatibility map patch
+
+add landing sound to f22
+add take off sound to f22
+add take off sound to all helis
+make all missiles explode on impact
+add repair anmation to nod arifield (crew that gets out and repairs)
+add rearm animation to nod airfiled (crane that lands missiles)
+exploit stances to be used as special abilities (IT COULD BE DONE WITH OTHER MEANS)
+make new window for research (MAYBE)
+make command center to build UAV and radar planes from out side the map
+fix f22 trail to fit the engine position
+add cranes to service depots that come from the ground and repair
+make new Drowning animation for infantry in the water, make new dummy unit that will replace infantry in the water after impact death, dummy unit will use the new animation and die over time (2 secs)
+add animals: underwater shadow of shark (when dummy infantry in the water, nearby shark will attack) sheep, cow, eagle, seagull
+add selection sounds to buildings
+
+RE DO outpost vehicle model
+
+edit sov barracks to look like an armory,  add a gdi version of allied tent with red cross on it (this will be the equevelent of nod armory)
+add fence crushing sound
+make engineers to be able to crush fences
+make fences electro kill infantry
+add new overlays for offline power
+enlarge the minimap ingame EVEN MORE
+add kanes wrath stats(health, damage, armor,weapon types, ect)
+add some music tracks from retaliation
+wait for the openra team to fix the problem with the navy turret AND add some temporary navy units.
+add break of sound visual and audio effect to f22 when it gets at CruiseAltitude also speed bonus.
+make engineers repair slowly buildings and disable abbility to enter for repair (MAYBE).
+fix crate shadow.
+add tooltip to crates.
+add "area" building, this building will shoot at the center of it allied units,and then change owner to the owner of the building.
+add background image of doctrine in the prudaction menu of each faction.
+add radar background of each faction (red nod logo, purple nod color ect)
+fix city buildings geting behind other units instead of front of them.
+add voice of flamewhel
+
+add light effect for each type of tiberium TGD is above it
+add damage and dead animation to TGD
+add overlayidle animation to port
+add mouse over scqare show up in port building
+
+
+add civilians with some geverment pick or afiliation left right wind or center?
+add life form side, strong in tiberium, can mutate other lifes, upgrade system with dna icons
+
+add faction to gdi that is more tank related, and insteed of commando add the artemys tank
+
+ADD >BUILDABLE< civilian trains, train stations and rails, train station A will act as refanery AND train station B will act as ore? this will allow to make trains use a "waypoint" system. But first I need train logic from tib sun mod, so that trains can have seperate connecting actor wagons, I hope that will be the case in the train logic in TS, other wise this wont work. (who em I kidding? it will probably be some hard coded logic that wont allow for any thing else)
+
+ADD:
+add fanatic to nod(rifleman who will run and explode on enemies when he is low on health and the enemies are 4-5 on target cell, he will also have black helmet).
+add GDI unit simular to nod rocket soldier. something like tank sniper
+add repair vehicle that spawns mechanics to repair units on the spot.
+add heavy lift helicopter for auto harverter and repairs pickup.
+
+ADD: 
+Crash level types and maybe size
+Crash husks with types
+
+Add the new pavement and a buildable road system I am working while wating to move out (gives more speed inside the player base)
+
+Make renegate automaticly spwan from temple of nod and adv com center when it dies.
+
+add water cliffs for the rest of the terrain (desert has it for now)
+
+add invisible actor that spawns sharks in water.
+
+Add the dll that allows for unit groups, carriers ect
+
+
+Rethink about the f22 minigun sound or if its a good idea to have a therd weapon for f22 at all.
+
+Add chronosphere and iron curtain to the civilian faction (they will be allied friendly or ex soviet countries, so it will fit some how to the lore) (Requested by MegaTank C&C).
+
+Add a minigun like laser weapon to (not yet added) miniguners when they get promoted maybe? (Requested by MegaTank C&C).
+
+Add night vision\headlights to vehicles when its night (Requested by DrStrangelove).
+
+Understand how tunnels work and add them for the map editor, also make a map with tunnels.
+
+add pilot sounds during combat, like i did with the infantry
+IMPORTANT: 
+1) Add invisible (1 cell) production buildings for the AI to bring random units in, so I can bypass the LUA scripts that are needed for a task like this.
+2) Add Campaign AI's.
+
+add tiberium chem missile (using ra art for the silo, and recoloring the nuke missile) that will kill infantry, and drivers on tanks.
+This will require a pilot\driver system that will allow for capturing the tanks.
+this new weapon will replace the nuke.
+I should add this weapon only to a new nod faction or not at all.
+that new faction will have to be unique and focused on tech or something intresting, that also make sence.
+
+add ability to destroy trees with force fire, like RA2.
+
+also when tiberium gets close to a claster of trees they should transform into something else other than tib tree, maybe a TS vainhole.
+
+Navy composition should be the following:
+
+light 
+medium
+heavy
+area lock down
+stealth
+defenive platforms
+mines
+oil rigs
+
+AutoSelectionSize
+  * AddCarryableHarvester: Inform about the 'CarryableHarvester' trait.
+  * RenameEditorTilesetFilter: EditorTilesetFilter renamed to MapEditorData---------
+  * DefineNotificationDefaults: Move mod-specific notifications to yaml
+  * MergeRearmAndRepairAnimation: WithRearmAnimation and WithRepairAnimation were merged to WithResupplyAnimation
+  * MergeCaptureTraits: Merge and overhaul Captures traits
+  * RemovedNotifyBuildComplete: Traits are no longer automatically disabled during Building make-animations
+  * LowPowerSlowdownToModifier: LowPowerSlowdown is renamed to LowPowerModifier
+  * ChangeTakeOffSoundAndLandingSound: Change 'TakeOffSound' and 'LandingSound' parameters within 'Aircraft' Trait.
+  * RemoveHealthPercentageRing: Remove ring support from HealthPercentageDamage warheads' Spread
+  * RenameCrateActionNotification: *CrateAction>Notification renamed to Sound
+  * RemoveRepairBuildingsFromAircraft: Removed RepairBuildings from Aircraft
+  * AddRearmable: Added Rearmable trait and move RearmBuildings properties there
+  * MergeAttackPlaneAndHeli: AttackPlane and AttackHeli were merged to AttackAircraft
+  * RemovedDemolishLocking: Traits are no longer automatically disabled during the Demolition countdown
+  * RequireProductionType: Require 'ProductionType' on 'ProductionBar'
+  * CloakRequiresConditionToPause: Change Cloak>RequiresCondition to PauseOnCondition
+  * ExtractHackyAIModules: Split HackyAI logic handling to BotModules
+  * RemoveNegativeDamageFullHealthCheck: Negative damage weapons are now valid against full-health targets.
+  * RemoveResourceExplodeModifier: Harvester and StoresResources traits no longer force Explodes.EmptyWeapon
+  * DefineLevelUpImageDefault: Unhardcoded LevelUpImage and LevelUpSequence on GainsExperience
+  * RemovedAutoCarryallCircleTurnSpeed: Removed AutoCarryall idle circling turnspeed hardcoding
+  * RemoveAttackIgnoresVisibility: IgnoresVisibility has been removed from Attack* traits.
+  * ReplacedWithChargeAnimation: Replaced WithChargeAnimation with WithChargeSpriteBody
+  * RefactorResourceLevelAnimating: Streamlined traits animating player resource level
+  * RemoveAttackSuicides: AttackSuicides trait has been removed.
+  
+  
+SO MANY IDEAS, SO HARD TO DO THEM ALL, WORK IS ALL I DO.

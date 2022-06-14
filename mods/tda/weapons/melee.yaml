@@ -1,0 +1,63 @@
+Tail:
+	ReloadDelay: 30
+	Range: 1c0
+	Report: dinoatk1.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 213
+		Damage: 180
+		Versus:
+			None: 90
+			Wood: 10
+			Light: 30
+			Heavy: 10
+		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath
+
+Horn:
+	ReloadDelay: 20
+	Range: 1c0
+	Report: dinoatk1.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 213
+		Damage: 120
+		Versus:
+			None: 90
+			Wood: 10
+			Light: 30
+			Heavy: 10
+		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath
+
+Teeth:
+	ReloadDelay: 30
+	Range: 1c0
+	Report: dinoatk1.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 213
+		Damage: 180
+		Versus:
+			None: 90
+			Wood: 10
+			Light: 30
+			Heavy: 10
+		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath
+
+Claw:
+	ReloadDelay: 10
+	Range: 1c0
+	Report: dinoatk1.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@1Dam: SpreadDamage
+		Spread: 213
+		Damage: 60
+		Versus:
+			None: 90
+			Wood: 10
+			Light: 30
+			Heavy: 10
+		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath

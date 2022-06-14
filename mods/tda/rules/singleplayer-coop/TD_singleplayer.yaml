@@ -1,0 +1,327 @@
+World:
+	-SpawnMPUnits:
+	-MPStartLocations:
+	-CrateSpawner:
+	ObjectivesPanel:
+		PanelName: MISSION_OBJECTIVES
+	MapBuildRadius:
+		AllyBuildRadiusLocked: True
+		AllyBuildRadiusEnabled: True
+		AllyBuildRadiusCheckboxVisible: False
+		AllyBuildRadiusCheckboxDisplayOrder: 4
+		BuildRadiusCheckboxDisplayOrder: 5
+		BuildRadiusCheckboxEnabled: False
+		BuildRadiusCheckboxVisible: False
+		BuildRadiusCheckboxLocked: True
+	MapOptions:
+		ShortGameCheckboxDisplayOrder: 3
+		TechLevelDropdownDisplayOrder: 2
+		GameSpeedDropdownDisplayOrder: 3
+		ShortGameLocked: True
+		ShortGameEnabled: False
+	MapCreeps:
+		CheckboxEnabled: True
+		CheckboxLocked: True
+		CheckboxDisplayOrder: 9
+		CheckboxVisible: False
+
+Player:
+	-ConquestVictoryConditions:
+	MissionObjectives:
+		EarlyGameOver: False
+	Shroud:
+		FogLocked: True
+		FogEnabled: False
+		ExploredMapLocked: True
+		ExploredMapEnabled: False
+	PlayerResources:
+		DefaultCashLocked: True
+		SelectableCash: 5000
+		DefaultCash: 5000
+	LobbyPrerequisiteCheckbox@GLOBALFACTUNDEPLOY:
+		ID: factundeploy
+		Label: Redeployable MCVs
+		Description: Allow undeploying Construction Yard.
+		DisplayOrder: 7
+		Prerequisites: global-factundeploy
+		Enabled: False
+		Locked: True
+		Visible: False
+	LobbyPrerequisiteCheckbox@GLOBALBOUNTY:
+		ID: bounty
+		Label: Kill Bounties
+		Description: Players receive cash bonuses when killing enemy units
+		DisplayOrder: 6
+		Prerequisites: global-bounty
+		Enabled: False
+		Locked: True
+		Visible: False
+	DeveloperMode:
+		CheckboxDisplayOrder: 8
+		CheckboxEnabled: False
+		CheckboxLocked: False
+		CheckboxVisible: True
+	LobbyPrerequisiteCheckbox@HarvesterTruce:
+		ID: HarvesterTruce
+		Label: Harvester Truce
+		Description: Harvesters Won't die (Do Not Use with Short Game Off)
+		DisplayOrder: 10
+		Prerequisites: HarvesterTruce
+		Enabled: False
+		Locked: True
+		Visible: False
+	LobbyPrerequisiteCheckbox@MAPEFFECTS:
+		ID: mapeffects
+		Label: Map Effects
+		Description: Show day/night cycle and weather effects on the maps
+		DisplayOrder: 10
+		Prerequisites: MapEffects
+		Enabled: False
+		Locked: True
+		Visible: False
+	LobbyPrerequisiteCheckbox@OUTPOST:
+		ID: outpost
+		Label: Outpost
+		Description: Enables the Outpost unit, best used with "Limit Build Area" ON
+		DisplayOrder: 10
+		Prerequisites: outpost_on
+		Enabled: False
+		Locked: True
+		Visible: False
+	LobbyPrerequisiteCheckbox@TURBO_TIBERIUM:
+		ID: turbo_tiberium
+		Label: Turbo Tiberium
+		Description: Boost tiberium growth and also enables the Tiberium Growth Decelerator building
+		DisplayOrder: 10
+		Prerequisites: turbo_tiberium
+		Enabled: False
+		Locked: True
+		Visible: False
+	LobbyPrerequisiteCheckbox@ORIGINAL_RULES_OR_COOP:
+		ID: turbo_tiberium
+		Label: Original rules or coop
+		Description: This must be enabled for any single\coop mission that use the original rules
+		DisplayOrder: 10
+		Prerequisites: original_rules_or_coop
+		Visible: False
+		Enabled: True
+		Locked: True
+		Visible: False
+
+airstrike.proxy:
+	AlwaysVisible:
+	AirstrikePower:
+		Icon: airstrike
+		StartFullyCharged: True
+		ChargeTime: 120
+		SquadSize: 3
+		QuantizedFacings: 8
+		Description: Air Strike
+		LongDesc: Deploy an aerial napalm strike.\nBurns buildings and infantry along a line.
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyPlanesApproaching
+		UnitType: a10
+		DisplayBeacon: True
+		BeaconPoster: airstrike
+		DisplayRadarPing: True
+		CameraActor: camera
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+
+^Palettes:
+	-PlayerColorPalette:
+	IndexedPlayerPalette:
+		BasePalette: terrain
+		RemapIndex: 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191
+		PlayerIndex:
+			GDI: 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191
+			Nod: 127, 126, 125, 124, 122, 46, 120, 47, 125, 124, 123, 122, 42, 121, 120, 120
+			Neutral: 192, 164, 132, 155, 133, 197, 112, 12, 163, 132, 155, 133, 134, 197, 154, 198
+	IndexedPlayerPalette@units:
+		BasePalette: terrain
+		BaseName: player-units
+		RemapIndex: 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191
+		PlayerIndex:
+			GDI: 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191
+			Nod: 161, 200, 201, 202, 204, 205, 206, 12, 201, 202, 203, 204, 205, 115, 198, 114
+			Neutral: 192, 164, 132, 155, 133, 197, 112, 12, 163, 132, 155, 133, 134, 197, 154, 198
+	PaletteFromFile@PlayerColor:
+		Name: PlayerColor
+		Filename: temperat.pal
+		ShadowIndex: 4
+		AllowModifiers: false
+	PlayerColorPalette@PlayerColor:
+		BasePalette: terrain
+		BaseName: PlayerColor
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+		PlayerIndex:
+			GDI: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+			Nod: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+			Neutral: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+
+^Building:
+	RenderSprites:
+		PlayerPalette: PlayerColor
+	Tooltip:
+		GenericVisibility: Enemy
+		ShowOwnerRow: false
+
+^Vehicle:
+	RenderSprites:
+		PlayerPalette: player-units
+	Tooltip:
+		GenericVisibility: Enemy
+		ShowOwnerRow: false
+	MustBeDestroyed:
+		RequiredForShortGame: true
+
+^Tank:
+	RenderSprites:
+		PlayerPalette: player-units
+	Tooltip:
+		GenericVisibility: Enemy
+		ShowOwnerRow: false
+
+^Helicopter:
+	RenderSprites:
+		PlayerPalette: player-units
+	Tooltip:
+		GenericVisibility: Enemy
+		ShowOwnerRow: false
+
+^Infantry:
+	RenderSprites:
+		PlayerPalette: player-units
+	WithDeathAnimation:
+		DeathSequencePalette: player-units
+	Tooltip:
+		GenericVisibility: Enemy
+		ShowOwnerRow: false
+	MustBeDestroyed:
+		RequiredForShortGame: true
+
+^CommonHuskDefaults:
+	RenderSprites:
+		PlayerPalette: player-units
+	Tooltip:
+		GenericVisibility: Enemy, Ally, Neutral
+		GenericStancePrefix: false
+		ShowOwnerRow: false
+
+BOAT:
+	RenderSprites:
+		PlayerPalette: PlayerColor
+
+3TNK:
+	RenderSprites:
+		PlayerPalette: playerRAunits
+	Buildable:
+		Prerequisites: ~disabled
+
+DTRK:
+	RenderSprites:
+		PlayerPalette: playerRAunits
+	Buildable:
+		Prerequisites: ~disabled
+
+FTNK:
+	RenderSprites:
+		PlayerPalette: PlayerColor
+
+C17:
+	RenderSprites:
+		PlayerPalette: player-units
+	Contrail@1:
+		UsePlayerColor: False
+	Contrail@2:
+		UsePlayerColor: False
+	Contrail@3:
+		UsePlayerColor: False
+	Contrail@4:
+		UsePlayerColor: False
+
+HARV:
+	RenderSprites:
+		PlayerPalette: PlayerColor
+
+MCV:
+	RenderSprites:
+		PlayerPalette: PlayerColor
+
+HARV.Husk:
+	RenderSprites:
+		PlayerPalette: PlayerColor
+
+MCV.Husk:
+	RenderSprites:
+		PlayerPalette: PlayerColor
+
+LST:
+	RenderSprites:
+		PlayerPalette: PlayerColor
+	#OLDLST:
+	#	RenderSprites:
+	#		PlayerPalette: PlayerColor
+
+
+^PlaneUnControled:
+	Tooltip:
+		GenericVisibility: Enemy
+		ShowOwnerRow: false
+
+^Ship:
+	Tooltip:
+		GenericVisibility: Enemy
+		ShowOwnerRow: false
+
+^Wall:
+	Tooltip:
+		ShowOwnerRow: false
+
+^CivBuilding:
+	Tooltip:
+		GenericVisibility: Enemy, Neutral
+		ShowOwnerRow: false
+
+^CivBuildingHusk:
+	Tooltip:
+		GenericVisibility: Enemy, Neutral
+		ShowOwnerRow: false
+
+^TechBuilding:
+	Tooltip:
+		GenericVisibility: None
+		ShowOwnerRow: false
+
+^DINO:
+	Tooltip:
+		ShowOwnerRow: false
+
+MISS:
+	Tooltip:
+		GenericVisibility: None
+		ShowOwnerRow: False
+
+ARCO:
+	Tooltip:
+		GenericVisibility: None
+		ShowOwnerRow: False
+
+ARCO.Husk:
+	Tooltip:
+		GenericVisibility: None
+
+V19.Husk:
+	Tooltip:
+		GenericVisibility: None
+
+HOSP.Husk:
+	Tooltip:
+		GenericVisibility: None
+
+BIO.Husk:
+	Tooltip:
+		GenericVisibility: None

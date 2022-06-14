@@ -1,0 +1,25 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Red Alert 2",
+			"type": "clr",
+			"linux": {
+				"type": "mono",
+			},
+			"osx": {
+				"type": "mono",
+			},
+			"request": "launch",
+			"preLaunchTask": "build",
+			"program": "${workspaceRoot}/engine/OpenRA.Game.exe",
+			"cwd": "${workspaceRoot}/engine/",
+			"args": [
+				"Engine.LaunchPath=${workspaceRoot}",
+				"Engine.ModSearchPaths=${workspaceRoot}/mods,./mods",
+				"Game.Mod=ra2",
+				"Debug.DisplayDeveloperSettings=true",
+			],
+		},
+	],
+}

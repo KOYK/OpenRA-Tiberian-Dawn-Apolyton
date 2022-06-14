@@ -1,0 +1,76 @@
+levels
+1 100
+2 300
+3 500
+4 
+
+SpeedMultiplier (10% inf 5% tanks,ships,air)
+RevealsShroudMultiplier (better leave for upgrades?)
+ReloadAmmoDelayMultiplier (not rate of fire, but actual ammo. 10% tanks,ships)
+ReloadDelayMultiplier (fire rate. 5%,10%,15%,20% inf,tanks,ships )
+RangeMultiplier (grenades only 10% )
+InaccuracyMultiplier (70%,80%,90%,100)*in order for accuracy to make sense, units should be first inaccurate.
+FirepowerMultiplier (does 105%,110%,115%,120% damage, not logical but whatever)
+DamageMultiplier (%100 receives normal damage)
+DetectCloakedMultiplier (navy)
+SelfHealing (crew repairs research only, for ships and tanks, inf can use medics or hosp)
+
+
+Unit xp
+Hard to kill targets should give alot of xp (con yards, radars ect)
+High hp targets should give alot of xp too (mammoth tank. obelisk)
+
+Player xp
+the player should be rewarded based on decicion making, so killing a 
+defence, should not give alot of xp, but killing a high value target should give alot.
+spies are not so hard to use and infiltrate so that should give some score but not too much.
+team support should give more xp than spies for example.
+
+List player
+None combat units 1
+civ buildings 1
+tech building 1 (why kill it if you can cap it?)
+
+infantry 5 
+
+GivesExperience:
+	Experience: 1
+	ValidStances: Enemy
+	ActorExperienceModifier: 10
+	PlayerExperienceModifier: 100
+
+GainsExperience:
+	Conditions:	
+	LevelUpImage: 
+	LevelUpSequence: 
+	LevelUpPalette: 
+	ExperienceModifier:	-1 
+	SuppressLevelupAnimation: True
+	LevelUpNotification: 
+
+DeliversExperience:
+	PlayerExperience: 0
+	Type: 
+	Voice: 
+
+AcceptsDeliveredExperience:
+	ValidTypes: 
+	ValidStances: Ally
+
+GivesExperienceMultiplier
+	Modifier: 
+	RequiresCondition: 
+
+GainsExperienceMultiplier:
+	Modifier: 
+	RequiresCondition: 
+
+Infiltrates
+
+RepairableBuilding
+
+DeliversCash
+
+RepairsUnits
+
+Captures

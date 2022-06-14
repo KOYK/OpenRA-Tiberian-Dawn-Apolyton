@@ -1,0 +1,92 @@
+tibtre01:
+	Inherits: ^Drill
+
+tibtre02:
+	Inherits: ^Drill
+
+tibtre03:
+	Inherits: ^Drill
+
+tree01:
+	Inherits: ^Tree
+
+tree02:
+	Inherits: ^Tree
+
+tree03:
+	Inherits: ^Tree
+
+tree04:
+	Inherits: ^Tree
+
+tree05:
+	Inherits: ^Tree
+
+tree06:
+	Inherits: ^Tree
+
+tree07:
+	Inherits: ^Tree
+
+tree08:
+	Inherits: ^Tree
+
+tree09:
+	Inherits: ^Tree
+
+tree10:
+	Inherits: ^Tree
+
+tree11:
+	Inherits: ^Tree
+
+tree12:
+	Inherits: ^Tree
+
+tree13:
+	Inherits: ^Tree
+
+tree14:
+	Inherits: ^Tree
+
+tree15:
+	Inherits: ^Tree
+
+tree16:
+	Inherits: ^Tree
+
+tree17:
+	Inherits: ^Tree
+
+tree18:
+	Inherits: ^Tree
+
+tree19:
+	Inherits: ^Tree
+
+tree20:
+	Inherits: ^Tree
+
+tree21:
+	Inherits: ^Tree
+
+tree22:
+	Inherits: ^Tree
+
+tree23:
+	Inherits: ^Tree
+
+tree24:
+	Inherits: ^Tree
+
+tree25:
+	Inherits: ^Tree
+
+tree26:
+	Inherits: ^Tree
+
+tree27:
+	Inherits: ^Tree
+
+tree28:
+	Inherits: ^Tree

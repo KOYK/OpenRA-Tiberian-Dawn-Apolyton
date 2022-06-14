@@ -1,0 +1,145 @@
+lobrdb_a:
+	Inherits: ^bridge
+	idle: lobrdb10
+	idle2: lobrdb11
+	idle3: lobrdb12
+	idle4: lobrdb13
+	adead: lobrdb15
+	bdead: lobrdb14
+	abdead: lobrdb16
+
+lobrdb_a_d:
+	Inherits: ^bridge
+	idle: lobrdb28
+	aramp: lobrdb17
+	bramp: lobrdb18
+	abramp: lobrdb28
+	editor: lobrdb10
+
+lobrdb_b:
+	Inherits: ^bridge
+	idle: lobrdb01
+	idle2: lobrdb02
+	idle3: lobrdb03
+	idle4: lobrdb04
+	adead: lobrdb05
+	bdead: lobrdb06
+	abdead: lobrdb07
+
+lobrdb_b_d:
+	Inherits: ^bridge
+	idle: lobrdb27
+	aramp: lobrdb08
+	bramp: lobrdb09
+	abramp: lobrdb27
+	editor: lobrdb01
+
+lobrdb_r_se:
+	Inherits: ^bridge
+	idle: lobrdb19
+	damaged-idle: lobrdb20
+
+lobrdb_r_nw:
+	Inherits: ^bridge
+	idle: lobrdb21
+	damaged-idle: lobrdb22
+
+lobrdb_r_ne:
+	Inherits: ^bridge
+	idle: lobrdb23
+	damaged-idle: lobrdb24
+
+lobrdb_r_sw:
+	Inherits: ^bridge
+	idle: lobrdb25
+	damaged-idle: lobrdb26
+
+lobrdg_a:
+	Inherits: ^bridge
+	idle: lobrdg10
+	idle2: lobrdg11
+	idle3: lobrdg12
+	idle4: lobrdg13
+	adead: lobrdg15
+	bdead: lobrdg14
+	abdead: lobrdg16
+
+lobrdg_a_d:
+	Inherits: ^bridge
+	idle: lobrdg28
+	aramp: lobrdg17
+	bramp: lobrdg18
+	abramp: lobrdg28
+	editor: lobrdg10
+
+lobrdg_b:
+	Inherits: ^bridge
+	idle: lobrdg01
+	idle2: lobrdg02
+	idle3: lobrdg03
+	idle4: lobrdg04
+	adead: lobrdg05
+	bdead: lobrdg06
+	abdead: lobrdg07
+
+lobrdg_b_d:
+	Inherits: ^bridge
+	idle: lobrdg27
+	aramp: lobrdg08
+	bramp: lobrdg09
+	abramp: lobrdg27
+	editor: lobrdg01
+
+lobrdg_r_se:
+	Inherits: ^bridge
+	idle: lobrdg19
+	damaged-idle: lobrdg20
+
+lobrdg_r_nw:
+	Inherits: ^bridge
+	idle: lobrdg21
+	damaged-idle: lobrdg22
+
+lobrdg_r_ne:
+	Inherits: ^bridge
+	idle: lobrdg23
+	damaged-idle: lobrdg24
+
+lobrdg_r_sw:
+	Inherits: ^bridge
+	idle: lobrdg25
+	damaged-idle: lobrdg26
+
+bridge1:
+	idle: bridge
+		# Disabled to avoid glitches until shadow rendering is fixed
+		# ShadowStart: 18
+		UseTilesetExtension: true
+		ZRamp: 1
+		Offset: 0, -16, 12
+
+bridge2:
+	idle: bridge
+		Start: 9
+		# Disabled to avoid glitches until shadow rendering is fixed
+		# ShadowStart: 27
+		UseTilesetExtension: true
+		ZRamp: 1
+		Offset: 0, -31, 12
+
+bridgb1:
+	idle: bridgb
+		# Disabled to avoid glitches until shadow rendering is fixed
+		# ShadowStart: 18
+		UseTilesetExtension: true
+		ZRamp: 1
+		Offset: 0, -16, 12
+
+bridgb2:
+	idle: bridgb
+		Start: 9
+		# Disabled to avoid glitches until shadow rendering is fixed
+		# ShadowStart: 27
+		UseTilesetExtension: true
+		ZRamp: 1
+		Offset: 0, -31, 12

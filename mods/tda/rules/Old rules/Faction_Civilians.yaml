@@ -1,0 +1,1539 @@
+#############################################################################################################
+#											Buildings														#
+#############################################################################################################
+#Welcome to the most unorganized section of my mod!!! ill short it out as I go tho.
+#All-Faction
+
+CIV_CHURCH:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Selectable:
+		Bounds: 48,48
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Tooltip:
+		Name: Church
+	Valued:
+		Cost: 500
+	SpawnActorsOnSell:
+		ActorTypes: scientist,scientist,scientist,scientist,scientist,scientist,scientist,scientist,scientist
+	WithMakeAnimation:
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: anytech
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure
+	Power:
+		Amount: 0
+	Health:
+		HP: 600
+	RevealsShroud:
+		Range: 5c0
+	RenderSprites:
+		Palette: NoTerrain
+	GrantCondition@afterbuild:
+		Condition: afterbuild
+	WithIdleOverlay@afterbuild:
+		StartSequence: afterbuild
+		Sequence: null
+		RequiresCondition: afterbuild
+		Palette: NoTerrain
+		IsPlayerPalette: false
+#unfortunally for some reason the idleoverlay palette messes with the building palette, and the end result is the building inheriting the idleoverlay palette. So i have to convert the buildings into one palette, but in a twist of fate i found that only the desert buildings are visually effected for my eyes, so i will change only them.
+
+V19:
+	Inherits: ^TechBuilding
+	GivesCashOnCapture:
+		Amount: 500
+		CaptureTypes: Building
+	#CashTricklerBar:
+	#	DisplayStances: Ally
+	#	Color: c5c5c5
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 1000
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Oil Derrick
+	SpawnActorOnDeath:
+		Actor: V19_DES
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	TransformOnCapture:
+		IntoActor: V19.Captured
+		SkipMakeAnims: true
+		CaptureTypes: Building
+		
+V19.Captured:
+	Inherits: V19
+	RenderSprites:
+		Image: V19
+	CashTrickler:
+		Amount: 10
+		Interval: 25
+		InitialDelay: 25
+	-GivesCashOnCapture:
+
+OILRIG:
+	Inherits: ^TechBuilding
+	CashTricklerBar:
+		DisplayStances: Ally
+		Color: c5c5c5
+	CashTrickler:
+		Amount: 10
+		Interval: 25
+		InitialDelay: 25
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 1000
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Oilrig
+
+HOSP:
+	Inherits: ^TechBuilding
+	Selectable:
+		Priority: 0
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 1000
+	Tooltip:
+		Name: Hospital
+	SpawnActorOnDeath:
+		Actor: HOSP_DES
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	WithBuildingBib:
+		HasMinibib: True
+	ProvidesPrerequisite@buildingname:
+	CaptureNotification:
+		Notification: CivilianBuildingCaptured
+
+BIO:
+	Inherits: ^TechBuilding
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 2000
+	Tooltip:
+		Name: Biological Lab
+	SpawnActorOnDeath:
+		Actor: BIO_DES
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	ProvidesPrerequisite@buildingname:
+
+MISS:
+	Inherits: ^TechBuilding
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Tooltip:
+		Name: Tech Center
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 1000
+		Prerequisites: ~disabled
+	Valued:
+		Cost: 2000
+	WithBuildingBib:
+		HasMinibib: True
+	WithMakeAnimation:
+	ProvidesPrerequisite@buildingname:
+	SpawnActorOnDeath:
+		Actor: MISS_DES
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Selectable:
+		Bounds: 72,48
+
+BARR:
+	Inherits: ^TechBuilding
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Private Security Barracks
+	ProvidesPrerequisite:
+		Prerequisite: barracks
+	Buildable:
+		BuildPaletteOrder: 30
+		Description: Trains infantry
+	WithBuildingBib:
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 500
+	RevealsShroud:
+		Range: 5c0
+	RallyPoint:
+		Offset: 1,2
+	Exit@1:
+		SpawnOffset: -170,810,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: -725,640,0
+		ExitCell: 0,2
+	Production:
+		Produces: Mercs
+	ProductionQueue@nullfornow:
+		Type: Mercs
+		Group: Infantry
+		LowPowerModifier: 0
+	ProductionBar:
+		ProductionType: Mercs
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 48,42,0,-5
+		DecorationBounds: 48,42,0,-5
+	RenderSprites:
+		PlayerPalette: playerRA
+	SpawnActorOnDeath:
+		Actor: BARR_DES
+		OwnerType: InternalName
+		InternalOwner: Neutral
+
+FIXN:
+	Inherits: ^TechBuilding
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Machine Shop
+	Building:
+		Footprint: __x xxx x==
+		Dimensions: 3,3
+	Health:
+		HP: 500
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: 0
+	SelectionDecorations:
+	Selectable:
+		Bounds: 72,48
+		DecorationBounds: 72,72,0,0
+	WithIdleOverlay@ROOF:
+		Sequence: idle-roof
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithBuildingBib:
+	SpawnActorOnDeath:
+		Actor: FIXN_DES
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	ProvidesPrerequisite@buildingname:
+
+PORT:
+	Inherits: ^TechBuilding
+	Inherits@shape: ^2x1Shape
+	Valued:
+		Cost: 6000
+	Tooltip:
+		Name: Shipyard
+	Building:
+		Footprint: xxxx xxxx xxxx xxxx
+		Dimensions: 4,4
+	ProductionFromMapEdge:
+		Produces: Ship.Nod, Ship.Nodda, Ship.GDI
+	ProductionQueue@NodShip:
+		Type: Ship.Nod
+		Factions: nod
+		Group: Ship
+		LowPowerModifier: 300
+	ProductionQueue@NoddaShip:
+		Type: Ship.Nodda
+		Factions: nodda
+		Group: Ship
+		LowPowerModifier: 300
+	ProductionQueue@GDIShip:
+		Type: Ship.GDI
+		Factions: gdi
+		Group: Ship
+		LowPowerModifier: 300
+	ProductionBar@ShipGDI:
+		ProductionType: Ship.GDI
+	ProductionBar@ShipNod:
+		ProductionType: Ship.Nod
+	ProductionBar@ShipNod:
+		ProductionType: Ship.Nodda
+	Exit:
+		ProductionTypes: Ship.Nod, Ship.Nodda, Ship.GDI
+		ExitDelay: 5
+	RallyPoint:
+	Health:
+		HP: 5000
+	RevealsShroud:
+		Range: 7c0
+	RenderSprites:
+		PlayerPalette: playerRA
+	WithSpriteBody:
+	Power:
+		Amount: 0
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	-EngineerRepairable:
+	-Targetable:
+	ProximityCapturable:
+		Range: 10c0
+		CaptorTypes: Vehicle, Tank, Infantry, Player
+		MustBeClear: true
+		Sticky: true
+		Permanent: false
+
+V19_DES:
+	Inherits: ^TechBuilding
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 20
+	Valued:
+		Cost: 0
+	Tooltip:
+		Name: Destroyed Oil Derrick
+	EditorOnlyTooltip:
+		Name: Use this
+	-GrantCondition@CapturableBuilding:
+	WithIdleOverlay:
+		StartSequence: fire-start
+		Sequence: fire-loop
+	DamageMultiplier:
+		Modifier: 0
+
+HOSP_DES:
+	Inherits: ^TechBuilding
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 20
+	Valued:
+		Cost: 0
+	Tooltip:
+		Name: Destroyed Hospital
+	WithBuildingBib:
+		HasMinibib: True
+	ProvidesPrerequisite@buildingname:
+	TransformOnCapture:
+		IntoActor: hosp
+		ForceHealthPercentage: 10
+		SkipMakeAnims: True
+	EditorOnlyTooltip:
+		Name: Use this
+
+BIO_DES:
+	Inherits: ^TechBuilding
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 20
+	Valued:
+		Cost: 0
+	Tooltip:
+		Name: Destroyed Biological Lab
+	TransformOnCapture:
+		IntoActor: bio
+		ForceHealthPercentage: 10
+		SkipMakeAnims: True
+	EditorOnlyTooltip:
+		Name: Use this
+
+MISS_DES:
+	Inherits: ^TechBuilding
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Tooltip:
+		Name: Destroyed Tech Center
+	Health:
+		HP: 20
+	Valued:
+		Cost: 0
+	WithBuildingBib:
+		HasMinibib: True
+	TransformOnCapture:
+		IntoActor: miss
+		ForceHealthPercentage: 10
+		SkipMakeAnims: True
+	EditorOnlyTooltip:
+		Name: Use this
+
+BARR_DES:
+	Inherits: ^TechBuilding
+	Valued:
+		Cost: 0
+	Tooltip:
+		Name: Destroyed Private Security Barracks
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	WithBuildingBib:
+	Health:
+		HP: 20
+	RevealsShroud:
+		Range: 5c0
+	SelectionDecorations:
+	TransformOnCapture:
+		IntoActor: barr
+		ForceHealthPercentage: 10
+		SkipMakeAnims: True
+	RenderSprites:
+		PlayerPalette: playerRA
+	EditorOnlyTooltip:
+		Name: Use this
+	Selectable:
+		DecorationBounds: 48,42,0,-5
+
+FIXN_DES:
+	Inherits: ^TechBuilding
+	Valued:
+		Cost: 0
+	Tooltip:
+		Name: Destroyed Machine Shop
+	Building:
+		Footprint: __x xxx x__
+		Dimensions: 3,3
+	Health:
+		HP: 20
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: 0
+	SelectionDecorations:
+	TransformOnCapture:
+		IntoActor: fixn
+		ForceHealthPercentage: 10
+		SkipMakeAnims: True
+	Selectable:
+		Bounds: 48,42,0,-5
+		DecorationBounds: 48,42,0,-5
+	WithIdleOverlay@ROOF:
+		Sequence: idle-roof
+	WithBuildingBib:
+
+#############
+#Sub-faction#
+#############
+
+
+#############################################################################################################
+#											Defences														#
+#############################################################################################################
+#All-Faction
+
+CITY_4:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+	SpawnActorOnDeath:
+		Actor: city_4.husk
+	#CITY_1:
+	#CITY_2:
+	#CITY_3:
+CITY_4.Husk:
+	Inherits: ^CivBuildingHusk
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding (Destroyed)
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+
+CITY_5:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+	SpawnActorOnDeath:
+		Actor: city_5.husk
+CITY_5.Husk:
+	Inherits: ^CivBuildingHusk
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding (Destroyed)
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+
+CITY_6:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+	SpawnActorOnDeath:
+		Actor: city_6.husk
+CITY_6.Husk:
+	Inherits@shape: ^3x2Shape
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding (Destroyed)
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+
+CITY_7:
+	Inherits@shape: ^3x2Shape
+	Inherits: ^CivBuilding
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+	SpawnActorOnDeath:
+		Actor: city_7.husk
+CITY_7.Husk:
+	Inherits@shape: ^3x2Shape
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding (Destroyed)
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+
+CITY_8:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+	SpawnActorOnDeath:
+		Actor: city_8.husk
+CITY_8.Husk:
+	Inherits: ^CivBuildingHusk
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: ___ ___ xxx =x=
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Tooltip:
+		Name: City Bulding (Destroyed)
+	MapEditorData:
+		ExcludeTilesets: DESERT, SNOW, JUNGLE
+	RenderSprites:
+		PlayerPalette: playerRA
+		Palette: playerRA
+
+V01:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: -490,-384,0, 0,0,0, 0,470,0
+		Type: Rectangle
+			TopLeft: -768, -597
+			BottomRight: 896, 683
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Tooltip:
+		Name: Church
+	SpawnActorOnDeath:
+		Actor: V01.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+V01.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Tooltip:
+		Name: Church (Destroyed)
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+V02:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: -490,-512,0, 0,0,0, 0,512,0
+		Type: Rectangle
+			TopLeft: -1024, -512
+			BottomRight: 1024, 597
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	SpawnActorOnDeath:
+		Actor: V02.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Han's and Gretel's
+V02.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Han's and Gretel's (Destroyed)
+
+V03:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: -490,-512,0, 0,0,0, 421,512,0, -210,512,0
+		Type: Rectangle
+			TopLeft: -1024, -597
+			BottomRight: 1024, 597
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	SpawnActorOnDeath:
+		Actor: V03.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Hewitt's House
+V03.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Hewitt's House (Destroyed)
+
+V04:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, -421,-256,0, -421,256,0
+		Type: Rectangle
+			TopLeft: -683, -432
+			BottomRight: 683, 683
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	SpawnActorOnDeath:
+		Actor: V04.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Ricktor's House
+V04.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Ricktor's House (Destroyed)
+
+V05:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V05.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Gretchkin's house
+V05.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Gretchkin's house (Destroyed)
+
+V06:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V06.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: The Barn
+V06.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: The Barn (Destroyed)
+
+V07:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V07.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Damon's Pub
+V07.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Damon's Pub (Destroyed)
+
+V08:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V08.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Fran's House
+V08.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Fran's House (Destroyed)
+
+V09:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V09.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Music Factory
+V09.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Music Factory (Destroyed)
+
+V10:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V10.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Toymaker's
+V10.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Toymaker's (Destroyed)
+
+V11:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V11.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Ludwig's House
+V11.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Ludwig's House (Destroyed)
+
+V12:
+	Inherits: ^CivField
+	SpawnActorOnDeath:
+		Actor: V12.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Haystacks
+V12.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Haystacks (Destroyed)
+
+V13:
+	Inherits: ^CivField
+	SpawnActorOnDeath:
+		Actor: V13.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Haystacks
+V13.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Haystacks (Destroyed)
+
+V14:
+	Inherits: ^CivField
+	SpawnActorOnDeath:
+		Actor: V14.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Wheat Field
+V14.Husk:
+	Inherits: ^CivFieldHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Wheat Field (Destroyed)
+
+V15:
+	Inherits: ^CivField
+	SpawnActorOnDeath:
+		Actor: V15.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Fallow Field
+V15.Husk:
+	Inherits: ^CivFieldHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Fallow Field (Destroyed)
+
+V16:
+	Inherits: ^CivField
+	SpawnActorOnDeath:
+		Actor: V16.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Corn Field
+V16.Husk:
+	Inherits: ^CivFieldHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Corn Field (Destroyed)
+
+V17:
+	Inherits: ^CivField
+	SpawnActorOnDeath:
+		Actor: V17.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Celery Field
+V17.Husk:
+	Inherits: ^CivFieldHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Celery Field (Destroyed)
+
+V18:
+	Inherits: ^CivField
+	SpawnActorOnDeath:
+		Actor: V18.Husk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Potato Field
+V18.Husk:
+	Inherits: ^CivFieldHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	Tooltip:
+		Name: Potato Field (Destroyed)
+
+ARCO:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: ARCO.Husk
+	Tooltip:
+		Name: Oil Pump
+		ShowOwnerRow: True
+ARCO.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	Tooltip:
+		Name: Oil Pump (Destroyed)
+
+BARB:
+	Inherits: ^Wall
+	Armor:
+		Type: Light
+	Tooltip:
+		Name: Barbwire Fence
+	LineBuild:
+		NodeTypes: barbwire
+	LineBuildNode:
+		Types: barbwire
+	WithWallSpriteBody:
+		Type: barbwire
+
+WOOD:
+	Inherits: ^Wall
+	Armor:
+		Type: Wood
+	Tooltip:
+		Name: Wooden Fence
+	LineBuild:
+		NodeTypes: woodfence
+	LineBuildNode:
+		Types: woodfence
+	WithWallSpriteBody:
+		Type: woodfence
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Vehicles														#
+#############################################################################################################
+#All-Faction
+
+V20:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: -840,-512,0, 0,0,0, -840,512,0
+		Type: Rectangle
+			TopLeft: -1024, -512
+			BottomRight: 1024, 896
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	SpawnActorOnDeath:
+		Actor: V20.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Sala's House
+V20.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Sala's House (Destroyed)
+
+V21:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 840,-512,0, 420,0,0, 840,512,0
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 0
+	HitShape@WELL:
+		TargetableOffsets: -770,512,0
+		Type: Rectangle
+			TopLeft: 0, 0
+			BottomRight: 1024, 598
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	SpawnActorOnDeath:
+		Actor: V21.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Abdul's House
+V21.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Abdul's House (Destroyed)
+
+V22:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V22.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Pablo's Wicked Pub
+V22.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Pablo's Wicked Pub (Destroyed)
+
+V23:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V23.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Village Well
+V23.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Village Well (Destroyed)
+
+V24:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: -630,-512,0, 0,0,0, -630,256,0, 420,-512,0
+		Type: Rectangle
+			TopLeft: -1024, -683
+			BottomRight: 640, 853
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	SpawnActorOnDeath:
+		Actor: V24.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Camel Trader
+V24.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Camel Trader (Destroyed)
+
+V25:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,-128,0, 420,512,0
+		Type: Rectangle
+			TopLeft: -683, -683
+			BottomRight: 1024, 512
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Tooltip:
+		Name: Church
+	SpawnActorOnDeath:
+		Actor: V25.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+V25.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Tooltip:
+		Name: Church (Destroyed)
+	MapEditorData:
+		RequireTilesets: DESERT
+
+V26:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V26.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Ali's House
+V26.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Ali's House (Destroyed)
+
+V27:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V27.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Trader Ted's
+V27.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Trader Ted's (Destroyed)
+
+V28:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V28.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Menelik's House
+V28.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Menelik's House (Destroyed)
+
+V29:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V29.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Prestor John's House
+V29.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Prestor John's House (Destroyed)
+
+V30:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V30.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Village Well
+V30.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Village Well (Destroyed)
+
+V31:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V31.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Witch Doctor's Hut
+V31.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Witch Doctor's Hut (Destroyed)
+
+V32:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V32.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Rikitikitembo's Hut
+V32.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Rikitikitembo's Hut (Destroyed)
+
+V33:
+	Inherits: ^CivBuilding
+	Inherits@shape: ^2x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: V33.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Roarke's Hut
+V33.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Roarke's Hut (Destroyed)
+
+V34:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V34.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Mubasa's Hut
+V34.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Mubasa's Hut (Destroyed)
+
+V35:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V35.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Aksum's Hut
+V35.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Aksum's Hut (Destroyed)
+
+V36:
+	Inherits: ^CivBuilding
+	SpawnActorOnDeath:
+		Actor: V36.Husk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Mambo's Hut
+V36.Husk:
+	Inherits: ^CivBuildingHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: Mambo's Hut (Destroyed)
+
+V37:
+	Inherits: ^CivBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 0,1024,0
+		Type: Rectangle
+			TopLeft: -512, -597
+			BottomRight: 1536, 597
+	SpawnActorOnDeath:
+		Actor: V37.Husk
+	Building:
+		Footprint: __xx_ ___xx
+		Dimensions: 5,2
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: The Studio
+V37.Husk:
+	Inherits: ^CivBuildingHusk
+	Building:
+		Footprint: __xx_ ___xx
+		Dimensions: 5,2
+	MapEditorData:
+		RequireTilesets: DESERT
+	Tooltip:
+		Name: The Studio (Destroyed)
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Infantry														#
+#############################################################################################################
+#All-Faction
+
+C1:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+C2:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+C3:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+	Voiced:
+		VoiceSet: CivilianFemaleVoice
+
+C4:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+	Voiced:
+		VoiceSet: CivilianFemaleVoice
+
+C5:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+	Voiced:
+		VoiceSet: CivilianFemaleVoice
+
+C6:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+C7:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+C8:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+C9:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+C10:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+
+DELPHI:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+	-Wanders:
+	Tooltip:
+		Name: Agent Delphi
+
+CHAN:
+	Inherits: ^CivInfantry
+	Tooltip:
+		Name: Dr. Chan
+
+SCIENTIST:
+	Inherits: ^CivInfantry
+	Tooltip:
+		Name: Scientist
+	RenderSprites:
+		Image: chan
+	Valued:
+		Cost: 500
+# later this unit will be capturable and provide tech points(when the openra devs add an extra resource trait aside from money, probably never)
+
+MOEBIUS:
+	Inherits: ^CivInfantry
+	-Wanders:
+	Voiced:
+		VoiceSet: MoebiusVoice
+	Tooltip:
+		Name: Dr. Moebius
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											 Navy															#
+#############################################################################################################
+#All-Faction
+
+
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Airforce														#
+#############################################################################################################
+
+C130:
+	Inherits: ^PlaneUnControled
+	Inherits@2: ^GainsExperience
+	ParaDrop:
+		DropRange: 4c0
+	Health:
+		HP: 120
+	Armor:
+		Type: Light
+	Aircraft:
+		CruiseAltitude: 4560
+		TurnSpeed: 5
+		Speed: 200
+		Repulsable: False
+		MaximumPitch: 56
+	Cargo:
+		MaxWeight: 10
+	SelectionDecorations:
+		RenderSelectionBars: False
+	Tooltip:
+		Name: C-130
+	SpawnActorOnDeath:
+		Actor: C130.Husk
+	SmokeTrailWhenDamaged@0:
+		Offset: -432,560,0
+		Interval: 2
+	SmokeTrailWhenDamaged@1:
+		Offset: -432,-560,0
+		Interval: 2
+	RejectsOrders:
+	Valued:
+		Cost: 100
+	RenderSprites:
+		PlayerPalette: playerRA
+C130.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: C-130
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 149
+	SmokeTrailWhenDamaged@0:
+		Offset: -432,560,0
+		Interval: 2
+		MinDamage: Undamaged
+	SmokeTrailWhenDamaged@1:
+		Offset: -432,-560,0
+		Interval: 2
+		MinDamage: Undamaged
+	RenderSprites:
+		Image: c130
+		PlayerPalette: playerRA

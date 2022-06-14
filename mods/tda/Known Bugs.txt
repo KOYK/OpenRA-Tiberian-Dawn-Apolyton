@@ -1,0 +1,2 @@
+Selling the adv.power plant will show the original power plant animation.
+

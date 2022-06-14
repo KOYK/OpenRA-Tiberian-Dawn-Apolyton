@@ -1,0 +1,216 @@
+Atomic:
+	ValidTargets: Ground, Air, Trees
+	Report: icbm2stereo.aud
+	Warhead@1Dam_impact: SpreadDamage
+		Spread: 1c0
+		Damage: 400
+		Falloff: 1000, 368, 135, 50, 18, 7, 0
+		ValidTargets: Ground, Air, Trees
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 60
+			Heavy: 50
+		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@2Eff_impact: CreateEffect
+		Explosions: nuke_explosion
+		ImpactSounds: nukexplo.aud
+		ExplosionPalette: flashyeffect
+	Warhead@3Dam_areanukea: SpreadDamage
+		Spread: 3c512
+		Damage: 300
+		Falloff: 1000, 368, 135, 50, 18, 7, 0
+		Delay: 3
+		ValidTargets: Ground, Air
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 60
+			Heavy: 50
+		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@4Res_areanukea: DestroyResource
+		Size: 3
+		Delay: 3
+	Warhead@5Smu_areanukea: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall
+		Size: 3
+		Delay: 3
+	Warhead@6Eff_areanukea: CreateEffect
+		ImpactSounds: xplobig4.aud
+		Delay: 3
+	Warhead@7Dam_areanukeb: SpreadDamage
+		Spread: 4c768
+		Damage: 100
+		Falloff: 1000, 368, 135, 50, 18, 7, 0
+		Delay: 6
+		ValidTargets: Ground, Air, Trees
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 60
+			Heavy: 50
+		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@8Res_areanukeb: DestroyResource
+		Size: 4
+		Delay: 6
+	Warhead@9Smu_areanukeb: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall
+		Size: 4
+		Delay: 6
+	Warhead@10Dam_areanukec: SpreadDamage
+		Spread: 5c0
+		Damage: 50
+		Falloff: 1000, 368, 135, 50, 18, 7, 0
+		Delay: 9
+		ValidTargets: Ground, Air, Trees
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 60
+			Heavy: 50
+		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@11Res_areanukec: DestroyResource
+		Size: 5
+		Delay: 9
+	Warhead@12Smu_areanukec: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall
+		Size: 5
+		Delay: 9
+
+IonCannon:
+	ValidTargets: Ground, Air, Trees
+	Warhead@1Dam_impact: SpreadDamage
+		Range: 0, 1c1, 2c1, 3c1, 4c1
+		Damage: 300
+		Falloff: 1000, 1000, 250, 100, 50
+		ValidTargets: Ground, Air, Trees
+		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@2Smu_impact: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+	Warhead@3Smu_area: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		Size: 1
+		Delay: 3
+	Warhead@4Res_area2: DestroyResource
+		Size: 2
+		Delay: 6
+	Warhead@5Smu_area2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		Size: 2,1
+		Delay: 6
+	Warhead@6Eff_impact: CreateEffect
+		Explosions: ionflash
+		ExplosionPalette: alpha
+		Delay: 1
+
+ArtilleryShellExplode:
+	Inherits@1: ^ImpactSoundsShell
+	Inherits@2: ^ImpactHitForceShellMedium
+	Warhead@1Dam: SpreadDamage
+		Spread: 341
+		Damage: 150
+		Versus:
+			None: 100
+			Wood: 80
+			Light: 75
+			Heavy: 50
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+	Warhead@3Eff: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplosml2.aud
+		ExplosionPalette: flashyeffect
+		InvalidTargets: Water
+	Warhead@4EffFlash: CreateEffect
+		Explosions: flash3
+		ExplosionPalette: alpha
+		InvalidTargets: Water
+
+HeavyArtilleryShell:
+	Inherits@1: ^FireTrailL
+	Inherits@2: ^ImpactHitForceShellMedium
+	Inherits@3: ^Cannon
+	Range: 4c0
+	Burst: 4
+	BurstDelays: 3
+	Report: artyinco01.aud
+	Projectile: Bullet
+		Speed: 350
+		Blockable: false
+		LaunchAngle: 1
+		Inaccuracy: 1c0
+		ContrailLength: 30
+		Image: 120MM
+		Palette: flashyeffect
+		Shadow: true
+	Warhead@1Dam: SpreadDamage
+		Spread: 600
+		Damage: 1200
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+		Versus:
+			AT-1: 500
+			AT-25: 50
+			AT-26: 50
+			AT-27: 50
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+	Warhead@3Eff: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplosml2.aud
+		ExplosionPalette: flashyeffect
+		InvalidTargets: Water
+	Warhead@4EffFlash: CreateEffect
+		Explosions: flash3
+		ExplosionPalette: alpha
+		InvalidTargets: Water
+	Warhead@5Res_impact: DestroyResource
+		Size: 1
+
+NapalmB:
+	Inherits@1: ^Grenade
+	ValidTargets: Ground, Water, Trees
+	ReloadDelay: 4
+	Range: 2c0
+	Burst: 2
+	BurstDelays: 2
+	Projectile: GravityBomb
+		Image: BOMBLET
+		Shadow: true
+	Warhead@1Dam: SpreadDamage
+		Spread: 341
+		Damage: 1500
+		Falloff: 1000, 368, 135, 50, 18, 7, 0
+		ValidTargets: Ground, Water, Trees
+		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
+		Versus:
+			AT-1: 5
+			AT-25: 4
+			AT-26: 4
+			AT-27: 4
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall
+	Warhead@3Eff: CreateEffect
+		Explosions: med_napalm
+		ImpactSounds: flamer2.aud
+		ExplosionPalette: flashyeffect
+		InvalidTargets: Water
+	Warhead@ShellToWater: CreateEffect
+		ImpactSounds: ImpactShellWaterRA1.aud,ImpactShellWaterRA2.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle, Husk, Ground, Infantry, Structure, Wall
+	Warhead@HitForceToWater: CreateEffect
+		ValidTargets: Water
+		InvalidTargets: Vehicle, Husk, Ground, Infantry, Structure, Wall
+		Explosions: large_splash
+	Warhead@5Res_impact: DestroyResource
+		Size: 1

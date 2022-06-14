@@ -1,0 +1,47 @@
+#Upgrades that work like research but they only show up on the specifc actor.
+
+^UpgradeBasic:
+	ConditionManager:
+	Buildable:
+		Queue: PowerPlantUpgrade.Nod, PowerPlantUpgrade.Nodda, PowerPlantUpgrade.GDI
+		BuildPaletteOrder: 1
+		Prerequisites: anyhq
+		Description: Description unavailable
+		IconPalette: ra2foricamos
+	Immobile:
+		OccupiesSpace: false
+	BodyOrientation:
+		QuantizedFacings: 1
+	AlwaysVisible:
+	Interactable:
+	OwnerLostAction:
+		Action: Dispose
+		Owner: Neutral
+
+UPGRADE_ADV_NUKE:
+	Inherits: ^UpgradeBasic
+	ProximityExternalCondition@Upgrade:
+		Condition: PowerPlantUpgrade.proximity
+		Range: 1c0
+	ExternalCondition@PowerPlantEXIST:
+		Condition: PowerPlantEXIST.proximity
+	KillsSelf:
+		RemoveInstead: True
+		Delay: 25
+		RequiresCondition: !PowerPlantEXIST.proximity
+	Tooltip:
+		Name: Advance Reactors
+	EditorOnlyTooltip:
+		Name: (upgrade actor adv power)
+	Buildable:
+		Queue: PowerPlantUpgrade.Nod, PowerPlantUpgrade.Nodda, PowerPlantUpgrade.GDI
+		Prerequisites: anyhq
+		Description: Type: Upgeade\nSubject: Power\nDescription: Upgrade this power plant  to advance power plant\nNote: Chance for fail-safe failure 10%
+	Valued:
+		Cost: 500
+	RenderSprites:
+		Image: re_advpower_icon_nod
+		FactionImages:
+			nod: re_advpower_icon_nod
+			nodda: re_advpower_icon_nod
+			gdi: re_advpower_icon_gdi

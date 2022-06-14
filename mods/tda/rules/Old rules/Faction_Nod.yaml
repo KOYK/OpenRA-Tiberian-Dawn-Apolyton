@@ -1,0 +1,2480 @@
+#############################################################################################################
+#											Buildings														#
+#############################################################################################################
+#All-Faction
+
+NUKE_NOD:
+	Inherits@powerplant: NUKE
+	RenderSprites:
+		Image: NUKE
+	Tooltip:
+		Name: Nod Nuclear Power Plant
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	Tooltip@UPGRADED_ON:
+		Name: Nod Advanced Nuclear Power Plant
+		RequiresCondition: PowerPlantUpgrade.proximity
+	Power:
+		Amount: 15
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	Power@UPGRADED_ON:
+		Amount: 45
+		RequiresCondition: PowerPlantUpgrade.proximity
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: fact
+		Queue: Building.Nod, Building.Nodda
+		Description: Generates nuclear power.\nChance for fail-safe failure 5%
+
+NUK2_NOD:
+	Inherits@powerplant2: NUK2
+	RenderSprites:
+		Image: NUK2
+	Power:
+		Amount: 45
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Nod Advanced Nuclear Power Plant
+	Buildable:
+		BuildPaletteOrder: 15
+		Prerequisites: ~anyhq, ~research_adv_nuke, ~techlevel.medium
+		Queue: Building.Nod, Building.Nodda
+		Description: Provides extra nuclear power\nthan its predecessor model.\nChance for fail-safe failure 10%
+
+HAND:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Hand of Nod
+	ProvidesPrerequisite:
+		Prerequisite: barracks
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~anypower
+		Queue: Building.Nod, Building.Nodda
+		Description: Trains infantry
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 2500
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+	RallyPoint:
+		Offset: 1,2
+	Exit@1:
+		SpawnOffset: 512,1024,0
+		ExitCell: 1,2
+	Production:
+		Produces: Infantry.Nod, Infantry.Nodda
+	WithDeliveryAnimation:
+	ProductionQueue@NodInfantry:
+		Type: Infantry.Nod
+		Group: Infantry
+		Sticky: True
+		LowPowerModifier: 300
+		Factions: nod
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@NoddaInfantry:
+		Type: Infantry.Nodda
+		Group: Infantry
+		Sticky: True
+		LowPowerModifier: 300
+		Factions: nodda
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@Nod:
+		ProductionType: Infantry.Nod
+	ProductionBar@Nodda:
+		ProductionType: Infantry.Nodda
+	Power:
+		Amount: -5
+	ProvidesPrerequisite@buildingname:
+	Voiced:
+		VoiceSet: Buildings
+		Volume: 2
+	Selectable:
+		Bounds: 48,48
+		DecorationBounds: 48,68,0,-10
+		Voice: Barracks
+	SelectionDecorations:
+	InfiltrateForSupportPower:
+		Proxy: barracks.upgraded
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagRAX
+	AmbientSound:
+		SoundFiles: barracks.aud
+		Delay: 5
+	GrantConditionOnPrerequisite@HOSPITAL:
+		Condition: hospitalheal
+		Prerequisites: hosp
+	WithDecoration@REDCROSS:
+		Image: pips
+		Sequence: pip-heal
+		ReferencePoint: Top, Right
+		RequiresCondition: hospitalheal
+		ValidStances: Ally, Neutral
+		RequiresSelection: True
+	GrantConditionOnPrerequisite@BIO:
+		Condition: hazmatsuits
+		Prerequisites: bio
+	WithDecoration@HAZMAT:
+		Image: pips
+		Sequence: pip-hazmat
+		ReferencePoint: Top, Right
+		RequiresCondition: hazmatsuits
+		ValidStances: Ally, Neutral
+		RequiresSelection: True
+
+HANDSOLE:
+	Inherits: HAND
+	Power:
+		Amount: 0
+	RenderSprites:
+		Image: hand
+	-Buildable:
+	CashTrickler:
+		InitialDelay: 6000
+		Interval: 6000
+		Amount: 1000
+		ShowTicks: False
+
+AFLD:
+	Inherits: ^BaseBuilding
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
+		Type: Rectangle
+			TopLeft: -2048, -1024
+			BottomRight: 2048, 1024
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Airstrip
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~proc, ~anypower
+		Queue: Building.Nod, Building.Nodda
+		Description: Provides a dropzone\nfor vehicle reinforcements
+		BuildDuration: 750
+		BuildDurationModifier: 100
+	Building:
+		Footprint: XXX_ xxxx ====
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 10000
+	RevealsShroud:
+		Range: 7c0
+	WithBuildingBib:
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-dish
+	WithDeliveryAnimation:
+		RequiresCondition: !build-incomplete
+	RallyPoint:
+		Offset: 4,2
+	Exit@1:
+		SpawnOffset: -1024,0,0
+		ExitCell: 3,1
+	ProductionAirdrop:
+		Produces: Vehicle.Nod, Vehicle.Nodda
+		ActorType: c17
+	ProductionQueue@NodVehicle:
+		Type: Vehicle.Nod
+		Group: Vehicle
+		Sticky: True
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		Factions: nod
+	ProductionQueue@NoddaVehicle:
+		Type: Vehicle.Nodda
+		Group: Vehicle
+		Sticky: True
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		Factions: nodda
+	ProductionBar@Nod:
+		ProductionType: Vehicle.Nod
+	ProductionBar@Nodda:
+		ProductionType: Vehicle.Nodda
+	Power:
+		Amount: -5
+	ProvidesPrerequisite@buildingname:
+	InfiltrateForSupportPower:
+		Proxy: vehicles.upgraded
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagWF
+	WithDeliveryOverlay@LIGHTS:
+		Sequence: active-lights
+		Palette: PlayerColorLights
+		IsPlayerPalette: true
+	Selectable:
+		Bounds: 96,48
+	GrantConditionOnPrerequisite@MACHINE_SHOP:
+		Condition: machine_shop_repair
+		Prerequisites: fixn
+	WithDecoration@MECH:
+		Image: pips
+		Sequence: pip-mech
+		ReferencePoint: Right, Top
+		RequiresCondition: machine_shop_repair
+		RequiresSelection: True
+
+SHIPYARD_NOD:
+	Inherits: ^WaterBuilding
+	Tooltip:
+		Name: Nod Sub Pen
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Building.Nod, Building.Nodda
+		Prerequisites: ~proc, ~anypower, ~techlevel.high
+		Description: Produces and repairs\nNeval units.
+	ProductionQueue@NodShip:
+		Type: Ship.Nod
+		Factions: nod
+		Group: Ship
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@NoddaShip:
+		Type: Ship.Nodda
+		Factions: nodda
+		Group: Ship
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@ShipNod:
+		ProductionType: Ship.Nod
+	ProductionBar@ShipNod:
+		ProductionType: Ship.Nodda
+	ProvidesPrerequisite@buildingname:
+
+FIX_NOD:
+	Inherits@RepairFacility: FIX
+	Tooltip:
+		Name: Nod Repair Facility
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~vehicleproduction
+		Queue: Building.Nod, Building.Nodda
+		Description: Repairs vehicles
+	WithRepairOverlay@LIGHTS:
+		Sequence: active-lights
+		Palette: PlayerColorLights
+		IsPlayerPalette: true
+
+TMPL:
+	Inherits: ^BaseBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Inherits@shape: ^3x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 0,-896,0, 0,896,0, 840,0,0, -706,0,0, -706,-768,0, -706,640,0
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Temple of Nod
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~anytech, ~techlevel.high
+		Queue: Defence.Nod, Defence.Nodda
+		Description: Provides Nuclear Strike support power.\nRequires power to operate.
+		BuildLimit: 1
+	Building:
+		Footprint: Xx_ xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 72,48
+		DecorationBounds: 72,68,0,-12
+	SelectionDecorations:
+	Health:
+		HP: 20000
+	WithBuildingBib:
+	NukePower:
+		PauseOnCondition: disabled
+		Prerequisites: ~techlevel.superweapons
+		Icon: abomb
+		Cursor: nuke
+		ChargeInterval: 15000
+		Description: Nuclear Strike
+		LongDesc: Launch a tactical nuclear warhead.\nApplies heavy damage over a large area.
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		IncomingSpeechNotification: EnemyNuke
+		MissileWeapon: atomic
+		DisplayBeacon: True
+		BeaconPoster: atomic
+		BeaconPosterPalette: beaconposter
+		DisplayRadarPing: True
+		DisplayTimerStances: Ally, Neutral, Enemy
+		CameraRange: 10c0
+		ArrowSequence: arrow
+		CircleSequence: circles
+		ClockSequence: clock
+		AllowMultiple: True
+		CameraRemoveDelay: 30
+		CameraStances: Ally
+		CameraSpawnAdvance: 25
+		RevealGeneratedShroud: True
+	RevealsShroud@Ally:
+		Range: 6c0
+		ValidStances: Ally
+	RevealsShroud@Enemy:
+		Range: 2c0
+		ValidStances: Enemy
+		Type: CenterPosition
+		MaxHeightDelta: 2
+	HiddenUnderFog:
+		AlwaysVisibleStances: Ally, Enemy
+		Type: CenterPosition
+	-FrozenUnderFog:
+	SupportPowerChargeBar:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack, AItagSuperWeapon
+	WithDecoration@POWERDOWN:
+		Image: poweroff
+		Sequence: offline
+		Palette: chrome
+		RequiresCondition: powerdown
+		ReferencePoint: Center
+	PowerMultiplier@POWERDOWN:
+		RequiresCondition: powerdown
+		Modifier: 0
+	WithNukeLaunchAnimation:
+		RequiresCondition: !build-incomplete
+	WithNukeLaunchOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: smoke
+	GrantCondition@RenegadeOut:
+		Condition: renegadeout
+	FreeActor:
+		Actor: renegate
+		SpawnOffset: 1,2
+		AllowRespawn: True
+		EditorFreeActorDisplayOrder: 4
+		RequiresCondition: renegadeout
+
+MISS_NOD:
+	Inherits: ^BaseBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Inherits@shape: ^3x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 0,-896,0, 0,896,0, 840,0,0, -706,0,0, -706,-768,0, -706,640,0
+	Building:
+		Footprint: xx_ xxx ===
+		Dimensions: 3,3
+	Tooltip:
+		Name: Tech Center
+	Buildable:
+		Queue: Building.Nod, Building.Nodda
+		BuildPaletteOrder: 80
+		Prerequisites: ~anyhq, ~techlevel.high
+		Description: Provides Nod advanced technologies.
+		BuildLimit: 1
+	Valued:
+		Cost: 4000
+	WithBuildingBib:
+		HasMinibib: True
+	SpawnActorsOnSell:
+		ActorTypes: scientist,scientist,scientist,scientist,scientist,scientist,scientist,scientist,scientist
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: anytech
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure
+	Power:
+		Amount: -15
+	Health:
+		HP: 10000
+	WithDecoration@POWERDOWN:
+		Image: poweroff
+		Sequence: offline
+		Palette: chrome
+		RequiresCondition: powerdown
+		ReferencePoint: Center
+	PowerMultiplier@POWERDOWN:
+		RequiresCondition: powerdown
+		Modifier: 0
+	RevealsShroud:
+		Range: 5c0
+	Selectable:
+		Bounds: 72,48
+
+#############
+#Sub-faction#
+#############
+
+FACT.NODDA:
+	Inherits: FACT
+	RenderSprites:
+		Image: fact
+	Buildable:
+		Queue: Building.GDI, Building.Nod, Building.Nodda
+		BuildPaletteOrder: 1000
+		Prerequisites: ~disabled
+		ForceFaction: nodda
+	Tooltip:
+		Name: Nod DA
+
+AFLDRA:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 420,0,0, 420,-1024,0, 420,1024,0, -777,0,0, -777,-1024,0, -777,1024,0
+	ProximityExternalCondition:
+		Condition: OnPad
+		Range: 1c0
+		ValidStances: Ally
+		AffectsParent: False
+	Sellable:
+		RefundPercent: 30
+		RequiresCondition: !Repairing
+	ExternalCondition@REPAIRING:
+		Condition: Repairing
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Nod Airfield
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~proc, ~anypower, ~techlevel.high
+		Queue: Building.Nodda
+		Description: Produces and reloads aircraft.
+	ProvidesPrerequisite@buildingname:
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 4000
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+	Power:
+		Amount: -8
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack, SpyInfiltrate
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 192
+	RallyPoint:
+	ProductionFromMapEdge:
+		Produces: Aircraft.Nodda
+	Reservable:
+	Selectable:
+		Bounds: 72,48
+	WithResupplyAnimation:
+	RepairsUnits:
+		Interval: 15
+		PlayerExperience: 0
+	WithDamageOverlay:
+	ProductionQueue@GDI:
+		Type: Aircraft.GDI
+		Factions: gdi
+		Group: Aircraft
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@Nod:
+		Type: Aircraft.Nod
+		Factions: nod
+		Group: Aircraft
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionQueue@Nodda:
+		Type: Aircraft.Nodda
+		Factions: nodda
+		Group: Aircraft
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@GDI:
+		ProductionType: Aircraft.GDI
+	ProductionBar@Nod:
+		ProductionType: Aircraft.Nod
+	ProductionBar@Nodda:
+		ProductionType: Aircraft.Nodda
+	InfiltrateForSupportPower:
+		Proxy: aircraft.upgraded
+
+HQ_NOD_DA:
+	Inherits@radar: HQ
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 5000
+	Power:
+		Amount: -10
+	Tooltip:
+		Name: Nod DA Communications Center
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~proc, ~anypower, ~techlevel.medium
+		Queue: Building.Nodda
+		Description: Provides radar and Artilery Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
+		BuildLimit: 1
+	AirstrikePower@ArtileryStrike:
+		PauseOnCondition: disabled
+		OrderName: ArtileryBarrageInfoOrder
+		Prerequisites: anyhq, ~techlevel.superweapons
+		Icon: artystrike
+		ChargeInterval: 5250
+		SquadSize: 4
+		SquadOffset: -300,300,0
+		QuantizedFacings: 8
+		Description: Artilery Strike
+		LongDesc: Call in an artilery barrage.
+		EndChargeSpeechNotification:
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyArty
+		LaunchSpeechNotification: FriendlyArty
+		#NotReady: noredy1
+		UnitType: artyfire
+		DisplayBeacon: True
+		BeaconPoster: artystrike
+		BeaconPosterPalette: beaconposter
+		DisplayRadarPing: True
+		CameraRemoveDelay: 30
+		CameraActor: camera
+		ArrowSequence: arrow
+		CircleSequence: circles
+		ClockSequence: clock
+		DisplayTimerStances: Ally
+		Cordon: 10c0
+		Cursor: artilerybarrage
+	SupportPowerChargeBar:
+	ProductionQueue@NoddaResearch:
+		Type: Research.Nodda
+		Factions: nodda
+		Group: Research
+		LowPowerModifier: 300
+		ReadyAudio: ResearchC
+		BlockedAudio: ResearchW
+		QueuedAudio: ResearchST
+		OnHoldAudio: ResearchS
+		CancelledAudio: ResearchA
+	ProductionBar@ResearchNodda:
+		ProductionType: Research.Nodda
+	Production:
+		Produces: Research.Nodda
+	RenderSprites:
+		Image: HQNOD
+
+#############
+#Sub-faction#
+#############
+
+FACT.NOD:
+	Inherits: FACT
+	RenderSprites:
+		Image: fact
+	Buildable:
+		Queue: Building.GDI, Building.Nod, Building.Nodda
+		BuildPaletteOrder: 1000
+		Prerequisites: ~disabled
+		ForceFaction: nod
+	Tooltip:
+		Name: Nod GW
+
+HQ_NOD_GW:
+	Inherits@radar: HQ
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 5000
+	Power:
+		Amount: -10
+	Tooltip:
+		Name: Nod GW Communications Center
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~proc, ~anypower, ~techlevel.medium
+		Queue: Building.Nod
+		Description: Provides radar and AirDrop support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
+		BuildLimit: 1
+	ParatroopersPower@paratroopers:
+		PauseOnCondition: disabled
+		OrderName: AirdropInfoOrder
+		Prerequisites: anyhq, ~techlevel.superweapons
+		Icon: airdrop
+		ChargeInterval: 3500
+		Description: Airdrop
+		LongDesc: A C17 drops four armored vehicles\nanywhere on the map.
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyAirdrop
+		LaunchSpeechNotification: FriendlyAirdrop
+		AllowImpassableCells: false
+		QuantizedFacings: 8
+		CameraActor: camera
+		DisplayBeacon: true
+		BeaconPoster: airdrop
+		BeaconPosterPalette: beaconposter
+		UnitType: C17D
+		DropItems: bggy,ltnk,bggy,ltnk
+		SquadSize: 2
+		ArrowSequence: arrow
+		CircleSequence: circles
+		ClockSequence: clock
+		DisplayTimerStances: Ally
+		Cursor: airdrop
+	SupportPowerChargeBar:
+	ProductionQueue@NodResearch:
+		Type: Research.Nod
+		Factions: nod
+		Group: Research
+		LowPowerModifier: 300
+		ReadyAudio: ResearchC
+		BlockedAudio: ResearchW
+		QueuedAudio: ResearchST
+		OnHoldAudio: ResearchS
+		CancelledAudio: ResearchA
+	ProductionBar@ResearchNod:
+		ProductionType: Research.Nod
+	Production:
+		Produces: Research.Nod
+	RenderSprites:
+		Image: HQNOD
+
+#############################################################################################################
+#											Defences														#
+#############################################################################################################
+#All-Faction
+
+GUN:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Turret
+	Buildable:
+		BuildPaletteOrder: 55
+		Prerequisites: ~barracks
+		Queue: Defence.Nod, Defence.Nodda
+		BuildDuration: 1440
+		BuildDurationModifier: 40
+		Description: Basic Anti-Tank base defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+	Building:
+	Health:
+		HP: 5000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	WithBuildingBib:
+		HasMinibib: True
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: TurretGun
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -8
+	BodyOrientation:
+		UseClassicFacingFudge: True
+	Selectable:
+		Bounds: 24,24
+
+SAM:
+	Inherits: ^Defense
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@shape: ^2x1Shape
+	HitShape:
+		Type: Rectangle
+			TopLeft: -768,-512
+			BottomRight: 768,512
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: SAM Site
+	Buildable:
+		BuildPaletteOrder: 56
+		Prerequisites: ~anyhq
+		Queue: Defence.Nod, Defence.Nodda
+		BuildDuration: 1700
+		BuildDurationModifier: 40
+		Description: Anti-Aircraft base defense.\n  Strong vs Aircraft\n  Cannot target Ground units.
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	Health:
+		HP: 8000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		InitialFacing: 0
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: SAMMissile
+		MuzzleSequence: muzzle
+	AmmoPool:
+		Ammo: 6
+		PipCount: 0
+	AttackPopupTurreted:
+		RequiresCondition: !build-incomplete
+		ClosedDamageMultiplier: 40
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	-RenderDetectionCircle:
+	Power:
+		Amount: -6
+	BodyOrientation:
+		UseClassicFacingFudge: True
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack, Defense, AItagAvoid
+	ReloadAmmoPool@1:
+		Delay: 75
+		Count: 2
+	Selectable:
+		Bounds: 48,24
+
+OBLI:
+	Inherits: ^Defense
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Obelisk of Light
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~miss_nod, ~techlevel.high
+		Queue: Defence.Nod, Defence.Nodda
+		BuildDuration: 3120
+		BuildDurationModifier: 40
+		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs all Ground units\n  Cannot target Aircraft
+	Selectable:
+		Bounds: 24,24
+		DecorationBounds: 22,44,0,-10
+	SelectionDecorations:
+	Health:
+		HP: 7500
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 8c0
+	WithBuildingBib:
+		HasMinibib: True
+	Armament:
+		Weapon: Laser
+		LocalOffset: 0,-85,1280
+		FireDelay: 0
+	AttackCharges:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+		ChargeLevel: 50
+		ChargingCondition: charging
+	AmbientSound:
+		RequiresCondition: charging
+		SoundFiles: obelpowr.aud
+		Interval: 30, 40
+	SpawnActorsOnSell:
+		ActorTypes: e1
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !disabled
+	Power:
+		Amount: -15
+	#WithIdleOverlay@LIGHTS:
+	#	Sequence: active-lights
+	#	Palette: PlayerColorLights
+	#	IsPlayerPalette: true
+	#this above crashes the game
+
+#############
+#Sub-faction#
+#############
+
+FTUR:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~barracks, ~!research_bio_nod
+		Queue: Defence.Nodda
+		BuildDuration: 1440
+		BuildDurationModifier: 40
+		Description: Anti-Infantry base defense.\nCan detect cloaked units.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
+	Valued:
+		Cost: 800
+	Tooltip@CHEM:
+		Name: Chem Tower
+		RequiresCondition: bio_nod
+	Tooltip:
+		Name: Flame Tower
+		RequiresCondition: !bio_nod
+	Building:
+	Health:
+		HP: 4600
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	WithBuildingBib:
+		HasMinibib: True
+	Turreted:
+		TurnSpeed: 255
+		Offset: 0,0,112
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Power:
+		Amount: -10
+	DetectCloaked:
+		Range: 5c0
+	GrantConditionOnPrerequisite:
+		Condition: bio_nod
+		Prerequisites: research_bio_nod
+	Armament@flame:
+		Weapon: FlameLauncher
+		LocalOffset: 512,0,0
+		RequiresCondition: !bio_nod
+	Armament@chem:
+		Weapon: ChemLauncher
+		LocalOffset: 512,0,0
+		RequiresCondition: bio_nod
+	Explodes@ChemUpgradeOff:
+		Weapon: FlametankExplode
+		EmptyWeapon: FlametankExplode
+		RequiresCondition: !bio_nod
+	Explodes@ChemUpgradeOn:
+		Weapon: ChemtankExplode
+		EmptyWeapon: ChemtankExplode
+		RequiresCondition: bio_nod
+	WithIdleOverlay@ChemUpgradeOn:
+		RequiresCondition: bio_nod && !Damaged
+		Sequence: idle-chem
+		#RenderBeforeBuildComplete: false
+	GrantConditionOnDamageState:
+		ValidDamageStates: Heavy, Critical
+		Condition: Damaged
+	WithIdleOverlay@ChemDamagedUpgradeOn:
+		Sequence: damaged-idle-chem
+		RequiresCondition: bio_nod && Damaged
+
+CTUR:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~barracks, ~research_bio_nod
+		Queue: Defence.Nodda
+		BuildDuration: 1440
+		BuildDurationModifier: 40
+		Description: Anti-Infantry base defense.\nCan detect cloaked units.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Chem Tower
+	Building:
+	Health:
+		HP: 4600
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	WithBuildingBib:
+		HasMinibib: True
+	Turreted:
+		TurnSpeed: 255
+		Offset: 0,0,112
+	Armament:
+		Weapon: ChemLauncher
+		LocalOffset: 512,0,0
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Power:
+		Amount: -10
+	DetectCloaked:
+		Range: 5c0
+	Explodes:
+		Weapon: ChemtankExplode
+		EmptyWeapon: ChemtankExplode
+
+#############
+#Sub-faction#
+#############
+
+PBOX:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@RA: ^PlayerRApaletteBuilding
+	Tooltip:
+		Name: Pillbox
+	Building:
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~barracks
+		Queue: Defence.Nod
+		BuildDuration: 1440
+		BuildDurationModifier: 40
+		Description: Static defense with a fireport for a\ngarrisoned soldier.\nCan detect cloaked units.\nDetects Spies by scanning for biochip IDs.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
+	Valued:
+		Cost: 600
+	Health:
+		HP: 4600
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	WithBuildingBib:
+		HasMinibib: True
+	Turreted:
+		TurnSpeed: 255
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		PipCount: 1
+		InitialUnits: e1
+	AttackGarrisoned:
+		Armaments: pillbox
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+	RenderRangeCircle:
+		FallbackRange: 6c0
+	Power:
+		Amount: -6
+	DetectCloaked:
+		Range: 6c0
+	IgnoresDisguise:
+
+#############################################################################################################
+#											Vehicles														#
+#############################################################################################################
+#All-Faction
+
+BGGY:
+	Inherits: ^Vehicle
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Parachute: ^CombatArmorOnParachute
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Nod Buggy
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~afld
+		Queue: Vehicle.Nod, Vehicle.Nodda
+		Description: Fast scout and anti-infantry vehicle.\n Can carry 1 infantry\n  Strong vs Infantry\n  Weak vs Tanks
+	Mobile:
+		TurnSpeed: 10
+		Speed: 170
+		RequiresCondition: !notmobile
+	Health:
+		HP: 120
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -43,0,128
+	Armament:
+		Weapon: MachineGun
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SpawnActorOnDeath:
+		Actor: BGGY.Husk
+	Cargo:
+		Types: Infantry, Doctor
+		MaxWeight: 1
+		PipCount: 1
+		LoadingCondition: notmobile
+BGGY.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Nod Buggy (Destroyed)
+	TransformOnCapture:
+		IntoActor: bggy
+	RenderSprites:
+		Image: bggy.destroyed
+
+BIKE:
+	Inherits: ^Vehicle
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Recon Bike
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~afld
+		Queue: Vehicle.Nod, Vehicle.Nodda
+		Description: Fast scout vehicle, armed with\nrockets.\nCan attack Aircraft.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
+	Mobile:
+		TurnSpeed: 10
+		Speed: 213
+	Health:
+		HP: 120
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Armament:
+		Weapon: BikeRockets
+		LocalOffset: -128, -170, 170, -128, 170, 170
+		LocalYaw: 100, -100
+	AttackFrontal:
+	SpawnActorOnDeath:
+		Actor: BIKE.Husk
+BIKE.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Recon Bike (Destroyed)
+	TransformOnCapture:
+		IntoActor: bike
+	RenderSprites:
+		Image: bike.destroyed
+
+LTNK:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Parachute: ^CombatArmorOnParachute
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Light Tank
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Vehicle.Nod, Vehicle.Nodda
+		Description: Fast, light tank.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
+	Mobile:
+		TurnSpeed: 7
+		Speed: 110
+	Health:
+		HP: 340
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 7
+	Armament:
+		Weapon: 70mm
+		Recoil: 85
+		RecoilRecovery: 17
+		LocalOffset: 720,0,90
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SpawnActorOnDeath:
+		Actor: LTNK.Husk
+LTNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Light Tank (Destroyed)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: ltnk
+	RenderSprites:
+		Image: ltnk.destroyed
+
+MLRS:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@ARTILLERY: ^ArtilleryUnit
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Mobile S.A.M.
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Vehicle.Nod, Vehicle.Nodda
+		Description: Powerful anti-air unit.\nCannot attack Ground units.
+	Mobile:
+		Speed: 99
+		TurnSpeed: 7
+	Health:
+		HP: 120
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 8
+		Offset: -128,0,128
+		RealignDelay: 0
+	Armament:
+		Weapon: Patriot
+		LocalOffset: 0,-171,0, 0,171,0
+	AmmoPool:
+		Ammo: 2
+		PipCount: 0
+	AttackTurreted:
+	WithSpriteTurret:
+	RenderRangeCircle:
+	SpawnActorOnDeath:
+		Actor: MLRS.Husk
+	Guard:
+	ReloadAmmoPool@1:
+		Delay: 45
+		Count: 1
+MLRS.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Mobile S.A.M. (Destroyed)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: mlrs
+	RenderSprites:
+		Image: mlrs.destroyed
+
+
+
+MNLYNOD:
+	Inherits: ^Tank
+	Inherits@RA: ^PlayerRApaletteVehicle
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~anyfix, ~techlevel.medium
+		Queue: Vehicle.Nod, Vehicle.Nodda
+		Description: Lays mines to destroy\nunwary enemy tanks.\nCan detect mines.\n  Unarmed
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Minelayer AT
+	Health:
+		HP: 150
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 128
+	RevealsShroud:
+		Range: 5c0
+	Rearmable:
+		RearmActors: fix_gdi, fix_nod
+		AmmoPools: primary
+	Minelayer:
+		Mine: MINV
+		MinefieldDepth: 1c512
+	MineImmune:
+	AmmoPool:
+		Ammo: 5
+		RearmSound: minelay1.aud
+	DetectCloaked:
+		Range: 5c0
+		CloakTypes: Mine
+	RenderDetectionCircle:
+	Explodes:
+		Weapon: ATMine
+
+ARTY:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@ARTILLERY: ^ArtilleryUnit
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Artillery
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Vehicle.Nod, Vehicle.Nodda
+		Description: Long-range artillery.\n  Strong vs Infantry, Vehicles and Buildings
+	Mobile:
+		TurnSpeed: 4
+		Speed: 65
+	Health:
+		HP: 75
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Armament:
+		Weapon: ArtilleryShell
+		LocalOffset: 624,0,208
+		MuzzleSequence: muzzle
+	AttackSounds:
+		Sounds: artyfire2.aud, artyfire3.aud
+		Delay: 0
+		DelayRelativeTo: Preparation
+	AttackFrontal:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: ARTY.Husk
+	Explodes:
+		Weapon: ArtilleryShellExplode
+		EmptyWeapon: UnitExplode
+		LoadedChance: 75
+ARTY.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Artillery (Destroyed)
+	TransformOnCapture:
+		IntoActor: arty
+	RenderSprites:
+		Image: arty.destroyed
+
+FTNK:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Flame Tank
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Vehicle.Nod, Vehicle.Nodda
+		Description: Heavily armored flame-throwing vehicle.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Tanks
+	Mobile:
+		TurnSpeed: 7
+		Speed: 99
+	Health:
+		HP: 270
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 5c0
+	Armament:
+		Weapon: FlamethrowerL
+		LocalOffset: 512,128,42, 512,-128,42
+		MuzzleSequence: muzzle
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Explodes:
+		Weapon: FlametankExplode
+		EmptyWeapon: FlametankExplode
+FTNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Flame Tank (Destroyed)
+	TransformOnCapture:
+		IntoActor: ftnk
+	RenderSprites:
+		Image: ftnk.destroyed
+
+CTNK:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Chemical Tank
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~anytech, ~research_bio_nod, ~techlevel.medium
+		Queue: Vehicle.Nod, Vehicle.Nodda
+		Description: Heavily armored Chemical-throwing vehicle.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Defence
+	Mobile:
+		TurnSpeed: 7
+		Speed: 99
+	Health:
+		HP: 270
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 5c0
+	Armament:
+		Weapon: ChemsprayL
+		LocalOffset: 512,128,42, 512,-128,42
+		MuzzleSequence: muzzle
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Explodes:
+		Weapon: ChemtankExplode
+		EmptyWeapon: ChemtankExplode
+
+#############
+#Sub-faction#
+#############
+
+3TNK:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@RA: ^PlayerRApaletteVehicle
+	Buildable:
+		Prerequisites: ~anyfix, ~techlevel.medium
+		Queue: Vehicle.Nodda
+		BuildPaletteOrder: 130
+		Description: Nod Main Battle Tank, with dual cannons\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Valued:
+		Cost: 1150
+	Tooltip:
+		Name: Heavy Tank
+	Health:
+		HP: 550
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 71
+	RevealsShroud:
+		Range: 5c0
+	Turreted:
+		TurnSpeed: 4
+	Armament:
+		Weapon: 105mmRA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SpawnActorOnDeath:
+		Actor: 3TNK.Husk
+	SelectionDecorations:
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	Selectable:
+		DecorationBounds: 28,28
+3TNK.Husk:
+	Inherits: ^HuskRApalette
+	Tooltip:
+		Name: Husk (Heavy Tank)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: 3tnk
+	RenderSprites:
+		Image: 3tnk.destroyed
+		PlayerPalette: playerRA
+
+DTRK:
+	Inherits: ^VehicleWithoutVeterancy
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@RA: ^PlayerRApaletteVehicle
+	Buildable:
+		BuildPaletteOrder: 170
+		Prerequisites: ~miss_nod, ~techlevel.high
+		Queue: Vehicle.Nodda
+		Description: Demolition Truck, actively armed with\nnuclear explosives. Has very weak armor.
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Demolition Truck
+	Health:
+		HP: 50
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 85
+	RevealsShroud:
+		Range: 4c0
+	Explodes:
+		Weapon: MiniNukeDemo
+		EmptyWeapon: MiniNukeDemo
+		DamageSource: Killer
+	RenderSprites:
+		Scale: 0.9
+	-ProducibleWithLevel:
+	-Carryable:
+	AttackFrontal:
+		FacingTolerance: 128
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+	KillsSelf:
+		RequiresCondition: triggered
+
+
+#############
+#Sub-faction#
+#############
+
+STNK:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Stealth Tank
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~miss_nod, ~techlevel.high
+		Queue: Vehicle.Nod
+		Description: Long-range missile tank that can cloak.\nCan attack Aircraft.\nHas weak armor. Can be spotted by defense structures.\n  Strong vs Vehicles, Infantry\n  Weak vs Tanks and defences.
+	Mobile:
+		TurnSpeed: 10
+		Speed: 142
+	Health:
+		HP: 150
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+	Cloak:
+		InitialDelay: 90
+		CloakDelay: 90
+		CloakSound: trans1.aud
+		UncloakSound: trans1.aud
+		RequiresCondition: !cloak-force-disabled
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Armament:
+		Weapon: 227mm.stnk
+		LocalOffset: 213,43,128, 213,-43,128
+	AttackFrontal:
+	Targetable:
+	SpawnActorOnDeath:
+		Actor: STNK.Husk
+	-MustBeDestroyed:
+STNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Stealth Tank (Destroyed)
+	TransformOnCapture:
+		IntoActor: stnk
+	RenderSprites:
+		Image: stnk.destroyed
+
+MRJ:
+	Inherits: ^VehicleWithoutVeterancy
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Mobile Radar Jammer
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~miss_nod, ~techlevel.high
+		Queue: Vehicle.Nod
+		BuildDurationModifier: 40
+		Description: Jams nearby enemy radar\nand deflects incoming missiles.\nCan detect cloaked units.\n  Unarmed
+	Health:
+		HP: 220
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 85
+	RevealsShroud:
+		Range: 7c0
+	WithIdleOverlay@SPINNER:
+		Sequence: spinner
+		Offset: -256,0,256
+	ProximityExternalCondition@JAMMER:
+		Range: 18c0
+		ValidStances: Enemy, Neutral
+		Condition: jammed
+	WithRangeCircle@JAMMER:
+		Type: jammer
+		Range: 18c0
+		Color: 0000FF80
+	JamsMissiles:
+		Range: 5c0
+		DeflectionStances: Neutral, Enemy
+	RenderJammerCircle:
+	DetectCloaked:
+		Range: 7c0
+	RenderSprites:
+		Image: mhq
+	-ProducibleWithLevel:
+	#Guard:
+	#reserved for fake weapon
+
+#############################################################################################################
+#											Infantry														#
+#############################################################################################################
+#All-Faction
+
+E4:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Flamethrower
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Infantry.Nod, Infantry.Nodda
+		Description: Advanced Anti-infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
+		BuildDuration: 45
+		#BuildDuration: 270 (30 frames * 9 = 270) 270 / 6 squad members = 45
+		#contrary to 25 = 1 second, it seems that 30 is 1 second (with normal speed)
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 500
+	Armament:
+		Weapon: Flamethrower
+		LocalOffset: 341,0,256
+		FireDelay: 1
+		MuzzleSequence: muzzle
+	AttackFrontal:
+	WithMuzzleOverlay:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	Armament@PILLBOX:
+		Name: pillbox
+		Weapon: Flamethrower
+		FireDelay: 1
+		MuzzleSequence: muzzle
+	Armament@GUARDTOWER:
+		Name: guardtower
+		Weapon: Flamethrower
+		FireDelay: 1
+		MuzzleSequence: muzzle
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+
+E5:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Chemical trooper
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~anytech, ~research_bio_nod, ~techlevel.high
+		Queue: Infantry.Nod, Infantry.Nodda
+		Description: Advanced general-purpose infantry.\n  Strong vs all Ground units
+		BuildDuration: 45
+	Mobile:
+		Speed: 40
+	Health:
+		HP: 300
+	Armament:
+		Weapon: Chemspray
+		LocalOffset: 341,0,256
+		FireDelay: 1
+		MuzzleSequence: muzzle
+	AttackFrontal:
+	WithMuzzleOverlay:
+	-DamagedByTerrain:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	Armament@PILLBOX:
+		Name: pillbox
+		Weapon: Chemspray
+		LocalOffset: 341,0,256
+		FireDelay: 1
+		MuzzleSequence: muzzle
+	Armament@GUARDTOWER:
+		Name: guardtower
+		Weapon: Chemspray
+		LocalOffset: 341,0,256
+		FireDelay: 1
+		MuzzleSequence: muzzle
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+
+#############
+#Sub-faction#
+#############
+
+SPECOPS:
+	Inherits: ^Infantry
+	Buildable:
+		BuildPaletteOrder: 65
+		Prerequisites: ~anytech, ~techlevel.high
+		Queue: Infantry.Nod
+		Description: Infiltrates enemy structures for intel or\nsabotage. Exact effect depends on the\nbuilding infiltrated.\nLoses disguise when attacking.\nCan detect cloaked units and other SpecOps.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft\n  Special Ability: Disguised
+		BuildDuration: 60
+	Valued:
+		Cost: 200
+	DisguiseTooltip:
+		Name: SpecOps
+		GenericName: SpecOps
+	RevealsShroud:
+		Range: 5c0
+	Passenger:
+		PipType: Red
+		Voice: Move
+	Disguise:
+		Voice: Move
+		DisguisedCondition: disguise
+	Infiltrates:
+		EnterBehaviour: Dispose
+		PlayerExperience: 100
+		ValidStances: Enemy, Neutral
+		Types: SpyInfiltrate
+		Notification:
+	AutoTarget:
+		InitialStance: HoldFire
+		ScanRadius: 5
+	-WithInfantryBody:
+	WithDisguisingInfantryBody:
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2
+		StandSequences: stand,stand2
+	WithDecoration@disguise:
+		Image: pips
+		Sequence: pip-disguise
+		Palette: playerRA
+		ReferencePoint: Top, Right
+		ZOffset: 256
+		RequiresCondition: disguise
+		RequiresSelection: True
+	IgnoresDisguise:
+	Armament:
+		Weapon: SilencedPPK
+	AttackFrontal:
+	AttackMove:
+		Voice: Move
+	Voiced:
+		VoiceSet: SpecOpsVoice
+	Mobile:
+		Speed: 90
+	Health:
+		HP: 150
+
+#ATSNIPER:
+#	Inherits: ^Soldier
+#	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+#	Valued:
+#		Cost: 300
+#	Tooltip:
+#		Name: Tank Sniper
+#	Buildable:
+#		BuildPaletteOrder: 50
+#		Prerequisites: ~anytech, ~techlevel.high
+#		Queue: Infantry.Nod, Infantry.Nodda
+#		Description: Advanced anti-tank laser infantry.\n  Strong vs Tanks\n  Weak vs Anti-Infantry
+#	Mobile:
+#		Speed: 56
+#	Health:
+#		HP: 90
+#	Armament:
+#		Weapon: Chemspray
+#		LocalOffset: 341,0,256
+#		FireDelay: 3
+#		MuzzleSequence: muzzle
+#	AttackFrontal:
+#	WithMuzzleOverlay:
+#	-DamagedByTerrain:
+#	WithInfantryBody:
+#		DefaultAttackSequence: shoot
+#	Armament@PILLBOX:
+#		Name: pillbox
+#		Weapon: Chemspray
+#		LocalOffset: 341,0,256
+#		FireDelay: 3
+#		MuzzleSequence: muzzle
+#	Armament@GUARDTOWER:
+#		Name: guardtower
+#		Weapon: Chemspray
+#		LocalOffset: 341,0,256
+#		FireDelay: 3
+#		MuzzleSequence: muzzle
+#	SoundOnDamageTransition:
+#		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+#	RenderSprites:
+#		PlayerPalette: playerRA
+
+#############################################################################################################
+#											 Navy															#
+#############################################################################################################
+#All-Faction
+
+SS:
+	Inherits: ^Ship
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Ship, Ship.Nod, Ship.Nodda, Ship.GDI
+		BuildAtProductionType: Submarine
+		BuildPaletteOrder: 30
+		Prerequisites: ~shipyard_nod, ~shipyard_gdi, ~techlevel.low
+		Description: Submerged anti-ship unit\narmed with torpedoes.\nCan detect other submarines.\n  Strong vs Naval units\n  Weak vs Ground units, Aircraft\n  Special Ability: Submerge
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Submarine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Armor:
+		Type: Light
+	Mobile:
+		TurnSpeed: 4
+		Speed: 71
+	RevealsShroud:
+		Range: 1c0
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine, Repair
+		RequiresCondition: !underwater
+	Targetable@UNDERWATER:
+		TargetTypes: Underwater, Submarine
+		RequiresCondition: underwater
+	Cloak:
+		CloakTypes: Underwater
+		InitialDelay: 0
+		CloakDelay: 50
+		CloakSound: subshow1.aud
+		UncloakSound: subshow1.aud
+		CloakedCondition: underwater
+		Palette: submerged
+		PauseOnCondition: cloak-force-disabled
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Armament:
+		Weapon: TorpTube
+		LocalOffset: 0,-171,0, 0,171,0
+		FireDelay: 2
+	AttackFrontal:
+	SelectionDecorations:
+	AutoTarget:
+		InitialStance: HoldFire
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Water, Underwater
+	AutoTargetPriority@ATTACKANYTHING:
+		ValidTargets: Water, Underwater
+	DetectCloaked:
+		CloakTypes: Underwater
+		Range: 4c0
+	RenderDetectionCircle:
+	Explodes:
+		Weapon: UnitExplodeSubmarine
+		EmptyWeapon: UnitExplodeSubmarine
+	-MustBeDestroyed:
+	Selectable:
+		DecorationBounds: 38,38
+
+MSUB:
+	Inherits: ^Ship
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Buildable:
+		Queue: Ship, Ship.Nod, Ship.Nodda, Ship.GDI
+		BuildAtProductionType: Submarine
+		BuildPaletteOrder: 60
+		Prerequisites: ~shipyard_nod, ~shipyard_gdi, ~techlevel.high
+		Description: Submerged anti-ground siege unit\nwith anti-air capabilities.\nCan detect other submarines.\n  Strong vs Buildings, Ground units, Aircraft\n  Weak vs Naval units\n  Special Ability: Submerge
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Missile Submarine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	Armor:
+		Type: Light
+	Mobile:
+		TurnSpeed: 3
+		Speed: 42
+	RevealsShroud:
+		Range: 8c0
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine, Repair
+		RequiresCondition: !underwater
+	Targetable@UNDERWATER:
+		TargetTypes: Underwater, Submarine
+		RequiresCondition: underwater
+	Cloak:
+		CloakTypes: Underwater
+		InitialDelay: 0
+		CloakDelay: 100
+		CloakSound: subshow1.aud
+		UncloakSound: subshow1.aud
+		CloakedCondition: underwater
+		Palette: submerged
+		PauseOnCondition: cloak-force-disabled
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Armament@PRIMARY:
+		Weapon: SubMissile
+		LocalOffset: 0,-171,0, 0,171,0
+		FireDelay: 2
+	Armament@SECONDARY:
+		Weapon: SubMissileAA
+		LocalOffset: 0,-171,0, 0,171,0
+		FireDelay: 2
+	AttackFrontal:
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+	SelectionDecorations:
+	AutoTarget:
+		InitialStance: HoldFire
+	DetectCloaked:
+		CloakTypes: Underwater
+		Range: 4c0
+	RenderDetectionCircle:
+	Explodes:
+		Weapon: UnitExplodeSubmarine
+		EmptyWeapon: UnitExplodeSubmarine
+	-MustBeDestroyed:
+	Selectable:
+		DecorationBounds: 44,44
+
+DD:
+	Inherits: ^Ship
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Buildable:
+		Queue: Ship, Ship.Nod, Ship.Nodda, Ship.GDI
+		BuildAtProductionType: Boat
+		BuildPaletteOrder: 40
+		Prerequisites: ~shipyard_nod, ~shipyard_gdi, ~techlevel.medium
+		Description: Fast multi-role ship.\nCan detect submarines.\n  Strong vs Naval units, Vehicles, Aircraft\n  Weak vs Infantry
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Destroyer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 7
+		Speed: 85
+	RevealsShroud:
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 5c0
+	Turreted@PRIMARY:
+		Turret: primary
+		TurnSpeed: 7
+		Offset: -900,0,128
+	Turreted@SECONDARY:
+		Turret: secondary
+		TurnSpeed: 7
+		Offset: 900,0,128
+	Armament@PRIMARY:
+		Weapon: Stinger
+		LocalOffset: 0,-100,0, 0,100,0
+		LocalYaw: 64, -64
+	Armament@SECONDARY:
+		Weapon: DepthCharge
+		LocalOffset: 0,-100,0, 0,100,0
+		LocalYaw: 80, -80
+	Armament@TERTIARY:
+		Weapon: StingerAA
+		LocalOffset: 0,-100,0, 0,100,0
+		LocalYaw: 64, -64
+	AttackTurreted:
+	SelectionDecorations:
+	WithSpriteTurret@PRIMARY:
+		Turret: primary
+		Sequence: primary
+	WithSpriteTurret@SECONDARY:
+		Turret: secondary
+		Sequence: secondary
+	DetectCloaked:
+		CloakTypes: Underwater
+		Range: 4c0
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 38,38
+
+CA:
+	Inherits: ^Ship
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Ship, Ship.Nod, Ship.Nodda, Ship.GDI
+		BuildAtProductionType: Boat
+		BuildPaletteOrder: 50
+		Prerequisites: ~shipyard_nod, ~shipyard_gdi, ~techlevel.high
+		Description: Very slow long-range ship.\n  Strong vs Buildings, Ground units\n  Weak vs Naval units, Aircraft
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Cruiser
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 80000
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 3
+		Speed: 42
+	RevealsShroud:
+		Range: 7c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 5c0
+	Turreted@PRIMARY:
+		Turret: primary
+		Offset: -896,0,128
+		TurnSpeed: 3
+	Turreted@SECONDARY:
+		Turret: secondary
+		Offset: 768,0,128
+		TurnSpeed: 3
+	Armament@PRIMARY:
+		Turret: primary
+		Weapon: 8Inch
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 171
+		RecoilRecovery: 34
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Turret: secondary
+		Weapon: 8Inch
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 171
+		RecoilRecovery: 34
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		Turrets: primary, secondary
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	WithSpriteTurret@PRIMARY:
+		Turret: primary
+	WithSpriteTurret@SECONDARY:
+		Turret: secondary
+	Selectable:
+		DecorationBounds: 44,44
+
+LSTRA:
+	Inherits: ^Ship
+	Buildable:
+		Queue: Ship, Ship.Nod, Ship.Nodda, Ship.GDI
+		BuildPaletteOrder: 10
+		Prerequisites: ~techlevel.low
+		Description: General-purpose naval transport.\nCan carry infantry and tanks.\n  Unarmed
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 35000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Locomotor: lcraft
+		Speed: 113
+		PauseOnCondition: notmobile
+	RevealsShroud:
+		Range: 6c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 5c0
+	SelectionDecorations:
+	WithLandingCraftAnimation:
+		OpenTerrainTypes: Clear, Rough, Road, Ore, Gems, Beach
+	Cargo:
+		Types: Infantry, Vehicle
+		MaxWeight: 5
+		PipCount: 5
+		PassengerFacing: 0
+		LoadingCondition: notmobile
+	Selectable:
+		DecorationBounds: 36,36
+
+PT:
+	Inherits: ^Ship
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Ship, Ship.Nod, Ship.Nodda, Ship.GDI
+		BuildAtProductionType: Boat
+		BuildPaletteOrder: 20
+		Prerequisites: ~shipyard_nod, ~shipyard_gdi, ~techlevel.low
+		Description: Light scout & support ship.\nCan detect submarines.\n  Strong vs Naval units\n  Weak vs Ground units, Aircraft
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Gunboat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 20000
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 7
+		Speed: 128
+	RevealsShroud:
+		Range: 7c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 5c0
+	Turreted:
+		TurnSpeed: 7
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: 2Inch
+		LocalOffset: 208,0,48
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: DepthCharge
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	WithSpriteTurret:
+	DetectCloaked:
+		CloakTypes: Underwater
+		Range: 4c0
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 36,36
+
+
+#############################################################################################################
+#											Airforce														#
+#############################################################################################################
+#All-Faction
+
+C17:
+	Inherits: ^PlaneUnControled
+	Tooltip:
+		Name: Supply Aircraft
+	Valued:
+		Cost: 2000
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 326
+		Repulsable: False
+		MaximumPitch: 36
+		CruiseAltitude: 4560
+	Health:
+		HP: 25
+	Armor:
+		Type: Heavy
+	Cargo:
+		MaxWeight: 10
+		PipCount: 10
+	DamageMultiplier@INVULNERABLE:
+		Modifier: 0
+	Contrail@1:
+		Offset: -261,-650,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -85,-384,0
+		TrailLength: 16
+	Contrail@3:
+		Offset: -85,384,0
+		TrailLength: 16
+	Contrail@4:
+		Offset: -261,650,0
+		TrailLength: 15
+	-ProducibleWithLevel:
+	RenderSprites:
+		PlayerPalette: playerRA
+	Buildable:
+		Description: Drops vehicle reinforcements on Airstrips
+
+C17D:
+	Inherits: C17
+	RenderSprites:
+		Image: c17
+	ParaDrop:
+		DropRange: 1c0
+	Health:
+		HP: 120
+	Armor:
+		Type: Light
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 250
+		Repulsable: False
+		MaximumPitch: 36
+		CruiseAltitude: 4560
+	Targetable:
+		TargetTypes: Air
+	Cargo:
+		MaxWeight: 10
+	SelectionDecorations:
+		RenderSelectionBars: False
+	Tooltip:
+		Name: C17
+	Contrail@1:
+		Offset: -261,-650,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -85,-384,0
+		TrailLength: 16
+	Contrail@3:
+		Offset: -85,384,0
+		TrailLength: 16
+	Contrail@4:
+		Offset: -261,650,0
+		TrailLength: 15
+	SmokeTrailWhenDamaged@0:
+		Offset: -432,560,0
+		Interval: 2
+	SmokeTrailWhenDamaged@1:
+		Offset: -432,-560,0
+		Interval: 2
+	RejectsOrders:
+	GivesExperience:
+		Experience: 1000
+	SpawnActorOnDeath:
+		Actor: C17D.Husk
+	DamageMultiplier@NOT_INVULNERABLE:
+		Modifier: 100
+C17D.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: c17
+		GenericName: Destroyed Plane
+	Contrail@1:
+		Offset: -598,-683,0
+	Contrail@2:
+		Offset: -598,683,0
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 180
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+		MinDamage: Undamaged
+	RevealsShroud:
+		Range: 13c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: C17
+		PlayerPalette: playerRA
+
+
+#############
+#Sub-faction#
+#############
+
+F22:
+	Inherits@1: ^Plane
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Aircraft.Nodda
+		BuildPaletteOrder: 50
+		Prerequisites: ~afldra, ~anytech, ~techlevel.high
+		BuildDuration: 1750
+		Description: Fast Ground-Attack Plane.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: F-22
+	Health:
+		HP: 100
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+	AttackAircraft:
+		FacingTolerance: 20
+		Armaments: primary, secondary, tertiary
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: F22Missiles
+		LocalOffset: 0,-640,0, 0,640,0
+		PauseOnCondition: !f22missiles
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: HeavyMinigun
+		LocalOffset: 640,0,0
+		PauseOnCondition: !heavyminigun
+	Armament@TERTIARY:
+		Name: tertiary
+		Weapon: AirBomb
+		LocalOffset: 300,0,0
+		PauseOnCondition: !airbomb
+	AmmoPool@PRIMARY:
+		Name: primary
+		Armaments: primary
+		Ammo: 4
+		AmmoCondition: f22missiles
+		ReloadDelay: 100
+	AmmoPool@SECONDARY:
+		Name: secondary
+		Armaments: secondary
+		Ammo: 8
+		AmmoCondition: heavyminigun
+		ReloadDelay: 50
+	AmmoPool@TERTIARY:
+		Name: tertiary
+		Armaments: tertiary
+		Ammo: 1
+		AmmoCondition: airbomb
+		ReloadDelay: 400
+		PipType: Red
+	Aircraft:
+		InitialFacing: 192
+		TurnSpeed: 5
+		Speed: 250
+		RepulsionSpeed: 40
+		MaximumPitch: 56
+	Rearmable:
+		RearmActors: afldra
+		AmmoPools: primary, secondary, tertiary
+	Selectable:
+		Bounds: 36,28,0,2
+		DecorationBounds: 40,29,0,1
+	Contrail@1:
+		Offset: -598,-683,0
+	Contrail@2:
+		Offset: -598,683,0
+	SpawnActorOnDeath:
+		Actor: F22.Husk
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+	RenderSprites:
+		PlayerPalette: playerRA
+	JamsMissiles:
+		Range: 2c0
+		DeflectionStances: Enemy
+		Chance: 30
+	AppearsOnRadar:
+		UseLocation: False
+		ValidStances: Ally
+F22.Husk
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: F22
+		GenericName: Destroyed Plane
+	Contrail@1:
+		Offset: -598,-683,0
+	Contrail@2:
+		Offset: -598,683,0
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 180
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+		MinDamage: Undamaged
+	RevealsShroud:
+		Range: 13c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: F22
+		PlayerPalette: playerRA
+
+TRANNODDA:
+	Inherits@TRAN: TRAN
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: afldra
+		Queue: Aircraft.Nodda
+		Description: Infantry Transport Helicopter.\n  Unarmed
+	RenderSprites:
+		Image: tran
+
+#dummy air unit
+ARTYFIRE:
+	Inherits: ^PlaneUnControled
+	RenderSprites:
+		Image: null
+	Tooltip:
+		Name:
+	Valued:
+		Cost: 2000
+	Aircraft:
+		TurnSpeed: 4
+		Speed: 300
+		Repulsable: False
+		CruiseAltitude: 18000
+	Health:
+		HP: 80
+	Armor:
+		Type: Heavy
+	AttackBomber:
+		Armaments: gun
+	Armament@GUNS:
+		Name: gun
+		Weapon: HeavyArtilleryShell
+		LocalOffset: 0,0,0
+	AttackSounds:
+		Sounds: aertyincoming1.aud, aertyincoming3.aud, artyinco01.aud
+		Delay: 0
+		DelayRelativeTo: Preparation
+	WithMuzzleOverlay:
+	-ProducibleWithLevel:
+	RejectsOrders:
+	DamageMultiplier@INVULNERABLE:
+		Modifier: 0
+	RevealsShroud:
+		Range: 0c0
+		Type: CenterPosition
+	-AppearsOnRadar:
+
+#############
+#Sub-faction#
+#############
+
+HELI:
+	Inherits: ^Helicopter
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Apache
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~hpad, ~anyhq, ~techlevel.medium
+		Queue: Aircraft.Nod
+		Description: Attack Helicopter.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
+	Aircraft:
+		InitialFacing: 224
+		TurnSpeed: 4
+		Speed: 180
+		TurnToLand: True
+		IdleBehavior: None
+		# TakeoffSound: 
+		# LandingSound: 
+	Rearmable:
+		RearmActors: hpad
+		AmmoPools: primary, secondary
+	Health:
+		HP: 130
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+	Armament@PRIMARY:
+		Weapon: HeliAGGun
+		LocalOffset: 128,-213,-85, 128,213,-85
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammoG
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: HeliMissiles
+		LocalOffset: 128,-213,-85, 128,213,-85
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammoM
+	AmmoPool@HeliAGGunA:
+		Name: HeliAGGunA
+		Ammo: 20
+		ReloadCount: 1
+		PipCount: 0
+		AmmoCondition: ammoG
+	AmmoPool@HeliMissilesA:
+		Name: HeliMissilesA
+		Ammo: 8
+		PipCount: 5
+		ReloadCount: 8
+		AmmoCondition: ammoM
+	AttackAircraft:
+		FacingTolerance: 20
+	WithIdleOverlay@ROTORAIR:
+		Offset: 0,0,85
+		Sequence: rotor
+		RequiresCondition: airborne
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 0,0,85
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: HELI.Husk
+	AutoTarget:
+	Explodes:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 30,24
+HELI.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Apache Longbow
+	Aircraft:
+		TurnSpeed: 4
+		Speed: 186
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+	WithIdleOverlay:
+		Offset: 0,0,85
+		Sequence: rotor
+	RenderSprites:
+		Image: heli

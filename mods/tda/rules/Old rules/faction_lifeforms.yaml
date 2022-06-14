@@ -1,0 +1,156 @@
+#############################################################################################################
+#											Buildings														#
+#############################################################################################################
+#All-Faction
+
+
+#############
+#Sub-faction#
+#############
+
+
+#############################################################################################################
+#											Defences														#
+#############################################################################################################
+#All-Faction
+
+
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Vehicles														#
+#############################################################################################################
+#All-Faction
+
+
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Infantry														#
+#############################################################################################################
+#All-Faction
+
+
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											 Navy															#
+#############################################################################################################
+#All-Faction
+
+
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Airforce														#
+#############################################################################################################
+#All-Faction
+
+
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Research														#
+#############################################################################################################
+#All-Faction
+
+
+
+#############
+#Sub-faction#
+#############
+
+
+
+
+^Viceroid:
+	Inherits@1: ^CombatUnit
+	Inherits@2: ^SpriteActor
+	Huntable:
+	ConditionManager:
+	Health:
+		HP: 300
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 6c0
+	Mobile:
+		Voice: Move
+		Locomotor: chem
+		Speed: 71
+	SelectionDecorations:
+	Selectable:
+		Bounds: 24,24
+	Targetable:
+		TargetTypes: Ground, Creep
+	AutoTarget:
+		ScanRadius: 5
+	AttackMove:
+		Voice: Attack
+	DrawLineToTarget:
+	HiddenUnderFog:
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Visceroid
+	Armament:
+		Weapon: Chemspray
+		LocalOffset: 384,0,0
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		Voice: Attack
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithSpriteBody:
+	WithMuzzleOverlay:
+	Guard:
+		Voice: Move
+	Guardable:
+	DamagedByTerrain:
+		Damage: -1
+		DamageInterval: 4
+		DamageTypes: TiberiumDeath
+		Terrain: Tiberium, BlueTiberium, RedTiberium
+	Voiced:
+		VoiceSet: DinoVoice
+	GivesBounty:
+	HitShape:
+		Type: Circle
+			Radius: 427
+	MapEditorData:
+		Categories: Critter
+
+PVICE:
+	Inherits: ^Viceroid
+	Mobile:
+	Tooltip:
+	ActorLostNotification:
+	Buildable:
+		Description: Mutated abomination that spits liquid Tiberium.\n  Strong vs Infantry, Buildings\n  Weak vs Aircraft
+	Sandworm:
+		WanderMoveRadius: 5

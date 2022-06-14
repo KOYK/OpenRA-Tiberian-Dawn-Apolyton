@@ -1,0 +1,48 @@
+++Repairing big gunboat crash the game at the end of it.
+
+++finish buildings selection sounds.
+
+++finish unit selection sounds.
+
+++try remeber how to make spikes sellable.
+
+++make outpost bigger when deployed 3 3.
+
+++add ra terrain and remove cnc one.
+
+
+Do the BUILDDuration for buildings!!!
+
+Fix minelayer cursor CTD
+
+fix aircraft reload pad and fly mechanics.
+
+remove rank visability from enemy units.
+
+make snipers invisible when out of enemy weapon range and vision.
+
+FIX homve not attacking harversters and other vehicles\tanks
+
+add correct damage values to weapons.
+
+move my assets to a locked mix file.
+
+Fix capture logic for civilian buildings.
+
+--i shuld use the ra navy for now.
+
+--Fix capture logic.
+
+--allow to build every where inside the build are circle. enlarge vision on con yard
+
+--units can walk on trees and netrual buildings, but not on base buildings.
+
+--change starting money to 10000.
+
+--remove old cnc range build limmit.
+
+--make outpost a standard unit.
+
+--change default lobby settings to match kanes whrath.
+
+--remove church from main build queee.

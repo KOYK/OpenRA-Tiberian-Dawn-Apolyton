@@ -1,0 +1,160 @@
+TANKS:
+NODRaiderTankArmor 		(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper) light tank
+NODRaiderTankArmor 		(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper) arty
+GDIMCVArmor 			(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+NODMCVArmor 			(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper) Liquid
+NODStealthTankArmor 	(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+GDIPredatorTankArmor 	(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+GDIRigArmor 			(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+GDIMammothTankArmor 	(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+GDIJuggernaughtArmor	(100% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+
+NODBeamCannonArmor 		(100% Cannon, 75%  Rocket, 50%  Grenade, 50% Gun, 1% Sniper)
+GDIPitbullArmor 		(100% Cannon, 75%  Rocket, 50%  Grenade, 50% Gun, 1% Sniper) humve
+
+NODBunkerTruckArmor 	(100% Cannon, 75%  Rocket, 50%  Grenade, 55% Gun, 1% Sniper)
+GDIGuardianAPCArmor 	(100% Cannon, 75%  Rocket, 50%  Grenade, 55% Gun, 1% Sniper)
+
+NODEmissaryArmor 		(100% Cannon, 100% Rocket, 100% Grenade, 75% Gun, 1% Sniper)
+GDISurveyorArmor 		(100% Cannon, 100% Rocket, 100% Grenade, 75% Gun, 1% Sniper)
+
+NODHarvesterArmor 		(95%  Cannon, 95%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper
+GDIHarvesterArmor 		(95%  Cannon, 95%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+
+NODScorpionBuggyArmor 	(100% Cannon, 50%  Rocket, 50%  Grenade, 25% Gun, 1% Sniper)
+
+NODAvatarArmor 			(100% Cannon, 100% Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+
+NODAttackBikeArmor 		(110% Cannon, 110% Rocket, 75%  Grenade, 50% Gun, 1% Sniper)
+
+NODRedeemerArmor 		(30%  Cannon, 22%  Rocket, 7%   Grenade, 4%  Gun, 1% Sniper)
+
+NODFlameTankArmor 		(150% Cannon, 75%  Rocket, 25%  Grenade, 25% Gun, 1% Sniper)
+
+GDISonicTankArmor 		(150% Cannon, 100% Rocket, 50% Grenade, 25% Gun, 1% Sniper)
+
+GDIMARVArmor 			(43%  Cannon, 33% Rocket, 10% Grenade, 5% Gun, 1% Sniper)
+
+
+INFANTRY: AT-13
+Light 					(25% Cannon, 25% Rocket, 75% Grenade, 100% Gun, 100% Sniper)
+Missile, Engineer, Grenadier, Sniper, sabature, Shadow Team,
+
+Light 					(25% Cannon, 25% Rocket, 75% Grenade, 75% Gun, 100% Sniper)
+Combat-engineer
+
+Light 					(25% Cannon, 25% Rocket, 75% Grenade, 150% Gun, 100% Sniper)
+Rifleman
+
+Light 					(25% Cannon, 25% Rocket, 75% Grenade, 200% Gun, 100% Sniper)
+Fanatics
+
+Light 					(25% Cannon, 50% Rocket, 75% Grenade, 100% Gun, 100% Sniper)
+Militant, Awakened,
+
+Light 					(25% Cannon, 50% Rocket, 75% Grenade, 150% Gun, 100% Sniper)
+Militant rocket
+
+Light 					(25% Cannon, 50% Rocket, 100% Grenade, 100% Gun, 100% Sniper)
+Confessor Cabal
+
+Heavy 					(25% Cannon, 12% Rocket, 40% Grenade, 50% Gun, 100% Sniper)
+Enlightened 
+
+Heavy 					(5% Cannon, 12% Rocket, 40% Grenade, 50% Gun, 100% Sniper)
+GDI Commando Nod Commando
+
+Heavy 					(5% Cannon, 25% Rocket, 75% Grenade, 100% Gun, 100% Sniper)
+Zone raider
+
+Heavy 					(5% Cannon, 50% Rocket, 75% Grenade, 100% Gun, 100% Sniper)
+Black Hand \ Tiberium trooper
+
+Heavy					(5% Cannon, 25% Rocket, 75% Grenade, 100% Gun, 75% Sniper)
+Zone Trooper 
+
+
+ThisWeapon = 25% light
+
+BUILDING ARMORS: AT-25
+Fortified  Medium 		(75%  Cannon, 50% Rocket, 100% Grenade, 25% Gun, 1% Sniper)
+
+Concrete  Light 		(100% Cannon, 50% Rocket, 100% Grenade, 25% Gun, 1% Sniper)
+
+Metal  Medium 			(100% Cannon, 25% Rocket, 100% Grenade, 25% Gun, 1% Sniper)
+
+AIRCRAFT:
+GDIOrcaArmor 			(100% Cannon, 100% Rocket, 100% Grenade, 100% Gun, 1% Sniper)
+GDIHammerheadArmor 		(100% Cannon, 100% Rocket, 100% Grenade, 100% Gun, 1% Sniper)
+GDIOxArmor 				(100% Cannon, 100% Rocket, 100% Grenade, 100% Gun, 1% Sniper)
+NODVertigo				(100% Cannon, 100% Rocket, 100% Grenade, 100% Gun, 1% Sniper)
+GDIFirehawkArmor		(100% Cannon, 100% Rocket, 100% Grenade, 100% Gun, 1% Sniper)
+
+ZOCOMFirehawkCeramicArmo(50% Cannon, 50% Rocket, 50% Grenade, 50% Gun, 1% Sniper) (upgrade)
+
+
+
+
+less % means the weapon does less damage to the armor
+25% means less damage to the armor
+100% means the armor takes full damage
+
+
+(heavy equipment units, normal speed) 
+Kevlar Soft Armor Vests: rocket soldier, grenadier, sniper, engineer, spec ops, medic, mechanic, flamethrower, chemtrooper, commander 
+
+(light equipment units, fast moving)
+Hard Ballistic Plates: Rifleman, commando, renagade, 
+
+(heavy armament units, slow moving, dealing massive damage)
+Juggernaut armor: 
+
+
+penetretion damages systems.
+explosion damages overal hull, Large area of effect.
+penetretion and explosion damages all systems, to vehicles, only damage hull in tanks.
+
+
+Types of weapon damage				Weapon Type
+||									-------------------------
+||									|						|
+||----------||	||		Penetrates	|   	   ||	 ||Explode||
+||Armor Type||BulletL||BulletS||shell||missil||Melee||Burn||frag   ||explosion||
+None		||		 ||	100%||	100%||	100%|| 100%||100%|| 100%  	||
+Kevlar		||		 ||	80%	||	100%||	100%||	80%||100%||	100%  	||
+Plates		||		 ||	60%	||	100%||	100%||	70%||100%||	 90%  	||
+Juggernaut	||		 || 40%	||  100%||  100%||  1% || 70%||  50%	||
+
+Aluminium	||		 ||  50%	||  80%	||  100%||  1% || 70%||  50%||
+Steel		||		 ||  10%	||  50%	||  50%	||  1% || 70%||  50%||
+Uranium		||		 ||  1%		||  30%	||  30%	||  1% || 35%||  25%||
+
+Brik		||		 ||  40%	||  100%||  100%||  1% ||100%|| 100%||
+Concrete	||	     ||  30%	||  100%||  50% ||  1% ||100%||  50%||
+Fortified	||	 	 ||  1%		||  50%	||  100%||  1% ||100%||  25%||
+
+
+				||Weapon Damage||
+||ARMOR||		BulletS		BulletL		Shell	Burn	Frag	Explosion	Dino
+None: 			100			100			100		100		100		100			100
+
+Kevlar: 		70			100			100		100		90		100			100
+Plates: 		50			90			100		100		80		100			100
+Juggernaut: 	25			70			100		50		25		25			90
+
+Aluminium: 		25			60			100		100		25		100			85
+Steel: 			0			25			50		25		0		50			50
+Uranium: 		0			0			25		25		0		50			25
+
+Brik: 			60			80			100		100		50		100			100
+Concrete: 		0			50			100		100		25		50			50
+Fortified: 		0			25			50		100		0		100			25
+
+
+
+
+
+
+
+
+

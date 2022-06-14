@@ -1,0 +1,594 @@
+^Palettes:
+	GlobalLightingPaletteEffect:
+		ExcludePalettes: ra2foricamos, flashyeffectra, flashyeffect, effect, effectra, alpha, chrome, lights_Red_Pal, lights_Red_50, lights_Red_05, lights_Blue_Pal, lights_Blue_50, lights_Blue_05, lights_Green_Pal, lights_Green_50, lights_Green_05, lights_Gray_Pal, lights_Gray_50, lights_Gray_05, PlayerColorLights, PlayerColorLights_RA
+	FlashPaletteEffect:
+	#LIGHTS PALETTES-------------------------------------------------------------------------------------------------------------------------------------------------
+	#GRAY
+	PaletteFromFile@lights_Gray_Pal:
+		Name: lights_Gray_Pal
+		Filename: lightsgray.pal
+		ShadowIndex: 4
+	PaletteFromPaletteWithAlpha@lights_Gray_50:
+		Name: lights_Gray_50
+		BasePalette: lights_Gray_Pal
+		Alpha: 0.50
+	PaletteFromPaletteWithAlpha@lights_Gray_05:
+		Name: lights_Gray_05
+		BasePalette: lights_Gray_Pal
+		Alpha: 0.05
+	#RED
+	PaletteFromFile@lights_Red_Pal:
+		Name: lights_Red_Pal
+		Filename: lightsred.pal
+		ShadowIndex: 4
+	PaletteFromPaletteWithAlpha@lights_Red_50:
+		Name: lights_Red_50
+		BasePalette: lights_Red_Pal
+		Alpha: 0.50
+	PaletteFromPaletteWithAlpha@lights_Red_05:
+		Name: lights_Red_05
+		BasePalette: lights_Red_Pal
+		Alpha: 0.05
+	#BLUE
+	PaletteFromFile@lights_Blue_Pal:
+		Name: lights_Blue_Pal
+		Filename: lightsblue.pal
+		ShadowIndex: 4
+	PaletteFromPaletteWithAlpha@lights_Blue_50:
+		Name: lights_Blue_50
+		BasePalette: lights_Blue_Pal
+		Alpha: 0.50
+	PaletteFromPaletteWithAlpha@lights_Blue_05:
+		Name: lights_Blue_05
+		BasePalette: lights_Blue_Pal
+		Alpha: 0.05
+	#GREEN
+	PaletteFromFile@lights_Green_Pal:
+		Name: lights_Green_Pal
+		Filename: lightsgreen.pal
+		ShadowIndex: 4
+	PaletteFromPaletteWithAlpha@lights_Green_50:
+		Name: lights_Green_50
+		BasePalette: lights_Green_Pal
+		Alpha: 0.50
+	PaletteFromPaletteWithAlpha@lights_Green_05:
+		Name: lights_Green_05
+		BasePalette: lights_Green_Pal
+		Alpha: 0.05
+	#PLAYER COLORED PALETTES***************************************************************************************************************************************
+	PlayerColorPalette@PlayerColorLights:
+		BaseName: PlayerColorLights
+		BasePalette: terrain
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+		AllowModifiers: True
+	PlayerColorPalette@PlayerColorLights_RA:
+		BaseName: PlayerColorLights_RA
+		BasePalette: terrain
+		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+		AllowModifiers: True
+	#FLASH PALETTES-------------------------------------------------------------------------------------------------------------------------------------------------
+	PaletteFromFile@flashyeffect:
+		Name: flashyeffect
+		Filename: temperat.pal
+		ShadowIndex: 4
+	PaletteFromFile@effectra:
+		Name: effectra
+		Filename: temperatRA.pal
+		ShadowIndex: 4
+	PaletteFromFile@flashyeffectra:
+		Name: flashyeffectra
+		Filename: temperatRA.pal
+		ShadowIndex: 4
+	PaletteFromFile@alpha:
+		Name: alpha
+		Filename: alpha.pal
+	PaletteFromPaletteWithAlpha@raeffect50alpha:
+		Name: raeffect50alpha
+		BasePalette: flashyeffectra
+		Alpha: 0.5
+	PaletteFromPaletteWithAlpha@raeffect25alpha:
+		Name: raeffect25alpha
+		BasePalette: flashyeffectra
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@tdeffect50alpha:
+		Name: tdeffect50alpha
+		BasePalette: flashyeffect
+		Alpha: 0.5
+	PaletteFromPaletteWithAlpha@tdeffect25alpha:
+		Name: tdeffect25alpha
+		BasePalette: flashyeffect
+		Alpha: 0.25
+
+
+barracks.upgraded:
+	AlwaysVisible:
+	ProvidesPrerequisite:
+
+vehicles.upgraded:
+	AlwaysVisible:
+	ProvidesPrerequisite:
+
+aircraft.upgraded:
+	AlwaysVisible:
+	ProvidesPrerequisite:
+
+CRATE.plain:
+	Inherits: ^Crate
+	ScriptTriggers:
+
+TibShimmering:
+	Inherits@1: ^CombatUnit
+	Inherits@2: ^SpriteActor
+	ConditionManager:
+	Interactable:
+	Armor:
+		Type: Wood
+	HiddenUnderFog:
+	Valued:
+		Cost: 1
+	Tooltip:
+		Name: Tiberium
+	BodyOrientation:
+		QuantizedFacings: 8
+	Health:
+		HP: 30
+	Wanders:
+		WanderMoveRadius: 2
+	AttackFrontal:
+	Crushable:
+		WarnProbability: 0
+		CrushClasses: TibShimmeringEffect
+		CrushedByFriendlies: True
+	WithDeathAnimation:
+		CrushedSequence: removed
+		UseDeathTypeSuffix: False
+		FallbackSequence: removed
+	HitShape:
+		Type: Circle
+			Radius: 1
+	-AppearsOnRadar:
+	MapEditorData:
+		Categories: Critter
+	GrantConditionOnTerrain@RED:
+		Condition: OnRedTib
+		TerrainTypes: RedTiberium
+	GrantConditionOnTerrain@BLUE:
+		Condition: OnBlueTib
+		TerrainTypes: BlueTiberium
+	GrantConditionOnTerrain@GREEN:
+		Condition: OnGreenTib
+		TerrainTypes: Tiberium
+	WithIdleOverlay@SHIMMERING_RED:
+		Sequence: idle-shimmering
+		Palette: lights_Red_50
+		IsPlayerPalette: False
+		RequiresCondition: OnRedTib && !OnBlueTib && !OnGreenTib
+	WithIdleOverlay@SHIMMERING_BLUE:
+		Sequence: idle-shimmering
+		Palette: lights_Blue_50
+		IsPlayerPalette: False
+		RequiresCondition: OnBlueTib && !OnRedTib && !OnGreenTib
+	WithIdleOverlay@SHIMMERING_GREEN:
+		Sequence: idle-shimmering
+		Palette: lights_Green_50
+		IsPlayerPalette: False
+		RequiresCondition: OnGreenTib && !OnRedTib && !OnBlueTib
+	DamagedByTerrain:
+		Damage: 1
+		DamageInterval: 10
+		DamageThreshold: 0
+		Terrain: Clear, Rough, Road, Beach, BlueTiberium, RedTiberium, Tiberium
+	ExternalCondition@SPIKE
+		Condition: Spike.proximity
+	GrantConditionOnPrerequisite:
+		Condition: TurboTiberiumOn
+		Prerequisites: turbo_tiberium
+	Mobile:
+		Speed: 99999
+		Locomotor: TibShimmeringEffectLocomotor
+	SeedsResource@RED:
+		ResourceType: RedTiberium
+		Interval: 300
+		MaxRange: 900
+		RequiresCondition: OnRedTib && !OnBlueTib && !OnGreenTib && !Spike.proximity && TurboTiberiumOn
+	SeedsResource@BLUE:
+		ResourceType: BlueTiberium
+		Interval: 200
+		MaxRange: 900
+		RequiresCondition: OnBlueTib && !OnRedTib && !OnGreenTib && !Spike.proximity && TurboTiberiumOn
+	SeedsResource@GREEN:
+		ResourceType: Tiberium
+		Interval: 100
+		MaxRange: 900
+		RequiresCondition: OnGreenTib && !OnRedTib && !OnBlueTib && !Spike.proximity && TurboTiberiumOn
+
+CRATEHEAL:
+	Inherits: ^Crate
+	Crate:
+		Lifetime: 60
+	Tooltip:
+		Name: Healing Crate
+	RenderSprites:
+		Image: crateheal
+	HealUnitsCrateAction:
+		Sound: heal2.aud
+		SelectionShares: 10
+		Sequence: heal
+
+MINV:
+	Inherits: ^Mine
+	RenderSprites:
+		PlayerPalette: playerRA
+		Image: minv
+	Explodes:
+		Weapon: ATMine
+
+MINP:
+	Inherits: ^Mine
+	RenderSprites:
+		PlayerPalette: playerRA
+		Image: minp
+	Explodes:
+		Weapon: APMine
+
+CRATEUNIT:
+	#TimeDelay 1 hour = 90000, 30 min = 45000, 10 min=15000, 5 min=is=7500, 2 min = 3000, 1 min = 1500.
+	Inherits: ^Crate
+	Crate:
+		Lifetime: 60
+	Tooltip:
+		Name: Unit Crate
+	RenderSprites:
+		Image: crateunit
+	#Duplicate
+	DuplicateUnitCrateAction:
+		SelectionShares: 3
+		MaxAmount: 1
+		MinAmount: 1
+		MaxDuplicateValue: 1500
+		MaxRadius: 2
+	DuplicateUnitCrateAction:
+		SelectionShares: 1
+		MaxAmount: 1
+		MinAmount: 1
+		MaxDuplicateValue: 1500
+		MaxRadius: 2
+		Owner: Creeps
+	#Vehicles
+	GiveUnitCrateAction@va1:
+		SelectionShares: 35
+		Units: bggy
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 3000
+	GiveUnitCrateAction@va2:
+		SelectionShares: 35
+		Units: jeep
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 3000
+	GiveUnitCrateAction@vb1:
+		SelectionShares: 30
+		Units: apc
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 7500
+	GiveUnitCrateAction@vb2:
+		SelectionShares: 30
+		Units: bike
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 7500
+	GiveUnitCrateAction@vb3:
+		SelectionShares: 30
+		Units: ltnk
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 7500
+	GiveUnitCrateAction@vc1:
+		SelectionShares: 25
+		Units: arty
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 15000
+	GiveUnitCrateAction@vc2:
+		SelectionShares: 25
+		Units: mlrs
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 15000
+	GiveUnitCrateAction@vc3:
+		SelectionShares: 25
+		Units: ftnk
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 15000
+	GiveUnitCrateAction@vc4:
+		SelectionShares: 25
+		Units: ctnk
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 15000
+	GiveUnitCrateAction@vd1:
+		SelectionShares: 20
+		Units: 3tnk
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 45000
+	GiveUnitCrateAction@vd2:
+		SelectionShares: 20
+		Units: mtnk
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 45000
+	#Infantry
+	GiveUnitCrateAction@squadA1:
+		SelectionShares: 50
+		Units: e1,e1
+		ValidFactions: gdi, nod, nodda
+	GiveUnitCrateAction@squadA2:
+		SelectionShares: 50
+		Units: e1,e1,e1
+		ValidFactions: gdi, nod, nodda
+	GiveUnitCrateAction@squadA3:
+		SelectionShares: 50
+		Units: e1,e2,e1
+		ValidFactions: gdi, nod, nodda
+	GiveUnitCrateAction@squadB1:
+		SelectionShares: 50
+		Units: e1,e1,e1,e3,e3
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 3000
+	GiveUnitCrateAction@squadB2:
+		SelectionShares: 50
+		Units: e1,e1,e4,e4
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 3000
+	GiveUnitCrateAction@squadB3:
+		SelectionShares: 50
+		Units: e1,e1,e4,e4
+		ValidFactions: gdi, nod, nodda
+		TimeDelay: 3000
+	#MCV
+	GiveMcvCrateAction:
+		SelectionShares: 0
+		NoBaseSelectionShares: 120
+		Units: mcv
+		ExcludedActorTypes: solesurvivor
+	#Sole Survivor	
+	GiveUnitCrateAction@sole1:
+		SelectionShares: 3
+		Units: e6
+		ValidFactions: gdi, nod, nodda
+		Prerequisites: solesurvivor
+
+CRATEWOOD:
+	Inherits: ^Crate
+	Crate:
+		Lifetime: 60
+	Tooltip:
+		Name: Special Crate
+	RenderSprites:
+		Image: cratewood
+	GiveUnitCrateAction@dtrk:
+		SelectionShares: 1
+		Units: dtrk
+		ValidFactions: gdi, nod, nodda
+	GiveUnitCrateAction@htnk:
+		SelectionShares: 1
+		Units: htnk,htnk,htnk
+		ValidFactions: gdi, nod, nodda
+	GiveUnitCrateAction@blackops1:
+		SelectionShares: 1
+		Units: medi,medi,medi,rmbo,rmbo,rmbo,rmbo
+		ValidFactions: gdi, nod, nodda
+	GiveUnitCrateAction@blackops2:
+		SelectionShares: 1
+		Units: medi,medi,e6,e3,e3,e3,e3
+		ValidFactions: gdi, nod, nodda
+	GiveCashCrateAction:
+		Amount: 5000
+		SelectionShares: 1
+		UseCashTick: True
+
+CRATE:
+	Inherits: ^Crate
+	Crate:
+		Lifetime: 60
+	Tooltip:
+		Name: Aid Crate
+	GiveCashCrateAction:
+		Amount: 1000
+		SelectionShares: 6
+		UseCashTick: True
+	GiveCashCrateAction:
+		Amount: 500
+		SelectionShares: 12
+		UseCashTick: True
+	RevealMapCrateAction:
+		SelectionShares: 6
+		Sequence: reveal-map
+	HideMapCrateAction:
+		SelectionShares: 1
+		Sequence: reveal-map
+	ExplodeCrateAction@fire:
+		Weapon: Napalm.Crate
+		SelectionShares: 1
+	GrantExternalConditionCrateAction@cloak:
+		SelectionShares: 6
+		Sequence: cloak
+		Condition: cloak-crate-collected
+	LevelUpCrateAction:
+		SelectionShares: 48
+		MaxExtraCollectors: 1
+		Range: 0c3
+	LevelUpCrateAction:
+		SelectionShares: 24
+		MaxExtraCollectors: 30
+		Range: 1c0
+
+MONEYCRATEMP:
+	Inherits: ^Crate
+	Tooltip:
+		Name: Money Crate
+	GiveCashCrateAction:
+		Amount: 500
+		SelectionShares: 1
+		UseCashTick: true
+	RenderSprites:
+		Image: crate
+
+WCRATE:
+	Inherits: ^Crate
+	Tooltip:
+		Name: Wooden Crate
+
+SCRATE:
+	Inherits: ^Crate
+	Tooltip:
+		Name: Steel Crate
+
+mpspawn:
+	EditorOnlyTooltip:
+		Name: (multiplayer player starting point)
+	AlwaysVisible:
+	Immobile:
+		OccupiesSpace: false
+	WithSpriteBody:
+	RenderSpritesEditorOnly:
+	BodyOrientation:
+		QuantizedFacings: 1
+	MapEditorData:
+		Categories: System
+	Interactable:
+
+waypoint:
+	EditorOnlyTooltip:
+		Name: (waypoint for scripted behavior)
+	AlwaysVisible:
+	Immobile:
+		OccupiesSpace: false
+	WithSpriteBody:
+	RenderSpritesEditorOnly:
+	BodyOrientation:
+		QuantizedFacings: 1
+	MapEditorData:
+		Categories: System
+	Interactable:
+
+fact.colorpicker:
+	Inherits: FACT
+	-Buildable:
+	-MapEditorData:
+	RenderSprites:
+		Image: fact
+		Palette: colorpicker
+
+CAMERA:
+	EditorOnlyTooltip:
+		Name: (reveals area to owner)
+	AlwaysVisible:
+	WithSpriteBody:
+	RenderSpritesEditorOnly:
+	BodyOrientation:
+		QuantizedFacings: 1
+	Immobile:
+		OccupiesSpace: false
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+	MapEditorData:
+		Categories: System
+	Interactable:
+
+CAMERA.small:
+	EditorOnlyTooltip:
+		Name: (reveals small area to owner)
+	AlwaysVisible:
+	WithSpriteBody:
+	RenderSpritesEditorOnly:
+		Image: camera
+	BodyOrientation:
+		QuantizedFacings: 1
+	Immobile:
+		OccupiesSpace: false
+	Health:
+		HP: 1000
+	HitShape:
+	RevealsShroud:
+		Range: 6c0
+		Type: CenterPosition
+	MapEditorData:
+		Categories: System
+	Interactable:
+
+FLARE:
+	Immobile:
+		OccupiesSpace: false
+	RevealsShroud:
+		Range: 3c0
+		Type: CenterPosition
+	RenderSprites:
+		Image: smokland
+		Palette: terrain
+	WithSpriteBody:
+		StartSequence: open
+	HiddenUnderFog:
+		Type: CenterPosition
+	Tooltip:
+		Name: Flare
+		ShowOwnerRow: false
+	BodyOrientation:
+		QuantizedFacings: 1
+	MapEditorData:
+		Categories: System
+	Interactable:
+
+FLAG_STARTING_UNITS:
+	Inherits: ^BasicFlag
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Flag
+	WithBuildingBib:
+		HasMinibib: True
+	DamageMultiplier@INVULNERABLE:
+		Modifier: 0
+	Valued:
+		Cost: 2000
+	ProvidesPrerequisite:
+		Prerequisite: flag_starting_units
+	Health:
+		HP: 1000
+	RevealsShroud:
+		Range: 10c0
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	ProvidesRadar:
+	-Selectable:
+	Power:
+		Amount: 0
+	-Targetable:
+	AirstrikePower:
+		Prerequisites: ~techlevel.superweapons
+		Icon: airstrike
+		ChargeInterval: 7500
+		SquadSize: 3
+		QuantizedFacings: 8
+		Description: Air Strike
+		LongDesc: Deploy an aerial napalm strike.\nBurns buildings and infantry along a line.
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyPlanesApproaching
+		#NotReady: noredy1
+		UnitType: a10
+		DisplayBeacon: True
+		BeaconPoster: airstrike
+		BeaconPosterPalette: beaconposter
+		DisplayRadarPing: True
+		CameraActor: camera
+		ArrowSequence: arrow
+		CircleSequence: circles
+		ClockSequence: clock
+		DisplayTimerStances: Ally, Enemy
+	ProximityCapturable:
+		Range: 5c0
+		CaptorTypes: Vehicle, Tank, Infantry, Player
+		MustBeClear: true
+		Sticky: false
+		Permanent: false
+	CashTrickler:
+	MapEditorData:
+		Categories: System
+	Interactable:

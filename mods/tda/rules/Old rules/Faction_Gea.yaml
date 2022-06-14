@@ -1,0 +1,639 @@
+#############################################################################################################
+#											Buildings														#
+#############################################################################################################
+
+SPLIT2:
+	Inherits: ^TibTree
+	SeedsResource:
+		ResourceType: Tiberium
+		Interval: 55
+		MaxRange: 900
+	WithIdleOverlay@lightsg:
+		Sequence: idle-lightsg
+		Palette: lights_Green_05
+		IsPlayerPalette: False
+	LaysTerrain:
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		Template: 5001
+SPLIT3:
+	Inherits: ^TibTree
+	RenderSprites:
+		Image: split2
+	SeedsResource:
+		ResourceType: Tiberium
+		Interval: 55
+		MaxRange: 900
+	WithIdleAnimation:
+	WithIdleOverlay@lightsg:
+		Sequence: idle-lightsg
+		Palette: lights_Green_05
+		IsPlayerPalette: False
+	LaysTerrain:
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		Template: 5001
+SPLITBLUE:
+	Inherits: ^TibTree
+	RenderSprites:
+		Image: split3
+	SeedsResource:
+		ResourceType: BlueTiberium
+		Interval: 110
+		MaxRange: 10
+		RequiresCondition: !Spike.proximity
+	WithIdleAnimation:
+	Tooltip:
+		Name: Blossom Tree (blue)
+	RadarColorFromTerrain:
+		Terrain: BlueTiberium
+	WithIdleOverlay@lightsb:
+		Sequence: idle-lightsb
+		Palette: lights_Blue_05
+		IsPlayerPalette: False
+	LaysTerrain:
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		Template: 5002
+SPLITRED:
+	Inherits: ^TibTree
+	RenderSprites:
+		Image: split3
+	SeedsResource:
+		ResourceType: RedTiberium
+		Interval: 220
+		MaxRange: 5
+	WithIdleAnimation:
+	Tooltip:
+		Name: Blossom Tree (Red)
+	RadarColorFromTerrain:
+		Terrain: RedTiberium
+	WithIdleOverlay@lightsr:
+		Sequence: idle-lightsr
+		Palette: lights_Red_05
+		IsPlayerPalette: False
+	LaysTerrain:
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		Template: 5003
+
+#This below is a "hack" that allows for spikes to be build on tib trees. In esence this adds a dummy terrain. Personaly I think this is very unprofecional, might be a smart solution on my part but still I wish I dint had to do it, and spend countless hours on figuring stuff like this one, and then forget what ive have done and force my self to re invent the wheel just to understand what I have done. Oh well.
+
+DUMMY_GREEN_TIB_TREE:
+	Inherits: SPLIT3
+	RenderSprites:
+		Image: split2fake
+	-ActorSpawner:
+	-SeedsResource:
+	Replaceable:
+		Types: Spike
+	LaysTerrain:
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		Template: 5001
+DUMMY_BLUE_TIB_TREE:
+	Inherits: SPLITBLUE
+	RenderSprites:
+		Image: split3fake
+	-ActorSpawner:
+	-SeedsResource:
+	Replaceable:
+		Types: Spike
+	LaysTerrain:
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		Template: 5002
+DUMMY_RED_TIB_TREE:
+	Inherits: SPLITRED
+	RenderSprites:
+		Image: split3fake
+	-ActorSpawner:
+	-SeedsResource:
+	Replaceable:
+		Types: Spike
+	LaysTerrain:
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		Template: 5003
+
+#############################################################################################################
+#											Defences														#
+#############################################################################################################
+#ToDo: I need to add new titles for this "faction" since trees and rocks are not defences XD
+
+ROCK1:
+	Inherits: ^Rock
+	Building:
+		Footprint: __ xx
+
+ROCK2:
+	Inherits: ^Rock
+	Building:
+		Footprint: xx_
+		Dimensions: 3,1
+
+ROCK3:
+	Inherits: ^Rock
+
+ROCK4:
+	Inherits: ^Rock
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+
+ROCK5:
+	Inherits: ^Rock
+	Building:
+		Footprint: x_
+		Dimensions: 2,1
+
+ROCK6:
+	Inherits: ^Rock
+	Building:
+		Footprint: ___ xxx
+		Dimensions: 3,2
+
+ROCK7:
+	Inherits: ^Rock
+	Building:
+		Footprint: xxxx
+		Dimensions: 4,1
+
+T01:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T01.Husk
+T01.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T02:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T02.Husk
+T02.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T03:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T03.Husk
+T03.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T04:
+	Inherits: ^Tree
+	MapEditorData:
+		RequireTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T04.Husk
+T04.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+
+T05:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T05.Husk
+T05.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T06:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T06.Husk
+T06.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T07:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T07.Husk
+T07.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T08:
+	Inherits: ^Tree
+	Building:
+		Footprint: x_
+		Dimensions: 2,1
+	SpawnActorOnDeath:
+		Actor: T08.Husk
+T08.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: x_
+		Dimensions: 2,1
+
+T09:
+	Inherits: ^Tree
+	Building:
+		Footprint: x_
+		Dimensions: 2,1
+	MapEditorData:
+		RequireTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T09.Husk
+T09.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: x_
+		Dimensions: 2,1
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T10:
+	Inherits: ^Tree
+	Building:
+		Footprint: __ xx
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T10.Husk
+T10.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: __ xx
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T11:
+	Inherits: ^Tree
+	Building:
+		Footprint: __ xx
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T11.Husk
+T11.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: __ xx
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T12:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T12.Husk
+T12.Husk:
+	Inherits: ^TreeHusk
+	Building:
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T13:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T13.Husk
+T13.Husk:
+	Inherits: ^TreeHusk
+	Building:
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T14:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T14.Husk
+T14.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T15:
+	Inherits: ^Tree
+	Building:
+		Footprint: ___ xx_
+		Dimensions: 3,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T15.Husk
+T15.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: ___ xx_
+		Dimensions: 3,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T16:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T16.Husk
+T16.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T17:
+	Inherits: ^Tree
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T17.Husk
+T17.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+T18:
+	Inherits: ^Tree
+	MapEditorData:
+		RequireTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: T18.Husk
+T18.Husk:
+	Inherits: ^TreeHusk
+	MapEditorData:
+		RequireTilesets: DESERT
+
+TC01:
+	Inherits: ^Tree
+	Building:
+		Footprint: ___ xx_
+		Dimensions: 3,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: TC01.Husk
+TC01.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: ___ xx_
+		Dimensions: 3,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+TC02:
+	Inherits: ^Tree
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: TC02.Husk
+TC02.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+TC03:
+	Inherits: ^Tree
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: TC03.Husk
+TC03.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+TC04:
+	Inherits: ^Tree
+	Building:
+		Footprint: ____ xxx_ x___
+		Dimensions: 4,3
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: TC04.Husk
+TC04.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: ____ xxx_ x___
+		Dimensions: 4,3
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+TC05:
+	Inherits: ^Tree
+	Building:
+		Footprint: __x_ xxx_ _xx_
+		Dimensions: 4,3
+	MapEditorData:
+		ExcludeTilesets: DESERT
+	SpawnActorOnDeath:
+		Actor: TC05.Husk
+TC05.Husk:
+	Inherits: ^TreeHusk
+	Building:
+		Footprint: __x_ xxx_ _xx_
+		Dimensions: 4,3
+	MapEditorData:
+		ExcludeTilesets: DESERT
+
+#############################################################################################################
+#											Vehicles														#
+#############################################################################################################
+
+
+
+#############################################################################################################
+#											Infantry														#
+#############################################################################################################
+
+STEG:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Stegosaurus
+	Armament:
+		Weapon: tail
+	WithDeathAnimation:
+		DeathSequencePalette: terrain
+		DeathPaletteIsPlayerPalette: false
+	Buildable:
+		Description: A large, heavily built, herbivorous quadruped
+
+TREX:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Tyrannosaurus rex
+	Armament:
+		Weapon: teeth
+	Selectable:
+		Bounds: 48,36,2,1
+		DecorationBounds: 52,38
+	SelectionDecorations:
+	Buildable:
+		Description: Bipedal carnivore with a massive skull
+
+TRIC:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Triceratops
+	Armament:
+		Weapon: horn
+	SelectionDecorations:
+	Buildable:
+		Description: Quadruped with large bony frill and three horns
+	Selectable:
+		DecorationBounds: 34,24,0,2
+
+RAPT:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Velociraptor
+	Armament:
+		Weapon: claw
+	Buildable:
+		Description: Bipedal with enlarged sickle-shaped claw on each hindfoot
+
+
+VICE:
+	Inherits: ^Viceroid
+	AttackWander:
+		WanderMoveRadius: 2
+		MinMoveDelay: 25
+		MaxMoveDelay: 45
+
+#############################################################################################################
+#											 Navy															#
+#############################################################################################################
+
+
+
+#############################################################################################################
+#											Airforce														#
+#############################################################################################################
+#ToDo: again bridges do not fly...OR DO THEY!?!? oO
+#Note: RA snow terrain uses the TD templetes as bridge, therefor RAsnow maps will use cliffs as TD bridge logic. This needs fix.
+BRIDGE1:
+	Inherits: ^Bridge
+	Bridge:
+		Template: 165
+		DestroyedTemplate: 166
+	Building:
+		Footprint: ____ ____ ____ ____
+		Dimensions: 4,4
+	FreeActor@north:
+		Actor: bridgehut
+		SpawnOffset: 2,0
+	FreeActor@south:
+		Actor: bridgehut
+		SpawnOffset: 0,2
+	Interactable:
+		Bounds: 96,96
+	ShakeOnDeath:
+		Duration: 15
+		Intensity: 6
+
+BRIDGE2:
+	Inherits: ^Bridge
+	Bridge:
+		Template: 167
+		DestroyedTemplate: 168
+	Building:
+		Footprint: _____ _____ _____ _____ _____
+		Dimensions: 5,5
+	FreeActor@north:
+		Actor: bridgehut
+		SpawnOffset: 0,0
+	FreeActor@south:
+		Actor: bridgehut
+		SpawnOffset: 2,2
+	Interactable:
+		Bounds: 120,120
+	ShakeOnDeath:
+		Duration: 15
+		Intensity: 6
+
+BRIDGE3:
+	Inherits: ^Bridge
+	Bridge:
+		Template: 169
+		DestroyedTemplate: 170
+	Building:
+		Footprint: ______ ______ ______ ______ ______
+		Dimensions: 6,5
+	FreeActor@north:
+		Actor: bridgehut
+		SpawnOffset: 3,0
+	FreeActor@south:
+		Actor: bridgehut
+		SpawnOffset: 1,2
+	Interactable:
+		Bounds: 144,120
+	ShakeOnDeath:
+		Duration: 15
+		Intensity: 6
+
+BRIDGE4:
+	Inherits: ^Bridge
+	Bridge:
+		Template: 171
+		DestroyedTemplate: 172
+	Building:
+		Footprint: ______ ______ ______ ______
+		Dimensions: 6,4
+	FreeActor@north:
+		Actor: bridgehut
+		SpawnOffset: 1,0
+	FreeActor@south:
+		Actor: bridgehut
+		SpawnOffset: 3,2
+	Interactable:
+		Bounds: 144,96
+	ShakeOnDeath:
+		Duration: 15
+		Intensity: 6
+
+BRIDGEHUT:
+	AlwaysVisible:
+	Building:
+		Footprint: __ __
+		Dimensions: 2,2
+	Selectable:
+		Bounds: 48,48
+		Priority: 2
+	LegacyBridgeHut:
+	Targetable:
+		TargetTypes: BridgeHut, C4
+
+BRIDGEHUT.small:
+	AlwaysVisible:
+	Building:
+		Footprint: _
+		Dimensions: 1,1
+	Selectable:
+		Bounds: 24,24
+		Priority: 2
+	LegacyBridgeHut:
+	Targetable:
+		TargetTypes: BridgeHut, C4

@@ -1,0 +1,52 @@
+This is the manual for Tiberium Dawn Apolyton.
+(This is work in progress, expect a lot of spelling mistakes, and missing content)
+
+==================================================================================================================
+Units:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Mobile radar jammer or mbj:
+it can deflect enemy missiles.
+
+Mobile Outpost Vehicle or mov:
+Deploys in to an outpost allowing for a cheep base expantion, with a small build radius.
+You can enable it in the game lobby options, best to use it with build radius on.
+
+==================================================================================================================
+Buildings:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Service depot or SV:
+It can repair damaged vehicles and also allows you to sell vehicles.
+
+==================================================================================================================
+Game Mechanics:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Research:
+With research you can unlock new upgrades and units\buildings
+
+
+
+==================================================================================================================
+Other Notes:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The delay in the A-10 fire sound is intented, like in reality when the A-10 fires its guns there is a delay in 
+the sound to any one who is far from the plane. Check videos in youtube for better understanding.
+
+I am looking forward for when the openra engine introduse the ablity to add new custom resources that are 
+seperate from money, an example will be stone, wood ect. So in my case ill be able to add "Research Points" 
+or RP as a resource, so in order to get new tech you will have to invest in getting RP points.
+This will allow for more intresting gameplay, for example a player who invest more in techknology will fall
+behind in the early game and will need to be defencive, but in the late game will be rewarded with better
+armaments and so on. Or a player could decide to have both tech and firepower and be a jack of all traits.
+Or have a player who rush and manages even to capture the enemy RP production buildings.
+
+I am planing to add 2 new factions, one is the civilians and the other is tiberium lifeforms.
+If the openra engine ever gets a diplomacy back, the civ faction could act as a buffer nation, and who ever
+controls the civ players will get bonus stuff, or just decide to burn and kill an entire town just for fun.
+So Nod or GDI players will have to help any allied civ player or try and "conquer" them. The life forms in the 
+other hand are going to be a one man army, getting upgrades by killing or mutating the enemy.
+And if left unchecked they could grow in to an unstopable force! (not unkillable tho)
+
+
+==================================================================================================================
+
+

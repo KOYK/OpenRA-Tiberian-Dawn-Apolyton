@@ -1,0 +1,223 @@
+^CaptureManager:
+	EditorOnlyTooltip@32:
+	CaptureManager:
+		CapturingCondition: CapturingCon
+		BeingCapturedCondition: BeingCapturedCon
+		PreventsAutoTarget: True
+	Captures@Building:
+		CaptureTypes: Building
+		PlayerExperience: 50
+		CaptureDelay: 100
+		ConsumedByCapture: True
+		PlayerExperienceRelationships: Enemy, Neutral
+		RequiresCondition: CapturesBuilding
+		Voice: Action
+		TargetLineColor: 19B41B
+	Captures@Transport:
+		CaptureTypes: Transport
+		PlayerExperience: 50
+		CaptureDelay: 1
+		ConsumedByCapture: True
+		PlayerExperienceRelationships: Enemy, Neutral
+		RequiresCondition: CapturesTransport
+		Voice: Move
+		TargetLineColor: 19B41B
+	Captures@Husk:
+		CaptureTypes: Husk
+		PlayerExperience: 50
+		CaptureDelay: 1
+		ConsumedByCapture: True
+		PlayerExperienceRelationships: Enemy, Neutral, Ally
+		RequiresCondition: CapturesHusk
+		Voice: Action
+		TargetLineColor: FFFF00
+	CapturableProgressBlink:
+		Interval: 10
+	Capturable@Building:
+		Types: Building
+		ValidStances: Enemy, Neutral
+		CancelActivity: False
+		RequiresCondition: CapturableBuilding
+	Capturable@Husk:
+		Types: Husk
+		ValidStances: Enemy, Neutral, Ally
+		CancelActivity: False
+		RequiresCondition: CapturableHusk
+	Capturable@Transport:
+		Types: Transport
+		ValidStances: Enemy, Neutral
+		CancelActivity: False
+		RequiresCondition: CapturableTransport
+
+^AcceptsRepair:
+	Targetable@DAMAGED:
+		RequiresCondition: !parachute && damaged
+		TargetTypes: Damaged
+	GrantConditionOnDamageState@DAMAGED:
+		Condition: damaged
+		ValidDamageStates: Light, Medium, Heavy, Critical
+	SelfHealing@MACHINE_SHOP:
+		Step: 1
+		Delay: 5
+		HealIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: machine_shop_repair && damaged
+	GrantConditionOnPrerequisite@MACHINE_SHOP:
+		Condition: machine_shop_repair
+		Prerequisites: fixn
+
+^AcceptsHeal:
+	Targetable@WOUNDED:
+		RequiresCondition: !parachute && wounded
+		TargetTypes: Wounded
+	GrantConditionOnDamageState@WOUNDED:
+		Condition: wounded
+		ValidDamageStates: Light, Medium, Heavy, Critical
+	SelfHealing@HOSPITAL:
+		Step: 5
+		Delay: 100
+		HealIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: hospitalheal
+	GrantConditionOnPrerequisite@HOSPITAL:
+		Condition: hospitalheal
+		Prerequisites: hosp
+
+^ConditionManager:
+	ConditionManager:
+
+^ExternalCondition:
+	ExternalCondition@HitByTiberium:
+		Condition: HitByTiberium
+		SourceCap: 0
+		TotalCap: 0
+
+^ArtilleryUnit:
+	RevealOnFire:
+		ArmamentNames: primary
+		RevealForStancesRelativeToTarget: Ally
+		Duration: 75
+		Radius: 1c0
+	Targetable@AITAG:
+		TargetTypes: ArtyType
+
+^SpriteActor:
+	BodyOrientation:
+	QuantizeFacingsFromSequence:
+	RenderSprites:
+
+^VoxelActor:
+	BodyOrientation:
+		QuantizedFacings: 0
+	#	CameraPitch: 
+	RenderVoxels:
+		Scale: 12
+		PlayerPalette: playerTS
+	#	Palette: player
+	WithVoxelBody:
+
+^PlayerRApaletteVehicle:
+	RenderSprites:
+		PlayerPalette: playerRA
+	WithDamageOverlay:
+		Image: smoke2_m
+		IdleSequence: idle
+		LoopSequence: loop
+		EndSequence: end
+		MinimumDamageState: Heavy
+		MaximumDamageState: Dead
+	WithDeathAnimation:
+		DeathSequence: idle
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: playerRA
+		DeathPaletteIsPlayerPalette: True
+
+^PlayerRApaletteBuilding:
+	RenderSprites:
+		PlayerPalette: playerRA
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: playerRA
+		DeathPaletteIsPlayerPalette: True
+
+^CombatArmorOnParachute:
+	Armament:
+		PauseOnCondition: parachute
+	Targetable:
+		RequiresCondition: !parachute
+	WithParachute@Medium:
+		ShadowImage: parach-vshadow
+		ShadowSequence: idle
+		Image: parach
+		Palette: playerRA
+		Sequence: idle
+		OpeningSequence: open
+		Offset: 0,0,200
+		RequiresCondition: parachute && Vehicle
+	WithParachute@Large:
+		ShadowImage: parach-vshadow
+		ShadowSequence: idle
+		Image: parach
+		Palette: playerRA
+		Sequence: idle
+		OpeningSequence: open
+		Offset: 0,0,200
+		RequiresCondition: parachute && Tank
+	WithParachute@Small:
+		ShadowImage: parach-shadow
+		ShadowSequence: idle
+		Image: parach
+		Palette: playerRA
+		Sequence: idle
+		OpeningSequence: open
+		Offset: 0,0,427
+		RequiresCondition: parachute && Infantry
+
+^GlobalTraits:
+	Inherits@1: ^Basic
+
+^Basic:
+	Huntable:
+	GrantConditionOnPrerequisite@GLOBALBOUNTY:
+		Condition: global-bounty
+		Prerequisites: global-bounty
+	GivesBounty:
+		RequiresCondition: global-bounty
+	AppearsOnRadar:
+	UpdatesPlayerStatistics:
+	GivesExperience:
+		PlayerExperienceModifier: 1
+	ScriptTriggers:
+	ConditionManager:
+	RenderDebugState:
+	CombatDebugOverlay:
+	OwnerLostAction:
+		Action: Kill
+		Owner: Creeps
+	SelectionDecorations:
+	Guardable:
+	MustBeDestroyed:
+	WithSpriteControlGroupDecoration:
+		Palette: terrain
+
+^CombatUnit: 
+	Inherits@Basic: ^Basic
+	AttackMove:
+	DrawLineToTarget:
+	Guard:
+	HitShape:
+	AppearsOnRadar:
+		UseLocation: true
+	HiddenUnderFog:
+		AlwaysVisibleStances: Ally, Neutral
+		Type: CenterPosition
+
+^CombatBuilding:
+	Inherits@Basic: ^Basic
+	ShakeOnDeath:
+	Guardable:
+		Range: 5c0
+	Demolishable:
+		Condition: being-demolished
+	FrozenUnderFog:

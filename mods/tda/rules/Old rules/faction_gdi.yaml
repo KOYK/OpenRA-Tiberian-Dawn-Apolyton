@@ -1,0 +1,1250 @@
+#############################################################################################################
+#											Buildings														#
+#############################################################################################################
+#All-Faction
+
+FACT.GDI:
+	Inherits: FACT
+	RenderSprites:
+		Image: fact
+	Buildable:
+		Queue: Building.GDI, Building.Nod, Building.Nodda
+		BuildPaletteOrder: 1000
+		Prerequisites: ~disabled
+		ForceFaction: gdi
+	Tooltip:
+		Name: Construction Yard (GDI)
+
+NUKE_GDI:
+	Inherits@powerplant: NUKE
+	RenderSprites:
+		Image: NUKE
+	Power:
+		Amount: 20
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	Power@UPGRADED_ON:
+		Amount: 40
+		RequiresCondition: PowerPlantUpgrade.proximity
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: GDI Nuclear Power Plant
+		RequiresCondition: !PowerPlantUpgrade.proximity
+	Tooltip@UPGRADED_ON:
+		Name: GDI Advanced Nuclear Power Plant
+		RequiresCondition: PowerPlantUpgrade.proximity
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: fact
+		Queue: Building.GDI
+		Description: Generates nuclear power.\nChance for fail-safe failure 5%
+
+NUK2_GDI:
+	Inherits@powerplant2: NUK2
+	RenderSprites:
+		Image: NUK2
+	Power:
+		Amount: 40
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: GDI Advanced Nuclear Power Plant
+	Buildable:
+		BuildPaletteOrder: 15
+		Prerequisites: ~anyhq, ~research_adv_nuke, ~techlevel.medium
+		Queue: Building.GDI
+		Description: Provides extra nuclear power\nthan its predecessor model.\nChance for fail-safe failure 10%
+
+PYLE:
+	Inherits: ^BaseBuilding
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 640
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Barracks
+	ProvidesPrerequisite:
+		Prerequisite: barracks
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~anypower
+		Queue: Building.GDI
+		Description: Trains infantry
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 3000
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 1,1
+	Production:
+		Produces: Infantry.GDI
+	ProductionQueue:
+		Type: Infantry.GDI
+		Group: Infantry
+		Sticky: True
+		LowPowerModifier: 300
+		Factions: gdi
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@GDI:
+		ProductionType: Infantry.GDI
+	Power:
+		Amount: -5
+	ProvidesPrerequisite@buildingname:
+	Voiced:
+		VoiceSet: Buildings
+		Volume: 2
+	Selectable:
+		Bounds: 48,42,0,-5
+		Voice: Barracks
+	InfiltrateForSupportPower:
+		Proxy: barracks.upgraded
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagRAX
+	AmbientSound:
+		SoundFiles: barracks.aud
+		Delay: 5
+	GrantConditionOnPrerequisite@HOSPITAL:
+		Condition: hospitalheal
+		Prerequisites: hosp
+	WithDecoration@REDCROSS:
+		Image: pips
+		Sequence: pip-heal
+		ReferencePoint: Top, Right
+		RequiresCondition: hospitalheal
+		ValidStances: Ally, Neutral
+		RequiresSelection: True
+	GrantConditionOnPrerequisite@BIO:
+		Condition: hazmatsuits
+		Prerequisites: bio
+	WithDecoration@HAZMAT:
+		Image: pips
+		Sequence: pip-hazmat
+		ReferencePoint: Top, Right
+		RequiresCondition: hazmatsuits
+		ValidStances: Ally, Neutral
+		RequiresSelection: True
+
+PYLESOLE:
+	Inherits: PYLE
+	Power:
+		Amount: 0
+	RenderSprites:
+		Image: pyle
+	-Buildable:
+	CashTrickler:
+		InitialDelay: 6000
+		Interval: 6000
+		Amount: 1000
+		ShowTicks: False
+
+WEAP:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+		Type: Rectangle
+			TopLeft: -1536, -1024
+			BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Vehicle Factory
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~proc, ~anypower
+		Queue: Building.GDI
+		Description: Produces vehicles
+		BuildDuration: 750
+		BuildDurationModifier: 100
+	Building:
+		Footprint: xxx === ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 72,48
+		DecorationBounds: 72,64,0,-16
+	SelectionDecorations:
+	Health:
+		HP: 10000
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+	WithProductionDoorOverlay:
+		Sequence: build-top
+		RequiresCondition: !build-incomplete
+	RallyPoint:
+		Offset: 0,2
+	Exit@1:
+		SpawnOffset: -512,-512,0
+		ExitCell: 0,1
+		ExitDelay: 3
+	Production:
+		Produces: Vehicle.GDI
+	ProductionQueue:
+		Type: Vehicle.GDI
+		Sticky: True
+		Group: Vehicle
+		LowPowerModifier: 300
+		Factions: gdi
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@GDI:
+		ProductionType: Vehicle.GDI
+	Power:
+		Amount: -7
+	ProvidesPrerequisite@buildingname:
+	InfiltrateForSupportPower:
+		Proxy: vehicles.upgraded
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagWF
+	GrantConditionOnPrerequisite@MACHINE_SHOP:
+		Condition: machine_shop_repair
+		Prerequisites: fixn
+	WithDecoration@MECH:
+		Image: pips
+		Sequence: pip-mech
+		ReferencePoint: Right, Top
+		RequiresCondition: machine_shop_repair
+		RequiresSelection: True
+
+SHIPYARD_GDI:
+	Inherits: ^WaterBuilding
+	Tooltip:
+		Name: GDI Naval Yard
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Building.GDI
+		Prerequisites: ~proc, ~anypower, ~techlevel.high
+		Description: Produces and repairs\nNeval units.
+	ProductionQueue@GDIShip:
+		Type: Ship.GDI
+		Factions: gdi
+		Group: Ship
+		LowPowerModifier: 300
+		QueuedAudio: Building
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@ShipGDI:
+		ProductionType: Ship.GDI
+	ProvidesPrerequisite@buildingname:
+
+HQ_GDI:
+	Inherits@radar: HQ
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 5000
+	Power:
+		Amount: -9
+	Tooltip:
+		Name: GDI Communications Center
+	ProvidesPrerequisite:
+		Prerequisite: anyhq
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~proc, ~anypower, ~techlevel.medium
+		Queue: Building.GDI
+		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
+		BuildLimit: 1
+	AirstrikePower:
+		PauseOnCondition: disabled
+		Prerequisites: ~techlevel.superweapons
+		Icon: airstrike
+		ChargeInterval: 5250
+		SquadSize: 3
+		QuantizedFacings: 8
+		Description: Air Strike
+		LongDesc: Deploy an aerial napalm strike.\nBurns buildings and infantry along a line.
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyAirstrike
+		LaunchSpeechNotification: FriendlyAirstrike
+		#NotReady: noredy1
+		UnitType: a10
+		DisplayBeacon: True
+		BeaconPoster: airstrike
+		BeaconPosterPalette: beaconposter
+		DisplayRadarPing: True
+		CameraActor: camera
+		ArrowSequence: arrow
+		CircleSequence: circles
+		ClockSequence: clock
+		DisplayTimerStances: Ally
+		Cursor: airstrike
+	SupportPowerChargeBar:
+	ProductionQueue@GDIResearch:
+		Type: Research.GDI
+		Factions: gdi
+		Group: Research
+		LowPowerModifier: 300
+		ReadyAudio: ResearchC
+		BlockedAudio: ResearchW
+		QueuedAudio: ResearchST
+		OnHoldAudio: ResearchS
+		CancelledAudio: ResearchA
+	ProductionBar@ResearchGDI:
+		ProductionType: Research.GDI
+	Production:
+		Produces: Research.GDI
+	RenderSprites:
+		Image: HQ
+
+FIX_GDI:
+	Inherits@RepairFacility: FIX
+	Tooltip:
+		Name: GDI Repair Facility
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~vehicleproduction
+		Queue: Building.GDI
+		Description: Repairs vehicles
+	WithRepairOverlay@LIGHTS:
+		Sequence: active-lights
+		Palette: PlayerColorLights
+		IsPlayerPalette: true
+	RenderSprites:
+		Image: FIX
+
+EYE:
+	Inherits: ^BaseBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,512,128, 420,-598,213
+		Type: Rectangle
+			TopLeft: -1024, -384
+			BottomRight: 1024, 1024
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Advanced Communications Center
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~anytech, ~techlevel.high
+		Queue: Defence.GDI
+		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
+		BuildLimit: 1
+	Building:
+		Footprint: X_ xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 48,40,0,9
+		DecorationBounds: 48,53,0,-4
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	Health:
+		HP: 10000
+	WithBuildingBib:
+	ProvidesRadar:
+		RequiresCondition: !disabled
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 6c0
+	IonCannonPower:
+		PauseOnCondition: disabled
+		Prerequisites: ~techlevel.superweapons
+		Icon: ioncannon
+		Cursor: ioncannon
+		ChargeInterval: 9000
+		Description: Ion Cannon
+		LongDesc: Initiate an Ion Cannon strike.\nApplies instant damage to a small area.
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		LaunchSound: ion1.aud
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		DisplayTimerStances: Ally, Neutral, Enemy
+		AllowMultiple: True
+	RevealsShroud@Ally:
+		Range: 6c0
+		ValidStances: Ally
+	RevealsShroud@Enemy:
+		Range: 2c0
+		ValidStances: Enemy
+		Type: CenterPosition
+		MaxHeightDelta: 2
+	HiddenUnderFog:
+		AlwaysVisibleStances: Ally, Enemy
+		Type: CenterPosition
+	-FrozenUnderFog:
+	SupportPowerChargeBar:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	InfiltrateForExploration:
+	Targetable:
+		TargetTypes: Ground, C4, Structure, SpyInfiltrate, DetonateAttack, AItagSuperWeapon
+	AmbientSound:
+		SoundFiles: low_radio.aud
+		Delay: 5
+	WithDecoration@POWERDOWN:
+		Image: poweroff
+		Sequence: offline
+		Palette: chrome
+		RequiresCondition: powerdown
+		ReferencePoint: Center
+	PowerMultiplier@POWERDOWN:
+		RequiresCondition: powerdown
+		Modifier: 0
+	FreeActor:
+		Actor: renegate
+		SpawnOffset	1,2
+		AllowRespawn: True
+		EditorFreeActorDisplayOrder: 4
+		RequiresCondition: !disabled && !powerdown && !build-incomplete && !being-demolished
+
+MISS_GDI:
+	Inherits: ^BaseBuilding
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Inherits@shape: ^3x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 0,-896,0, 0,896,0, 840,0,0, -706,0,0, -706,-768,0, -706,640,0
+	Building:
+		Footprint: xx_ xxx ===
+		Dimensions: 3,3
+	Tooltip:
+		Name: Tech Center
+	Buildable:
+		Queue: Building.GDI
+		BuildPaletteOrder: 80
+		Prerequisites: ~anyhq, ~techlevel.high
+		Description: Provides GDI advanced technologies.
+		BuildLimit: 1
+	Valued:
+		Cost: 4000
+	WithBuildingBib:
+		HasMinibib: True
+	SpawnActorsOnSell:
+		ActorTypes: scientist,scientist,scientist,scientist,scientist,scientist,scientist,scientist,scientist
+	WithMakeAnimation:
+	WithIdleOverlay@DISH:
+		PauseOnCondition: lowpower
+		Sequence: idle-dish
+	WithIdleOverlay@ANTENA:
+		PauseOnCondition: lowpower
+		Sequence: idle-antena
+		Palette: playerRA
+		IsPlayerPalette: True
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: anytech
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure
+	Power:
+		Amount: -12
+	Health:
+		HP: 10000
+	WithDecoration@POWERDOWN:
+		Image: poweroff
+		Sequence: offline
+		Palette: chrome
+		RequiresCondition: powerdown
+		ReferencePoint: Center
+	PowerMultiplier@POWERDOWN:
+		RequiresCondition: powerdown
+		Modifier: 0
+	RevealsShroud:
+		Range: 5c0
+	Selectable:
+		Bounds: 72,48
+
+#############
+#Sub-faction#
+#############
+
+
+#############################################################################################################
+#											Defences														#
+#############################################################################################################
+#All-Faction
+
+ATWR:
+	Inherits: ^Defense
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Advanced Guard Tower
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Defence.GDI
+		BuildDuration: 2880
+		BuildDurationModifier: 40
+		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
+	Selectable:
+		Bounds: 24,24
+		DecorationBounds: 22,48,0,-12
+	SelectionDecorations:
+	Health:
+		HP: 7000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 8c0
+	WithBuildingBib:
+		HasMinibib: True
+	Turreted:
+		TurnSpeed: 255
+		Offset: 128,128,384
+	Armament@PRIMARY:
+		Weapon: TowerMissle
+		LocalOffset: 256,128,0, 256,-128,0
+		LocalYaw: -100,100
+	Armament@SECONDARY:
+		Weapon: SAMMissile
+		LocalOffset: 256,128,0, 256,-128,0
+		LocalYaw: -100,100
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	BodyOrientation:
+		QuantizedFacings: 8
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !disabled
+	Power:
+		Amount: -15
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack, Defense, AItagAvoid
+
+GTWR:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Guard Tower
+	Buildable:
+		BuildPaletteOrder: 55
+		Prerequisites: ~barracks
+		Queue: Defence.GDI
+		BuildDuration: 1440
+		BuildDurationModifier: 40
+		Description: Basic defensive structure.\nDetects Spies by scanning for biochip IDs.\n  Strong vs Infantry\n  Weak vs Tanks
+	Building:
+	Health:
+		HP: 2400
+	RevealsShroud:
+		Range: 7c0
+	WithBuildingBib:
+		HasMinibib: True
+	AttackGarrisoned:
+		Armaments: guardtower
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		PipCount: 1
+		InitialUnits: e1
+	BodyOrientation:
+		QuantizedFacings: 8
+	DetectCloaked:
+		Range: 3c0
+	Turreted:
+		TurnSpeed: 255
+	Power:
+		Amount: -5
+	IgnoresDisguise:
+	-QuantizeFacingsFromSequence:
+	Selectable:
+		Bounds: 24,24
+	RenderRangeCircle:
+		FallbackRange: 6c0
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Vehicles														#
+#############################################################################################################
+#All-Faction
+
+APC:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: APC
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~pyle
+		Queue: Vehicle.GDI
+		Description: Armed infantry transport.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		TurnSpeed: 8
+		Speed: 128
+		RequiresCondition: !notmobile
+	Health:
+		HP: 210
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		Weapon: MachineGun
+		LocalOffset: 0,0,171
+		MuzzleSequence: muzzle
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Cargo:
+		Types: Infantry, Doctor
+		MaxWeight: 5
+		PipCount: 5
+		LoadingCondition: notmobile
+	SpawnActorOnDeath:
+		Actor: APC.Husk
+APC.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: APC (Destroyed)
+	TransformOnCapture:
+		IntoActor: apc
+	RenderSprites:
+		Image: apc.destroyed
+
+JEEP:
+	Inherits: ^Vehicle
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Hum-Vee
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~weap
+		Queue: Vehicle.GDI
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
+	Mobile:
+		TurnSpeed: 10
+		Speed: 156
+	Health:
+		HP: 160
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: MachineGun
+		LocalOffset: 171,0,85
+		MuzzleSequence: muzzle
+	GrantConditionOnPrerequisite:
+		Condition: tow
+		Prerequisites: research_humvee_tow
+	Armament@TOWM:
+		Weapon: TOW
+		FireDelay: 5
+		RequiresCondition: tow
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret@normal:
+	WithSpriteTurret@upgraded:
+		RequiresCondition: tow
+		Sequence: turret2
+	SpawnActorOnDeath:
+		Actor: JEEP.Husk
+JEEP.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Hum-Vee (Destroyed)
+	TransformOnCapture:
+		IntoActor: jeep
+	RenderSprites:
+		Image: jeep.destroyed
+
+MTNK:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Medium Tank
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Vehicle.GDI
+		Description: General-Purpose GDI Tank.\n  Strong vs Tanks, Vehicles\n  Weak vs Infantry
+	Mobile:
+		Speed: 85
+	Health:
+		HP: 450
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 5
+	Armament:
+		Weapon: 120mm
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SpawnActorOnDeath:
+		Actor: MTNK.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 28,28
+MTNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Medium Tank (Destroyed)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: mtnk
+	RenderSprites:
+		Image: mtnk.destroyed
+
+HTNK:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Mammoth Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~miss_gdi, ~techlevel.high
+		Queue: Vehicle.GDI
+		Description: Heavily armored GDI Tank.\nCan attack Aircraft.\n  Strong vs Everything
+	Mobile:
+		Speed: 56
+		TurnSpeed: 3
+		-RequiresCondition:
+	Health:
+		HP: 800
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	WithSpriteTurret:
+	Turreted:
+		TurnSpeed: 3
+	Armament@PRIMARY:
+		Weapon: 120mmDual
+		LocalOffset: 900,180,340, 900,-180,340
+		Recoil: 170
+		RecoilRecovery: 42
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: MammothMissiles
+		LocalOffset: -85,384,340, -85,-384,340
+		LocalYaw: -100, 100
+		Recoil: 10
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelfHealing:
+		Delay: 10
+		HealIfBelow: 50
+		DamageCooldown: 200
+	SpawnActorOnDeath:
+		Actor: HTNK.Husk
+	SelectionDecorations:
+	-Carryable:
+	Selectable:
+		DecorationBounds: 34,34,0,-3
+HTNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Mammoth Tank (Destroyed)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: htnk
+	RenderSprites:
+		Image: htnk.destroyed
+
+MSAM:
+	Inherits: ^Tank
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@ARTILLERY: ^ArtilleryUnit
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Rocket Launcher
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Vehicle.GDI
+		Description: Long range rocket artillery.\n  Strong vs all Ground units.
+	Mobile:
+		Speed: 85
+		TurnSpeed: 4
+	Health:
+		HP: 120
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 255
+		Offset: -256,0,128
+	Armament@PRIMARY:
+		Weapon: 227mm
+		LocalOffset: 213,128,0, 213,-128,0
+	Armament@SECONDARY:
+		Weapon: 227mm
+		LocalOffset: 213,-128,0, 213,128,0
+	AttackFrontal:
+	WithSpriteTurret:
+	SpawnActorOnDeath:
+		Actor: MSAM.Husk
+	WithTurretAimAnimation:
+		Sequence: aim
+MSAM.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Rocket Launcher (Destroyed)
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: msam
+	RenderSprites:
+		Image: msam.destroyed
+
+MNLYGDI:
+	Inherits: ^Tank
+	Inherits@RA: ^PlayerRApaletteVehicle
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~anyfix, ~techlevel.medium
+		Queue: Vehicle.GDI
+		Description: Lays mines to destroy\nunwary enemy infantry.\nCan detect mines.\n  Unarmed
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Minelayer AP
+	Health:
+		HP: 150
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 128
+	RevealsShroud:
+		Range: 5c0
+	Rearmable:
+		RearmActors: fix_gdi, fix_nod
+		AmmoPools: primary
+	Minelayer:
+		Mine: MINP
+		AmmoPoolName: primary
+		MinefieldDepth: 1c512
+	MineImmune:
+	AmmoPool:
+		Ammo: 5
+		RearmSound: minelay1.aud
+	DetectCloaked:
+		Range: 5c0
+		CloakTypes: Mine
+	RenderDetectionCircle:
+	Explodes:
+		Weapon: APMine
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Infantry														#
+#############################################################################################################
+#All-Faction
+
+SNIPER:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Sniper
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~anyhq, ~techlevel.medium
+		Queue: Infantry.GDI
+		Description: Sniper infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+		BuildDuration: 150
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 40
+	RevealsShroud:
+		Range: 14c0
+	Armament:
+		Weapon: Sniper2
+	AmmoPool@SniperAmmo:
+		Name: SniperAmmo
+		Ammo: 10
+		PipCount: 0
+	AutoTarget:
+		ScanRadius: 15
+	AttackSounds:
+		Sounds: barrett1.aud, barrett2.aud
+		Delay: 0
+		DelayRelativeTo: Attack
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		-IdleSequences:
+	Armament@PILLBOX:
+		Name: pillbox
+		Weapon: Sniper2
+	Armament@GUARDTOWER:
+		Name: guardtower
+		Weapon: Sniper2
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+	ReloadAmmoPool@1:
+		AmmoPool: SniperAmmo
+	WithDecoration@SNIPER:
+		Image: pips
+		Sequence: pip-sniper
+		ReferencePoint: Top, Center
+		ValidStances: Ally
+		RequiresSelection: False
+
+E2:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Grenadier
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~anyhq, ~techlevel.medium, ~disabled
+		Queue: Infantry.GDI
+		Description: Fast infantry armed with grenades. \n  Strong vs Buildings, slow-moving targets
+		BuildDuration: 60
+	Mobile:
+		Speed: 48
+	Health:
+		HP: 312
+	Armament:
+		Weapon: Grenade
+		LocalOffset: 0,0,427
+		FireDelay: 15
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: throw
+	Explodes:
+		Weapon: GrenadierExplode
+		EmptyWeapon: GrenadierExplode
+		Chance: 50
+	Armament@PILLBOX:
+		Name: pillbox
+		Weapon: Grenade
+		FireDelay: 15
+	Armament@GUARDTOWER:
+		Name: guardtower
+		Weapon: GrenadeTower
+		FireDelay: 15
+	SoundOnDamageTransition:
+		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
+
+MEDI:
+	Inherits@1: ^Infantry
+	Inherits@2: ^Doctor
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Infantry.GDI
+		BuildPaletteOrder: 40
+		Description: Heals nearby infantry.\n  Unarmed
+		BuildDuration: 150
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Medic
+	Health:
+		HP: 75
+	RevealsShroud:
+		Range: 3c0
+	Passenger:
+		PipType: Blue
+		Voice: Action
+	Armament:
+		Weapon: Heal
+		Cursor: heal
+		OutsideRangeCursor: heal
+		TargetStances: Ally
+		ForceTargetStances: Ally
+	AutoTarget:
+	AttackFrontal:
+	WithInfantryBody:
+		DefaultAttackSequence: heal
+		StandSequences: stand
+	Voiced:
+		VoiceSet: MedicVoice
+	TakeCover:
+		DamageModifiers:
+			Prone50Percent: 50
+		DamageTriggers: TriggerProne
+	Mobile:
+		Speed: 36
+	Guard:
+		Voice: Action
+
+MECH:
+	Inherits: ^Infantry
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CapMan: ^CaptureManager
+	GrantCondition@CapturesHusk:
+		Condition: CapturesHusk
+	CaptureNotification:
+		Notification: null
+		NewOwnerVoice: False
+		LoseNewOwnerVoice: False
+		LoseNotification: null
+	Buildable:
+		Queue: Infantry.GDI
+		BuildPaletteOrder: 40
+		Prerequisites: ~anyfix, ~techlevel.medium
+		Description: Repairs nearby vehicles and restores\nhusks to working condition by capturing them.\n  Unarmed
+		BuildDuration: 150
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Mechanic
+	Health:
+		HP: 75
+	Mobile:
+		Voice: Move
+		Speed: 36
+	RevealsShroud:
+		Range: 3c0
+	Passenger:
+		PipType: Blue
+		Voice: Move
+	AutoTarget:
+	Armament:
+		Weapon: Repair
+		Cursor: repair
+		OutsideRangeCursor: repair
+		TargetStances: Ally
+		ForceTargetStances: None
+	AttackFrontal:
+		Voice: Move
+	WithInfantryBody:
+		DefaultAttackSequence: repair
+		StandSequences: stand
+	Voiced:
+		VoiceSet: MechanicVoice
+	ProducibleWithLevel:
+		Prerequisites: vehicles.upgraded
+	MustBeDestroyed:
+		RequiredForShortGame: true
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											 Navy															#
+#############################################################################################################
+#All-Faction
+
+
+
+#############
+#Sub-faction#
+#############
+
+
+
+#############################################################################################################
+#											Airforce														#
+#############################################################################################################
+#All-Faction
+
+ORCA:
+	Inherits: ^Helicopter
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Orca
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~hpad, ~anyhq, ~techlevel.medium
+		Queue: Aircraft.GDI
+		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
+	Aircraft:
+		InitialFacing: 224
+		TurnSpeed: 4
+		Speed: 240
+		TurnToLand: True
+		IdleBehavior: None
+	Health:
+		HP: 100
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+	Armament@PRIMARY:
+		Weapon: OrcaAGMissiles
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	Armament@SECONDARY:
+		Weapon: OrcaAAMissiles
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 20
+	AmmoPool:
+		Ammo: 8
+		PipCount: 8
+		ReloadCount: 2
+		AmmoCondition: ammo
+	Rearmable:
+		RearmActors: hpad
+		AmmoPools: primary, secondary
+	SpawnActorOnDeath:
+		Actor: ORCA.Husk
+	AutoTarget:
+	Explodes:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 30,24
+ORCA.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Orca
+	Aircraft:
+		TurnSpeed: 4
+		Speed: 186
+	RevealsShroud:
+		Range: 10c0
+		Type: CenterPosition
+	RenderSprites:
+		Image: orca
+
+A10:
+	Inherits: ^PlaneUnControled
+	Tooltip:
+		Name: A10 Bomber
+	Valued:
+		Cost: 2000
+	Aircraft:
+		TurnSpeed: 4
+		Speed: 280
+		Repulsable: False
+	Health:
+		HP: 150
+	Armor:
+		Type: Heavy
+	AttackBomber:
+		Armaments: gun, bombs
+	Armament@GUNS:
+		Name: gun
+		Weapon: Vulcan
+		LocalOffset: 1024,0,-85
+	AttackSounds:
+		Sounds: null.wav, a10_strafingrun1.wav, null.wav, a10_strafingrun2.wav, null.wav, null.wav, null.wav, null.wav, null.wav, null.wav, null.wav
+		Delay: 0
+		DelayRelativeTo: Attack
+	WithMuzzleOverlay:
+	Armament@BOMBS:
+		Name: bombs
+		Weapon: NapalmB
+		LocalOffset: 0,-256,-43, 0,256,-43
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	-ProducibleWithLevel:
+	Targetable:
+		TargetTypes: Air
+	Buildable:
+		Description: Used to deliver air strikes.
+	SpawnActorOnDeath:
+		Actor: A10.Husk
+A10.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: A10
+		GenericName: Destroyed Plane
+	Contrail@1:
+		Offset: -598,-683,0
+	Contrail@2:
+		Offset: -598,683,0
+	Aircraft:
+		TurnSpeed: 5
+		Speed: 180
+	SmokeTrailWhenDamaged:
+		Offset: -853,0,171
+		Interval: 2
+		MinDamage: Undamaged
+	RevealsShroud:
+		Range: 13c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: A10
+
+#############
+#Sub-faction#
+#############
+
+
