@@ -6,5 +6,6 @@
 *.sln eol=lf
 * text=lf
 
+
 # Custom for Visual Studio
 *.cs     diff=csharp
