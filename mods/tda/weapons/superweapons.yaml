@@ -79,6 +79,13 @@ Atomic:
 		InvalidTargets: Vehicle, Structure, Wall
 		Size: 5
 		Delay: 9
+	Warhead@21Shake: ShakeScreen
+		Duration: 20
+		Intensity: 5
+		Multiplier: 1,1
+	Warhead@7FlashEffect: FlashPaletteEffect
+		Duration: 20
+		FlashType: Nuke
 
 IonCannon:
 	ValidTargets: Ground, Air, Trees

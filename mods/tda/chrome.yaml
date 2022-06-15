@@ -457,7 +457,7 @@ strategic:
 		player_owned: 883, 223, 22, 22
 
 scrollpanel-decorations:
-	Image: buttons.png # TODO: Will need left and right arrows to be added to the artwork.
+	Image: buildmenu.png # TODO: Will need left and right arrows to be added to the artwork.
 	Regions:
 		down: 116, 140, 16, 16
 		down-pressed: 116, 140, 16, 16
@@ -473,7 +473,7 @@ scrollpanel-decorations:
 		left-disabled: 132, 140, 16, 16 # TODO: Placeholder coordinates.
 
 dropdown-decorations:
-	Image: buttons.png # TODO: This is a placeholder.
+	Image: buildmenu.png # TODO: This is a placeholder.
 	Regions:
 		marker: 116, 140, 16, 16
 		marker-pressed: 116, 140, 16, 16

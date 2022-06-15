@@ -19,6 +19,11 @@ Tiberium Dawn Apolyton Credits:
 	Helped a lot and more than I can count 
 	with lua and github.
 
+    * Penev92: 
+	Made an unbelievable amount of work! to update
+	TDA	to the latest engine version! 
+	Thank you sir you	brought TDA back to life!
+
     * MustaphaTR: 
 	Helped me with github and also spoted 
 	a lot of bugs, donated code for turning off\on 

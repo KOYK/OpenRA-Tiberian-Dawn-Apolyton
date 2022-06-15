@@ -508,7 +508,12 @@ EditorWorld:
 		Name: tdeffect25alpha
 		BasePalette: flashyeffect
 		Alpha: 0.25
-
+	#PIP PALETTES-------------------------------------------------------------------------------------------------------------------------------------------------
+	PaletteFromFile@pips:
+		Name: pips
+		Filename: temperat.pal
+		AllowModifiers: false
+		ShadowIndex: 4
 
 barracks.upgraded:
 	AlwaysVisible:
@@ -1512,6 +1517,11 @@ Player:
 			TopLeft: -1536, -1024
 			BottomRight: 1536, 1024
 
+^PlayerHandicaps:
+	HandicapFirepowerMultiplier:
+	HandicapDamageMultiplier:
+	HandicapProductionTimeMultiplier:
+
 ^GainsExperience:
 	GainsExperience:
 		Conditions:
@@ -1684,6 +1694,7 @@ Player:
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@ExternalCondition: ^ExternalCondition
 	Inherits@Repair: ^AcceptsRepair
+	Inherits@handicaps: ^PlayerHandicaps
 	DamagedByTerrain@UnderTiberiumEffect:
 		Damage: 25
 		DamageInterval: 25
@@ -1722,7 +1733,6 @@ Player:
 		GenericName: Vehicle
 	Voiced:
 		VoiceSet: VehicleVoice
-	ClassicFacingBodyOrientation:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	ProximityCaptor:
@@ -1769,6 +1779,7 @@ Player:
 	Inherits@1: ^CombatUnit
 	Inherits@2: ^SpriteActor
 	Inherits@3: ^GainsExperience
+	Inherits@handicaps: ^PlayerHandicaps
 	GivesBounty:
 		RequiresCondition: global-bounty
 	Sellable:
@@ -1837,6 +1848,7 @@ Player:
 	Inherits@1: ^CombatUnit
 	Inherits@2: ^GainsExperience
 	Inherits@3: ^SpriteActor
+	Inherits@handicaps: ^PlayerHandicaps
 	Sellable:
 		RefundPercent: 30
 		RequiresCondition: OnPad
@@ -1876,7 +1888,6 @@ Player:
 		RequiresCondition: cruising
 	Voiced:
 		VoiceSet: VehicleVoice
-	ClassicFacingBodyOrientation:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	ProximityCaptor:
@@ -1895,6 +1906,7 @@ Player:
 	Inherits@ConMan: ^ConditionManager
 	Inherits@ExternalCondition: ^ExternalCondition
 	Inherits@Heal: ^AcceptsHeal
+	Inherits@handicaps: ^PlayerHandicaps
 	DamagedByTerrain@UnderTiberiumEffect:
 		Damage: 25
 		DamageInterval: 25
@@ -2034,6 +2046,7 @@ Player:
 		Notification: CivilianKilled
 		NotifyAll: true
 	ScaredyCat:
+		PanicSequencePrefix:
 	Crushable:
 		CrushSound: squish2.aud
 	Voiced:
@@ -2054,6 +2067,7 @@ Player:
 ^DINO:
 	Inherits@1: ^CombatUnit
 	Inherits@2: ^SpriteActor
+	Inherits@handicaps: ^PlayerHandicaps
 	Health:
 		HP: 1000
 	Armor:
@@ -2103,6 +2117,7 @@ Player:
 	Inherits@1: ^CombatUnit
 	Inherits@2: ^GainsExperience
 	Inherits@3: ^SpriteActor
+	Inherits@handicaps: ^PlayerHandicaps
 	Mobile:
 		Locomotor: naval
 	Selectable:
@@ -2135,6 +2150,7 @@ Player:
 	Inherits@ConMan: ^ConditionManager
 	Inherits@CapMan: ^CaptureManager
 	Inherits@ExternalCondition: ^ExternalCondition
+	Inherits@handicaps: ^PlayerHandicaps
 	ActorPreviewPlaceBuildingPreview:
 	DamagedByTerrain@UnderTiberiumEffect:
 		Damage: 25
@@ -2307,6 +2323,7 @@ Player:
 	Inherits@1: ^SpriteActor
 	Inherits@shape: ^1x1Shape
 	Inherits@ConMan: ^ConditionManager
+	Inherits@handicaps: ^PlayerHandicaps
 	CombatDebugOverlay:
 	AppearsOnRadar:
 	ActorPreviewPlaceBuildingPreview:
@@ -2506,6 +2523,7 @@ Player:
 
 ^Tree:
 	Inherits@1: ^SpriteActor
+	Inherits@handicaps: ^PlayerHandicaps
 	Interactable:
 	Tooltip:
 		Name: Tree
@@ -2615,6 +2633,7 @@ Player:
 
 ^CommonHuskDefaults:
 	Inherits@1: ^SpriteActor
+	Inherits@handicaps: ^PlayerHandicaps
 	Interactable:
 	Health:
 		HP: 140
@@ -2622,10 +2641,10 @@ Player:
 		Type: Light
 	HiddenUnderFog:
 		Type: CenterPosition
-	WithFacingSpriteBody:
 	HitShape:
 	MapEditorData:
 		Categories: Husk
+	WithFacingSpriteBody:
 
 ^PlaneHusk:
 	Inherits: ^CommonHuskDefaults
@@ -2661,7 +2680,6 @@ Player:
 	Explodes:
 		Weapon: UnitExplodeSmall
 		EmptyWeapon: UnitExplodeSmall
-	ClassicFacingBodyOrientation:
 	WithIdleOverlay@Burns:
 		Image: fire
 		Sequence: 1
@@ -2697,10 +2715,10 @@ Player:
 		Explosion: HeliCrash
 	Tooltip:
 		GenericName: Destroyed Helicopter
-	ClassicFacingBodyOrientation:
 
 ^Bridge:
 	Inherits@shape: ^1x1Shape
+	Inherits@handicaps: ^PlayerHandicaps
 	AlwaysVisible:
 	Tooltip:
 		Name: Bridge
@@ -2767,6 +2785,7 @@ Player:
 	Inherits@1: ^CombatUnit
 	Inherits@2: ^SpriteActor
 	Inherits@shape: ^1x1Shape
+	Inherits@handicaps: ^PlayerHandicaps
 	Selectable:
 		Priority: 3
 	Targetable:
@@ -2796,6 +2815,7 @@ Player:
 
 ^Mine:
 	Inherits: ^SpriteActor
+	Inherits@handicaps: ^PlayerHandicaps
 	Interactable:
 		Bounds: 24,24
 	WithSpriteBody:
@@ -5245,6 +5265,12 @@ GTWR:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
 
 GUN:
 	Inherits: ^Defense
@@ -5339,7 +5365,6 @@ SAM:
 		TargetTypes: Ground, C4, Structure, DetonateAttack, Defense, AItagAvoid
 	Selectable:
 		Bounds: 48,24
-	-WithAmmoPipsDecoration:
 
 FTUR:
 	Inherits: ^Defense
@@ -5491,6 +5516,12 @@ PBOX:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
 
 SBAG:
 	Inherits: ^Wall
@@ -6209,6 +6240,13 @@ APC:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
+
 APC.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -6623,6 +6661,13 @@ BGGY:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
+
 BGGY.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -6761,7 +6806,7 @@ MLRS: #mantis for lack of AA or until i make a new nod AA vehicle unit
 	ReloadAmmoPool@1:
 		Delay: 45
 		Count: 1
-	-WithAmmoPipsDecoration:
+
 MLRS.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -7128,6 +7173,12 @@ C17:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
 
 C17D:
 	Inherits: C17
@@ -7440,7 +7491,6 @@ HELI:
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 30,24
-	-WithAmmoPipsDecoration:
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -7661,6 +7711,13 @@ TRAN:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
+
 TRAN.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
@@ -7755,6 +7812,13 @@ OSPREY:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
+
 OSPREY.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
@@ -8221,6 +8285,12 @@ LST:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
 
 LSTRA:
 	Inherits: ^Ship
@@ -8261,6 +8331,12 @@ LSTRA:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
+		Palette: pips
+		CustomPipSequences:
+			blue: pip-blue
+			yellow: pip-yellow
+			green: pip-green
+			red: pip-red
 
 BOAT:
 	Inherits: ^Ship
@@ -8428,7 +8504,6 @@ SNIPER:
 		Position: Top
 		ValidRelationships: Ally
 		RequiresSelection: False
-	-WithAmmoPipsDecoration:
 
 E2:
 	Inherits: ^Soldier
@@ -8623,7 +8698,6 @@ E1:
 		Delay: 4
 		Count: 1
 		ResetOnFire: False
-	-WithAmmoPipsDecoration:
 
 E3:
 	Inherits: ^Soldier
@@ -9014,7 +9088,6 @@ RENEGATE:
 		InitialStanceAI: AttackAnything
 		EnableStances: False
 	RejectsOrders:
-	Interactable:
 	GrantCondition@RenegadeOut:
 		Condition: renegadeout
 
