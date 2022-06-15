@@ -1,14 +1,14 @@
 f22:
 	idle:
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	icon: f22icon.shp
 		AddExtension: False
 
 c17:
 	idle:
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	icon: c17icnh
 
 c130:
@@ -18,7 +18,7 @@ c130:
 osprey:
 	idle:
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	rotor: lrotor
 		Length: 4
 	rotor2: rrotor
@@ -35,7 +35,7 @@ osprey:
 tran:
 	idle:
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	rotor: lrotor
 		Length: 4
 	rotor2: rrotor
@@ -57,7 +57,7 @@ tran:
 heli:
 	idle:
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	rotor: lrotor
 		Length: 4
 	slow-rotor: lrotor
@@ -72,7 +72,7 @@ heli:
 orca:
 	idle:
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	move:
 		Start: 32
 		Facings: 32
@@ -82,7 +82,7 @@ orca:
 a10:
 	idle:
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	muzzle: minigun
 		Length: 6
 		Facings: 8

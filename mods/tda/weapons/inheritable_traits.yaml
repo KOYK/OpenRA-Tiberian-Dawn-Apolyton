@@ -332,7 +332,7 @@
 		Duration: 125
 		ValidTargets: Tank, Vehicle, Husk, Infantry, Structure
 		InvalidTargets: Air
-		ValidStances: Enemy, Neutral, Ally
+		ValidRelationships: Enemy, Neutral, Ally
 		AffectsParent: False
 		Delay: 75
 		DebugOverlayColor: FD30FF

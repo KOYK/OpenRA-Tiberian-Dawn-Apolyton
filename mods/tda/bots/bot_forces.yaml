@@ -39,7 +39,7 @@ Player:
 			fix: 20
 			fix_nod: 20
 			hq: 40
-			hq_gdi:40
+			hq_gdi: 40
 			hq_nod_gw: 40
 			hq_nod_da: 40
 			hpad: 25
@@ -77,7 +77,7 @@ Player:
 			fix: 1
 			fix_nod: 1
 			hq: 1
-			hq_gdi:1
+			hq_gdi: 1
 			hq_nod_gw: 1
 			hq_nod_da: 1
 			hpad: 0
@@ -96,11 +96,11 @@ Player:
 			tmpl: 0
 		BuildingDelays:
 			tgd: 1500
-    UnitBuilderBotModule@1:
-        RequiresCondition: enable-1-bot
-        UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
+	UnitBuilderBotModule@1:
+		RequiresCondition: enable-1-bot
+		UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
 		IdleBaseUnitsMaximum: 1000
-        UnitsToBuild:
+		UnitsToBuild:
 			harv: 100
 			harv_boost_on: 100
 			harv_boost_off: 100
@@ -130,7 +130,7 @@ Player:
 			htnk: 0
 			heli: 0
 			orca: 0
-        UnitLimits:
+		UnitLimits:
 			harv: 4
 			harv_boost_on: 4
 			harv_boost_off: 4
@@ -207,7 +207,7 @@ Player:
 			fix: 20
 			fix_nod: 20
 			hq: 40
-			hq_gdi:40
+			hq_gdi: 40
 			hq_nod_gw: 40
 			hq_nod_da: 40
 			hpad: 25
@@ -245,7 +245,7 @@ Player:
 			fix: 1
 			fix_nod: 1
 			hq: 1
-			hq_gdi:1
+			hq_gdi: 1
 			hq_nod_gw: 1
 			hq_nod_da: 1
 			hpad: 0
@@ -264,11 +264,11 @@ Player:
 			tmpl: 0
 		BuildingDelays:
 			tgd: 1500
-    UnitBuilderBotModule@2:
-        RequiresCondition: enable-2-bot
-        UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
+	UnitBuilderBotModule@2:
+		RequiresCondition: enable-2-bot
+		UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
 		IdleBaseUnitsMaximum: 3
-        UnitsToBuild:
+		UnitsToBuild:
 			harv: 100
 			harv_boost_on: 100
 			harv_boost_off: 100
@@ -299,7 +299,7 @@ Player:
 			htnk: 0
 			heli: 0
 			orca: 0
-        UnitLimits:
+		UnitLimits:
 			harv: 4
 			harv_boost_on: 4
 			harv_boost_off: 4
@@ -377,7 +377,7 @@ Player:
 			fix: 20
 			fix_nod: 20
 			hq: 40
-			hq_gdi:40
+			hq_gdi: 40
 			hq_nod_gw: 40
 			hq_nod_da: 40
 			hpad: 25
@@ -415,7 +415,7 @@ Player:
 			fix: 1
 			fix_nod: 1
 			hq: 1
-			hq_gdi:1
+			hq_gdi: 1
 			hq_nod_gw: 1
 			hq_nod_da: 1
 			hpad: 0
@@ -434,11 +434,11 @@ Player:
 			tmpl: 0
 		BuildingDelays:
 			tgd: 1500
-    UnitBuilderBotModule@3:
-        RequiresCondition: enable-3-bot
-        UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
+	UnitBuilderBotModule@3:
+		RequiresCondition: enable-3-bot
+		UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
 		IdleBaseUnitsMaximum: 3
-        UnitsToBuild:
+		UnitsToBuild:
 			harv: 100
 			harv_boost_on: 100
 			harv_boost_off: 100
@@ -470,7 +470,7 @@ Player:
 			htnk: 0
 			heli: 0
 			orca: 0
-        UnitLimits:
+		UnitLimits:
 			harv: 4
 			harv_boost_on: 4
 			harv_boost_off: 4
@@ -549,7 +549,7 @@ Player:
 			fix: 20
 			fix_nod: 20
 			hq: 40
-			hq_gdi:40
+			hq_gdi: 40
 			hq_nod_gw: 40
 			hq_nod_da: 40
 			hpad: 25
@@ -587,7 +587,7 @@ Player:
 			fix: 1
 			fix_nod: 1
 			hq: 1
-			hq_gdi:1
+			hq_gdi: 1
 			hq_nod_gw: 1
 			hq_nod_da: 1
 			hpad: 20
@@ -606,11 +606,11 @@ Player:
 			tmpl: 1
 		BuildingDelays:
 			tgd: 1500
-    UnitBuilderBotModule@4:
-        RequiresCondition: enable-4-bot
-        UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
+	UnitBuilderBotModule@4:
+		RequiresCondition: enable-4-bot
+		UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
 		IdleBaseUnitsMaximum: 10
-        UnitsToBuild:
+		UnitsToBuild:
 			harv: 100
 			harv_boost_on: 100
 			harv_boost_off: 100
@@ -642,7 +642,7 @@ Player:
 			3tnk: 80
 			heli: 20
 			orca: 20
-        UnitLimits:
+		UnitLimits:
 			harv: 4
 			harv_boost_on: 4
 			harv_boost_off: 4
@@ -698,7 +698,7 @@ Player:
 			fix: 20
 			fix_nod: 20
 			hq: 40
-			hq_gdi:40
+			hq_gdi: 40
 			hq_nod_gw: 40
 			hq_nod_da: 40
 			hpad: 25
@@ -736,7 +736,7 @@ Player:
 			fix: 1
 			fix_nod: 1
 			hq: 1
-			hq_gdi:1
+			hq_gdi: 1
 			hq_nod_gw: 1
 			hq_nod_da: 1
 			hpad: 6
@@ -755,11 +755,11 @@ Player:
 			tmpl: 1
 		BuildingDelays:
 			tgd: 1500
-    UnitBuilderBotModule@5:
-        RequiresCondition: enable-5-bot
-        UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
+	UnitBuilderBotModule@5:
+		RequiresCondition: enable-5-bot
+		UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
 		IdleBaseUnitsMaximum: 10
-        UnitsToBuild:
+		UnitsToBuild:
 			harv: 100
 			harv_boost_on: 100
 			harv_boost_off: 100
@@ -793,7 +793,7 @@ Player:
 			htnk: 10
 			heli: 0
 			orca: 0
-        UnitLimits:
+		UnitLimits:
 			harv: 12
 			harv_boost_on: 12
 			harv_boost_off: 12
@@ -874,7 +874,7 @@ Player:
 			fix: 20
 			fix_nod: 20
 			hq: 40
-			hq_gdi:40
+			hq_gdi: 40
 			hq_nod_gw: 40
 			hq_nod_da: 40
 			hpad: 25
@@ -912,7 +912,7 @@ Player:
 			fix: 1
 			fix_nod: 1
 			hq: 1
-			hq_gdi:1
+			hq_gdi: 1
 			hq_nod_gw: 1
 			hq_nod_da: 1
 			hpad: 6
@@ -931,11 +931,11 @@ Player:
 			tmpl: 1
 		BuildingDelays:
 			tgd: 1500
-    UnitBuilderBotModule@6:
-        RequiresCondition: enable-6-bot
-        UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
+	UnitBuilderBotModule@6:
+		RequiresCondition: enable-6-bot
+		UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
 		IdleBaseUnitsMaximum: 10
-        UnitsToBuild:
+		UnitsToBuild:
 			harv: 100
 			harv_boost_on: 100
 			harv_boost_off: 100
@@ -971,7 +971,7 @@ Player:
 			heli: 1
 			orca: 1
 			f22: 1
-        UnitLimits:
+		UnitLimits:
 			harv: 12
 			harv_boost_on: 12
 			harv_boost_off: 12
@@ -1014,7 +1014,6 @@ Player:
 	#=====================================================================================================================================
 	#[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 	#=====================================================================================================================================
-
 	BaseBuilderBotModule@7:
 		RequiresCondition: enable-7-bot
 		BuildingQueues: Building.Nod,Building.Nodda,Building.GDI
@@ -1055,7 +1054,7 @@ Player:
 			fix: 20
 			fix_nod: 20
 			hq: 40
-			hq_gdi:40
+			hq_gdi: 40
 			hq_nod_gw: 40
 			hq_nod_da: 40
 			hpad: 25
@@ -1096,7 +1095,7 @@ Player:
 			fix: 1
 			fix_nod: 1
 			hq: 1
-			hq_gdi:1
+			hq_gdi: 1
 			hq_nod_gw: 1
 			hq_nod_da: 1
 			hpad: 6
@@ -1118,11 +1117,11 @@ Player:
 			hgate.bot: 1000
 		BuildingDelays:
 			tgd: 1500
-    UnitBuilderBotModule@7:
-        RequiresCondition: enable-7-bot
-        UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
+	UnitBuilderBotModule@7:
+		RequiresCondition: enable-7-bot
+		UnitQueues: Vehicle.Nod,Vehicle.Nodda,Vehicle.GDI,Infantry.Nod,Infantry.Nodda,Infantry.GDI,Aircraft.Nod, Aircraft.GDI,Aircraft.Nodda,Research.Nod,Research.GDI
 		IdleBaseUnitsMaximum: 100
-        UnitsToBuild:
+		UnitsToBuild:
 			harv: 100
 			harv_boost_on: 100
 			harv_boost_off: 100
@@ -1160,7 +1159,7 @@ Player:
 			heli: 1
 			orca: 1
 			f22: 1
-        UnitLimits:
+		UnitLimits:
 			harv: 5
 			harv_boost_on: 5
 			harv_boost_off: 5

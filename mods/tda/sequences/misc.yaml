@@ -149,8 +149,8 @@ fb4:
 	idle:
 		Length: 4
 		ZOffset: 1023
-
 	#RA fireball
+
 rafb1:
 	idle:
 		Length: *
@@ -160,8 +160,8 @@ rafb2:
 		Length: *
 		ZOffset: 1023
 	#RA fireball^
-
 	#RA chemball
+
 racb1:
 	idle:
 		Length: *
@@ -387,7 +387,6 @@ rank:
 		Start: 2
 	rank-elite:
 		Start: 3
-
 	#rallypoint:
 	#	flag: flagfly
 	#		Length: *
@@ -396,6 +395,7 @@ rank:
 	#	circles: fpls
 	#		Length: *
 	#		ZOffset: 2047
+
 rallypoint:
 	flag: rallypoint
 		Length: *

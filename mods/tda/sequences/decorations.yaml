@@ -684,7 +684,7 @@ v02:
 
 v02.husk:
 	idle: v02
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		UseTilesetExtension: true
 		TilesetOverrides:
 			DESERT: TEMPERAT
@@ -700,7 +700,7 @@ v03:
 
 v03.husk:
 	idle: v03
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		UseTilesetExtension: true
 		TilesetOverrides:
 			DESERT: TEMPERAT
@@ -748,7 +748,7 @@ v06:
 
 v06.husk:
 	idle: v06
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		UseTilesetExtension: true
 		TilesetOverrides:
 			DESERT: TEMPERAT
@@ -780,7 +780,7 @@ v08:
 
 v08.husk:
 	idle: v08
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		UseTilesetExtension: true
 		TilesetOverrides:
 			DESERT: TEMPERAT
@@ -796,7 +796,7 @@ v09:
 
 v09.husk:
 	idle: v09
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		UseTilesetExtension: true
 		TilesetOverrides:
 			DESERT: TEMPERAT
@@ -812,7 +812,7 @@ v10:
 
 v10.husk:
 	idle: v10
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		UseTilesetExtension: true
 		TilesetOverrides:
 			DESERT: TEMPERAT
@@ -828,7 +828,7 @@ v11:
 
 v11.husk:
 	idle: v11
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		UseTilesetExtension: true
 		TilesetOverrides:
 			DESERT: TEMPERAT
@@ -846,7 +846,7 @@ v12:
 
 v12.husk:
 	idle: v12
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		ZOffset: -512
 		UseTilesetExtension: true
 		TilesetOverrides:
@@ -865,7 +865,7 @@ v13:
 
 v13.husk:
 	idle: v13
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		ZOffset: -512
 		UseTilesetExtension: true
 		TilesetOverrides:
@@ -884,7 +884,7 @@ v14:
 
 v14.husk:
 	idle: v14
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		ZOffset: -512
 		UseTilesetExtension: true
 		TilesetOverrides:
@@ -903,7 +903,7 @@ v15:
 
 v15.husk:
 	idle: v15
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		ZOffset: -512
 		UseTilesetExtension: true
 		TilesetOverrides:
@@ -922,7 +922,7 @@ v16:
 
 v16.husk:
 	idle: v16
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		ZOffset: -512
 		UseTilesetExtension: true
 		TilesetOverrides:
@@ -941,7 +941,7 @@ v17:
 
 v17.husk:
 	idle: v17
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		ZOffset: -512
 		UseTilesetExtension: true
 		TilesetOverrides:
@@ -960,7 +960,7 @@ v18:
 
 v18.husk:
 	idle: v18
-		Start: 1#2 #reaperrr: sprite only has 2 frames
+		Start: 1 #2 #reaperrr: sprite only has 2 frames
 		ZOffset: -512
 		UseTilesetExtension: true
 		TilesetOverrides:

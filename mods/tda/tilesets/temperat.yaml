@@ -80,7 +80,6 @@ Terrain:
 		TargetTypes: Ground
 		Color: 5DA5CE
 		RestrictPlayerColor: true
-
 	TerrainType@BotBase_Wall:
 		Type: BotBase_Wall
 		TargetTypes: Ground
@@ -91,6 +90,7 @@ Terrain:
 		TargetTypes: Ground
 		Color: FFFFFF
 		RestrictPlayerColor: true
+
 
 Templates:
 	Template@255:
@@ -2320,7 +2320,6 @@ Templates:
 		Tiles:
 			0: RedTibTreeTerrain
 			1: RedTibTreeTerrain
-
 	Template@BotBase_Wall:
 		Id: 6000
 		Images: clear1.tem

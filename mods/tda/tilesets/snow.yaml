@@ -3507,7 +3507,6 @@ Templates:
 		Tiles:
 			0: Rock
 			1: Rock
-
 	Template@GreenTibTreeTerrain:
 		Id: 5001
 		Palette: snowRA

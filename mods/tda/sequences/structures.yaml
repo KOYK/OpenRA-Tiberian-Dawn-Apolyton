@@ -187,17 +187,17 @@ nuke:
 		Start: 8
 		Tick: 800
 		ZOffset: -1023
-	upgraded_make:nuk2make
+	upgraded_make: nuk2make
 		Length: *
 		Tick: 80
-	upgraded_idle:nuk2
+	upgraded_idle: nuk2
 		Length: 4
 		Tick: 1000
-	upgraded_damaged-idle:nuk2
+	upgraded_damaged-idle: nuk2
 		Start: 4
 		Length: 4
 		Tick: 1000
-	upgraded_dead:nuk2
+	upgraded_dead: nuk2
 		Start: 8
 		Tick: 800
 		ZOffset: -1023
@@ -786,19 +786,19 @@ wood:
 gun:
 	idle:
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	recoil:
 		Start: 32
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	damaged-idle:
 		Start: 64
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	damaged-recoil:
 		Start: 96
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	make: gunmake
 		Length: *
 		Tick: 80
@@ -823,7 +823,7 @@ sam:
 	idle:
 		Start: 17
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	closing:
 		Start: 50
 		Length: 14
@@ -837,7 +837,7 @@ sam:
 	damaged-idle:
 		Start: 81
 		Facings: 32
-		UseClassicFacingFudge: True
+		UseClassicFacings: True
 	damaged-closing:
 		Start: 114
 		Length: 14

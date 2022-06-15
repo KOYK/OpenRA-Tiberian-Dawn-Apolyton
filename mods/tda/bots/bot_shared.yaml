@@ -7,12 +7,12 @@ Player:
 	BuildingRepairBotModule:
 		RequiresCondition: enable-all-bot
 	CaptureManagerBotModule:
-        CapturingActorTypes: e6,mech
-        CapturableStances: Enemy,Neutral,Ally
-        RequiresCondition: enable-all-bot
-    McvManagerBotModule:
-        RequiresCondition: enable-all-bot
-        McvTypes: mcv,mov
-        ConstructionYardTypes: fact,pylesole,handsole,outpost,fact.nod
-        McvFactoryTypes: weap,afld
+		CapturingActorTypes: e6,mech
+		CapturableRelationships: Enemy,Neutral,Ally
+		RequiresCondition: enable-all-bot
+	McvManagerBotModule:
+		RequiresCondition: enable-all-bot
+		McvTypes: mcv,mov
+		ConstructionYardTypes: fact,pylesole,handsole,outpost,fact.nod
+		McvFactoryTypes: weap,afld
 		RestrictMCVDeploymentFallbackToBase: True

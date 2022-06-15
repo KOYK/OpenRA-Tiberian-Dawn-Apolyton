@@ -184,7 +184,6 @@
 		MaxDensity: 12
 		ValuePerUnit: 35
 		Name: Tiberium
-		PipColor: Green
 		AllowedTerrainTypes: Clear
 		AllowUnderActors: true
 		Type: Tiberium
@@ -196,7 +195,6 @@
 		MaxDensity: 12
 		ValuePerUnit: 60
 		Name: Blue Tiberium
-		PipColor: Blue
 		AllowedTerrainTypes: Clear
 		AllowUnderActors: true
 		Type: BlueTiberium
@@ -208,7 +206,6 @@
 		MaxDensity: 12
 		ValuePerUnit: 100
 		Name: Red Tiberium
-		PipColor: Red
 		AllowedTerrainTypes: Clear
 		AllowUnderActors: true
 		Type: RedTiberium
@@ -248,10 +245,15 @@ World:
 	SmudgeLayer@SCORCH:
 		Type: Scorch
 		Sequence: scorches
-		SmokePercentage: 50
+		SmokeChance: 50
+		SmokeImage: smoke_m
+		SmokeSequences: idle
 	SmudgeLayer@CRATER:
 		Type: Crater
 		Sequence: craters
+		SmokeChance: 25
+		SmokeImage: smoke_m
+		SmokeSequences: idle
 	ResourceLayer:
 	ResourceClaimLayer:
 	WarheadDebugOverlay:
@@ -527,7 +529,6 @@ CRATE.plain:
 TibShimmering:
 	Inherits@1: ^CombatUnit
 	Inherits@2: ^SpriteActor
-	ConditionManager:
 	Interactable:
 	Armor:
 		Type: Wood
@@ -584,9 +585,8 @@ TibShimmering:
 	DamagedByTerrain:
 		Damage: 1
 		DamageInterval: 10
-		DamageThreshold: 0
 		Terrain: Clear, Rough, Road, Beach, BlueTiberium, RedTiberium, Tiberium
-	ExternalCondition@SPIKE
+	ExternalCondition@SPIKE:
 		Condition: Spike.proximity
 	GrantConditionOnPrerequisite:
 		Condition: TurboTiberiumOn
@@ -618,7 +618,7 @@ CRATEHEAL:
 		Name: Healing Crate
 	RenderSprites:
 		Image: crateheal
-	HealUnitsCrateAction:
+	HealActorsCrateAction:
 		Sound: heal2.aud
 		SelectionShares: 10
 		Sequence: heal
@@ -989,7 +989,7 @@ FLAG_STARTING_UNITS:
 		ArrowSequence: arrow
 		CircleSequence: circles
 		ClockSequence: clock
-		DisplayTimerStances: Ally, Enemy
+		DisplayTimerRelationships: Ally, Enemy
 	ProximityCapturable:
 		Range: 5c0
 		CaptorTypes: Vehicle, Tank, Infantry, Player
@@ -1046,7 +1046,6 @@ Player:
 	GrantConditionOnPrerequisiteManager:
 	ResourceStorageWarning:
 	PlayerExperience:
-	ConditionManager:
 	GameSaveViewportManager:
 	PlayerRadarTerrain:
 
@@ -1215,13 +1214,13 @@ Player:
 	CloakPaletteEffect:
 	RotationPaletteEffect:
 		ExcludeTilesets: JUNGLE, TEMPERAT, SNOW, WINTER, DESERT
-	RotationPaletteEffect@water: 
+	RotationPaletteEffect@water:
 		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
 		RotationBase: 32
 		RotationRange: 7
 		RotationStep: 0.20
 		ExcludeTilesets: SNOW
-	RotationPaletteEffect@ocean: 
+	RotationPaletteEffect@ocean:
 		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
 		RotationBase: 224
 		RotationRange: 2
@@ -1241,7 +1240,7 @@ Player:
 		RotationRange: 10
 		RotationStep: 0.20
 		ExcludeTilesets: JUNGLE, TEMPERAT, WINTER, DESERT
-	RotationPaletteEffect@shipyard: 
+	RotationPaletteEffect@shipyard:
 		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
 		Palettes: shipyard
 		RotationBase: 32
@@ -1300,17 +1299,17 @@ Player:
 		Interval: 10
 	Capturable@Building:
 		Types: Building
-		ValidStances: Enemy, Neutral
+		ValidRelationships: Enemy, Neutral
 		CancelActivity: False
 		RequiresCondition: CapturableBuilding
 	Capturable@Husk:
 		Types: Husk
-		ValidStances: Enemy, Neutral, Ally
+		ValidRelationships: Enemy, Neutral, Ally
 		CancelActivity: False
 		RequiresCondition: CapturableHusk
 	Capturable@Transport:
 		Types: Transport
-		ValidStances: Enemy, Neutral
+		ValidRelationships: Enemy, Neutral
 		CancelActivity: False
 		RequiresCondition: CapturableTransport
 
@@ -1321,10 +1320,10 @@ Player:
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
-	SelfHealing@MACHINE_SHOP:
+	ChangesHealth@MACHINE_SHOP:
 		Step: 1
 		Delay: 5
-		HealIfBelow: 100
+		StartIfBelow: 100
 		DamageCooldown: 125
 		RequiresCondition: machine_shop_repair && damaged
 	GrantConditionOnPrerequisite@MACHINE_SHOP:
@@ -1338,10 +1337,10 @@ Player:
 	GrantConditionOnDamageState@WOUNDED:
 		Condition: wounded
 		ValidDamageStates: Light, Medium, Heavy, Critical
-	SelfHealing@HOSPITAL:
+	ChangesHealth@HOSPITAL:
 		Step: 5
 		Delay: 100
-		HealIfBelow: 100
+		StartIfBelow: 100
 		DamageCooldown: 125
 		RequiresCondition: hospitalheal
 	GrantConditionOnPrerequisite@HOSPITAL:
@@ -1349,7 +1348,6 @@ Player:
 		Prerequisites: hosp
 
 ^ConditionManager:
-	ConditionManager:
 
 ^ExternalCondition:
 	ExternalCondition@HitByTiberium:
@@ -1360,7 +1358,7 @@ Player:
 ^ArtilleryUnit:
 	RevealOnFire:
 		ArmamentNames: primary
-		RevealForStancesRelativeToTarget: Ally
+		RevealForRelationships: Ally
 		Duration: 75
 		Radius: 1c0
 	Targetable@AITAG:
@@ -1454,7 +1452,6 @@ Player:
 	GivesExperience:
 		PlayerExperienceModifier: 1
 	ScriptTriggers:
-	ConditionManager:
 	RenderDebugState:
 	CombatDebugOverlay:
 	OwnerLostAction:
@@ -1466,7 +1463,7 @@ Player:
 	WithSpriteControlGroupDecoration:
 		Palette: terrain
 
-^CombatUnit: 
+^CombatUnit:
 	Inherits@Basic: ^Basic
 	AttackMove:
 	DrawLineToTarget:
@@ -1475,7 +1472,7 @@ Player:
 	AppearsOnRadar:
 		UseLocation: true
 	HiddenUnderFog:
-		AlwaysVisibleStances: Ally, Neutral
+		AlwaysVisibleRelationships: Ally, Neutral
 		Type: CenterPosition
 
 ^CombatBuilding:
@@ -1585,44 +1582,40 @@ Player:
 	InaccuracyMultiplier@RANK-ELITE:
 		RequiresCondition: rank-elite
 		Modifier: 50
-	SelfHealing@ELITE:
+	ChangesHealth@ELITE:
 		Step: 2
 		Delay: 50
-		HealIfBelow: 100
+		StartIfBelow: 100
 		DamageCooldown: 125
 		RequiresCondition: rank-elite
 	WithDecoration@RANK-1:
 		Image: rank
 		Sequence: rank-veteran-1
 		Palette: effect
-		ReferencePoint: Top, Right
+		Position: TopRight
 		RequiresCondition: rank-veteran-1
-		ZOffset: 256
-		ValidStances: Ally, Enemy
+		ValidRelationships: Ally, Enemy
 	WithDecoration@RANK-2:
 		Image: rank
 		Sequence: rank-veteran-2
 		Palette: effect
-		ReferencePoint: Top, Right
+		Position: TopRight
 		RequiresCondition: rank-veteran-2
-		ZOffset: 256
-		ValidStances: Ally, Enemy
+		ValidRelationships: Ally, Enemy
 	WithDecoration@RANK-3:
 		Image: rank
 		Sequence: rank-veteran-3
 		Palette: effect
-		ReferencePoint: Top, Right
+		Position: TopRight
 		RequiresCondition: rank-veteran-3
-		ZOffset: 256
-		ValidStances: Ally, Enemy
+		ValidRelationships: Ally, Enemy
 	WithDecoration@RANK-ELITE:
 		Image: rank
 		Sequence: rank-elite
 		Palette: effect
-		ReferencePoint: Top, Right
+		Position: TopRight
 		RequiresCondition: rank-elite
-		ZOffset: 256
-		ValidStances: Ally, Enemy
+		ValidRelationships: Ally, Enemy
 
 ^AutoTargetGround:
 	AutoTarget:
@@ -1702,13 +1695,13 @@ Player:
 	ProximityExternalCondition@REPAIRING:
 		Condition: Repairing
 		Range: 1c0
-		ValidStances: Ally
+		ValidRelationships: Ally
 		AffectsParent: False
 	ExternalCondition@ONPAD:
 		Condition: OnPad
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 5
+		TurnSpeed: 20
 		RequiresCondition: !notmobile
 	Selectable:
 		Bounds: 24,24
@@ -1729,8 +1722,7 @@ Player:
 		GenericName: Vehicle
 	Voiced:
 		VoiceSet: VehicleVoice
-	BodyOrientation:
-		UseClassicFacingFudge: True
+	ClassicFacingBodyOrientation:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	ProximityCaptor:
@@ -1757,7 +1749,7 @@ Player:
 ^TankWithoutVeterancy:
 	Inherits: ^VehicleWithoutVeterancy
 	Mobile:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Locomotor: tracked
 	Tooltip:
 		GenericName: Tank
@@ -1785,7 +1777,7 @@ Player:
 	ProximityExternalCondition@REPAIRING:
 		Condition: Repairing
 		Range: 1c0
-		ValidStances: Ally
+		ValidRelationships: Ally
 		AffectsParent: False
 	ExternalCondition@ONPAD:
 		Condition: OnPad
@@ -1851,7 +1843,7 @@ Player:
 	ProximityExternalCondition@REPAIRING:
 		Condition: Repairing
 		Range: 1c0
-		ValidStances: Ally
+		ValidRelationships: Ally
 		AffectsParent: False
 	ExternalCondition@ONPAD:
 		Condition: OnPad
@@ -1884,8 +1876,7 @@ Player:
 		RequiresCondition: cruising
 	Voiced:
 		VoiceSet: VehicleVoice
-	BodyOrientation:
-		UseClassicFacingFudge: True
+	ClassicFacingBodyOrientation:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	ProximityCaptor:
@@ -1960,9 +1951,8 @@ Player:
 	WithDecoration@DEFENCE:
 		Image: pips
 		Sequence: pip-defence
-		ReferencePoint: Top, Left
 		RequiresCondition: Infantry.sandbag
-		ValidStances: Ally, Enemy, Neutral
+		ValidRelationships: Ally, Enemy, Neutral
 		RequiresSelection: False
 	DeathSounds@NORMAL:
 		DeathTypes: DefaultDeath, BulletDeath, SmallExplosionDeath, ExplosionDeath
@@ -2222,13 +2212,13 @@ Player:
 	WithBuildingRepairDecoration:
 		Image: allyrepair
 		Sequence: repair
-		ReferencePoint: Center
+		Position: Center
 		Palette: player
 		IsPlayerPalette: True
 	#GrantCondition@UnitType:
 	#	Condition: BaseBuilding
 	AcceptsDeliveredCash:
-		ValidStances: Ally, Enemy
+		ValidRelationships: Ally, Enemy
 	WithMakeAnimation:
 		Condition: build-incomplete
 
@@ -2595,9 +2585,8 @@ Player:
 		Types: TibShimmeringType
 	Replaceable:
 		Types: Spike
-	ExternalCondition@SPIKE
+	ExternalCondition@SPIKE:
 		Condition: Spike.proximity
-	ConditionManager:
 	Valued:
 		Cost: 750
 	MapEditorData:
@@ -2626,7 +2615,6 @@ Player:
 
 ^CommonHuskDefaults:
 	Inherits@1: ^SpriteActor
-	ConditionManager:
 	Interactable:
 	Health:
 		HP: 140
@@ -2641,7 +2629,6 @@ Player:
 
 ^PlaneHusk:
 	Inherits: ^CommonHuskDefaults
-	ConditionManager:
 	WithShadow:
 		Offset: 43, 128, 0
 		ZOffset: -129
@@ -2661,8 +2648,6 @@ Player:
 		AllowedTerrain: Clear, Rough, Road, Tiberium, BlueTiberium, Beach, RedTiberium
 	GrantCondition@CapturableHusk:
 		Condition: CapturableHusk
-	Burns:
-		Interval: 5
 	Targetable:
 		RequiresForceFire: True
 		TargetTypes: Ground, Husk
@@ -2676,14 +2661,26 @@ Player:
 	Explodes:
 		Weapon: UnitExplodeSmall
 		EmptyWeapon: UnitExplodeSmall
-	BodyOrientation:
-		UseClassicFacingFudge: True
+	ClassicFacingBodyOrientation:
+	WithIdleOverlay@Burns:
+		Image: fire
+		Sequence: 1
+		IsDecoration: True
+	ChangesHealth:
+		Step: -1
+		StartIfBelow: 101
+		Delay: 5
 
 ^HuskRApalette:
 	Inherits: ^Husk
-	Burns:
-		Interval: 5
-		Anim: ra
+	WithIdleOverlay@Burns:
+		Image: fire
+		Sequence: ra
+		IsDecoration: True
+	ChangesHealth:
+		Step: -1
+		StartIfBelow: 101
+		Delay: 5
 
 ^HelicopterHusk:
 	Inherits: ^CommonHuskDefaults
@@ -2700,8 +2697,7 @@ Player:
 		Explosion: HeliCrash
 	Tooltip:
 		GenericName: Destroyed Helicopter
-	BodyOrientation:
-		UseClassicFacingFudge: True
+	ClassicFacingBodyOrientation:
 
 ^Bridge:
 	Inherits@shape: ^1x1Shape
@@ -2764,7 +2760,6 @@ Player:
 		OpeningSequence: open
 		Offset: 0,0,427
 		RequiresCondition: parachute
-	ConditionManager:
 	MapEditorData:
 		Categories: System
 
@@ -2830,7 +2825,7 @@ Player:
 	MapEditorData:
 		Categories: System
 	HitShape:
-	OwnerLostAction
+	OwnerLostAction:
 		Action: ChangeOwner
 		Owner: Creeps
 
@@ -2860,7 +2855,7 @@ Player:
 		Sequence: offline
 		Palette: chrome
 		RequiresCondition: powerdown
-		ReferencePoint: Center
+		Position: Center
 	PowerMultiplier@POWERDOWN:
 		RequiresCondition: powerdown
 		Modifier: 0
@@ -2941,9 +2936,6 @@ MINE:
 		Sequence: idle-lightsg
 		Palette: lights_Green_05
 		IsPlayerPalette: False
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5001
 
 GMINE:
 	Inherits: ^TibTree
@@ -2963,9 +2955,6 @@ GMINE:
 		Sequence: idle-lightsb
 		Palette: lights_Blue_05
 		IsPlayerPalette: False
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5002
 
 BR1:
 	Inherits: ^Bridge
@@ -3092,7 +3081,6 @@ EG_DATA:
 #Upgrades that work like research but they only show up on the specifc actor.
 
 ^UpgradeBasic:
-	ConditionManager:
 	Buildable:
 		Queue: PowerPlantUpgrade.Nod, PowerPlantUpgrade.Nodda, PowerPlantUpgrade.GDI
 		BuildPaletteOrder: 1
@@ -3292,7 +3280,7 @@ FACT:
 	Transforms:
 		IntoActor: mcv
 		Offset: 1,1
-		Facing: 108
+		Facing: 432
 		RequiresCondition: factundeploy && !build-incomplete
 	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
 		Condition: factundeploy
@@ -3736,15 +3724,13 @@ PROC:
 		Range: 6c0
 	WithBuildingBib:
 	Refinery:
-		DockAngle: 112
+		DockAngle: 448
 		DockOffset: 0,2
 		IsDragRequired: True
 		DragOffset: -554,512,0
 		DragLength: 12
 		TickRate: 15
 	StoresResources:
-		PipColor: Green
-		PipCount: 5
 		Capacity: 5000
 	Selectable:
 		Bounds: 72,56
@@ -3776,6 +3762,10 @@ PROC:
 		DeliveryOffset: 1,2
 		DeliveringActor: osprey.delivery
 		Facing: 160
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 5
 
 REF_TURBO_ON:
 	Inherits: PROC
@@ -3838,8 +3828,6 @@ SILO:
 	WithResourceLevelSpriteBody:
 		Sequence: stages
 	StoresResources:
-		PipCount: 10
-		PipColor: Green
 		Capacity: 2000
 	#you are just full of the stuff arent you?
 	Power:
@@ -3850,6 +3838,10 @@ SILO:
 	Selectable:
 		Bounds: 48,24
 		DecorationBounds: 49,30
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
 
 PYLE:
 	Inherits: ^BaseBuilding
@@ -3926,9 +3918,9 @@ PYLE:
 	WithDecoration@REDCROSS:
 		Image: pips
 		Sequence: pip-heal
-		ReferencePoint: Top, Right
+		Position: TopRight
 		RequiresCondition: hospitalheal
-		ValidStances: Ally, Neutral
+		ValidRelationships: Ally, Neutral
 		RequiresSelection: True
 	GrantConditionOnPrerequisite@BIO:
 		Condition: hazmatsuits
@@ -3936,9 +3928,9 @@ PYLE:
 	WithDecoration@HAZMAT:
 		Image: pips
 		Sequence: pip-hazmat
-		ReferencePoint: Top, Right
+		Position: TopRight
 		RequiresCondition: hazmatsuits
-		ValidStances: Ally, Neutral
+		ValidRelationships: Ally, Neutral
 		RequiresSelection: True
 
 PYLESOLE:
@@ -4042,9 +4034,9 @@ HAND:
 	WithDecoration@REDCROSS:
 		Image: pips
 		Sequence: pip-heal
-		ReferencePoint: Top, Right
+		Position: TopRight
 		RequiresCondition: hospitalheal
-		ValidStances: Ally, Neutral
+		ValidRelationships: Ally, Neutral
 		RequiresSelection: True
 	GrantConditionOnPrerequisite@BIO:
 		Condition: hazmatsuits
@@ -4052,9 +4044,9 @@ HAND:
 	WithDecoration@HAZMAT:
 		Image: pips
 		Sequence: pip-hazmat
-		ReferencePoint: Top, Right
+		Position: TopRight
 		RequiresCondition: hazmatsuits
-		ValidStances: Ally, Neutral
+		ValidRelationships: Ally, Neutral
 		RequiresSelection: True
 
 HANDSOLE:
@@ -4142,7 +4134,7 @@ WEAP:
 	WithDecoration@MECH:
 		Image: pips
 		Sequence: pip-mech
-		ReferencePoint: Right, Top
+		Position: TopRight
 		RequiresCondition: machine_shop_repair
 		RequiresSelection: True
 
@@ -4236,7 +4228,7 @@ AFLD:
 	WithDecoration@MECH:
 		Image: pips
 		Sequence: pip-mech
-		ReferencePoint: Right, Top
+		Position: TopRight
 		RequiresCondition: machine_shop_repair
 		RequiresSelection: True
 
@@ -4352,7 +4344,7 @@ HQ:
 		Sequence: offline
 		Palette: chrome
 		RequiresCondition: powerdown
-		ReferencePoint: Center
+		Position: Center
 	PowerMultiplier@POWERDOWN:
 		RequiresCondition: powerdown
 		Modifier: 0
@@ -4398,7 +4390,7 @@ HQ_GDI:
 		ArrowSequence: arrow
 		CircleSequence: circles
 		ClockSequence: clock
-		DisplayTimerStances: Ally
+		DisplayTimerRelationships: Ally
 		Cursor: airstrike
 	SupportPowerChargeBar:
 	ProductionQueue@GDIResearch:
@@ -4458,7 +4450,7 @@ HQ_NOD_DA:
 		ArrowSequence: arrow
 		CircleSequence: circles
 		ClockSequence: clock
-		DisplayTimerStances: Ally
+		DisplayTimerRelationships: Ally
 		Cordon: 10c0
 		Cursor: artilerybarrage
 	SupportPowerChargeBar:
@@ -4516,7 +4508,7 @@ HQ_NOD_GW:
 		ArrowSequence: arrow
 		CircleSequence: circles
 		ClockSequence: clock
-		DisplayTimerStances: Ally
+		DisplayTimerRelationships: Ally
 		Cursor: airdrop
 	SupportPowerChargeBar:
 	ProductionQueue@NodResearch:
@@ -4550,7 +4542,7 @@ FIX:
 	ProximityExternalCondition:
 		Condition: OnPad
 		Range: 1c0
-		ValidStances: Ally
+		ValidRelationships: Ally
 		AffectsParent: False
 	Sellable:
 		RefundPercent: 30
@@ -4669,7 +4661,7 @@ MISS_GDI:
 		Sequence: offline
 		Palette: chrome
 		RequiresCondition: powerdown
-		ReferencePoint: Center
+		Position: Center
 	PowerMultiplier@POWERDOWN:
 		RequiresCondition: powerdown
 		Modifier: 0
@@ -4717,7 +4709,7 @@ MISS_NOD:
 		Sequence: offline
 		Palette: chrome
 		RequiresCondition: powerdown
-		ReferencePoint: Center
+		Position: Center
 	PowerMultiplier@POWERDOWN:
 		RequiresCondition: powerdown
 		Modifier: 0
@@ -4735,7 +4727,7 @@ HPAD:
 	ProximityExternalCondition:
 		Condition: OnPad
 		Range: 1c0
-		ValidStances: Ally
+		ValidRelationships: Ally
 		AffectsParent: False
 	Sellable:
 		RefundPercent: 30
@@ -4828,7 +4820,7 @@ AFLDRA:
 	ProximityExternalCondition:
 		Condition: OnPad
 		Range: 1c0
-		ValidStances: Ally
+		ValidRelationships: Ally
 		AffectsParent: False
 	Sellable:
 		RefundPercent: 30
@@ -4860,7 +4852,7 @@ AFLDRA:
 		TargetTypes: Ground, C4, Structure, DetonateAttack, SpyInfiltrate
 	Exit@1:
 		ExitCell: 1,1
-		Facing: 192
+		Facing: 768
 	RallyPoint:
 	ProductionFromMapEdge:
 		Produces: Aircraft.Nodda
@@ -4967,18 +4959,18 @@ EYE:
 		InsufficientPowerSpeechNotification: InsufficientPower
 		DisplayRadarPing: True
 		CameraActor: camera.small
-		DisplayTimerStances: Ally, Neutral, Enemy
+		DisplayTimerRelationships: Ally, Neutral, Enemy
 		AllowMultiple: True
 	RevealsShroud@Ally:
 		Range: 6c0
-		ValidStances: Ally
+		ValidRelationships: Ally
 	RevealsShroud@Enemy:
 		Range: 2c0
-		ValidStances: Enemy
+		ValidRelationships: Enemy
 		Type: CenterPosition
 		MaxHeightDelta: 2
 	HiddenUnderFog:
-		AlwaysVisibleStances: Ally, Enemy
+		AlwaysVisibleRelationships: Ally, Enemy
 		Type: CenterPosition
 	-FrozenUnderFog:
 	SupportPowerChargeBar:
@@ -4996,13 +4988,13 @@ EYE:
 		Sequence: offline
 		Palette: chrome
 		RequiresCondition: powerdown
-		ReferencePoint: Center
+		Position: Center
 	PowerMultiplier@POWERDOWN:
 		RequiresCondition: powerdown
 		Modifier: 0
 	FreeActor:
 		Actor: renegate
-		SpawnOffset	1,2
+		SpawnOffset	1,2:
 		AllowRespawn: True
 		EditorFreeActorDisplayOrder: 4
 		RequiresCondition: !disabled && !powerdown && !build-incomplete && !being-demolished
@@ -5054,26 +5046,26 @@ TMPL:
 		BeaconPoster: atomic
 		BeaconPosterPalette: beaconposter
 		DisplayRadarPing: True
-		DisplayTimerStances: Ally, Neutral, Enemy
+		DisplayTimerRelationships: Ally, Neutral, Enemy
 		CameraRange: 10c0
 		ArrowSequence: arrow
 		CircleSequence: circles
 		ClockSequence: clock
 		AllowMultiple: True
 		CameraRemoveDelay: 30
-		CameraStances: Ally
+		CameraRelationships: Ally
 		CameraSpawnAdvance: 25
 		RevealGeneratedShroud: True
 	RevealsShroud@Ally:
 		Range: 6c0
-		ValidStances: Ally
+		ValidRelationships: Ally
 	RevealsShroud@Enemy:
 		Range: 2c0
-		ValidStances: Enemy
+		ValidRelationships: Enemy
 		Type: CenterPosition
 		MaxHeightDelta: 2
 	HiddenUnderFog:
-		AlwaysVisibleStances: Ally, Enemy
+		AlwaysVisibleRelationships: Ally, Enemy
 		Type: CenterPosition
 	-FrozenUnderFog:
 	SupportPowerChargeBar:
@@ -5087,13 +5079,13 @@ TMPL:
 		Sequence: offline
 		Palette: chrome
 		RequiresCondition: powerdown
-		ReferencePoint: Center
+		Position: Center
 	PowerMultiplier@POWERDOWN:
 		RequiresCondition: powerdown
 		Modifier: 0
-	WithNukeLaunchAnimation:
+	WithSupportPowerActivationAnimation:
 		RequiresCondition: !build-incomplete
-	WithNukeLaunchOverlay:
+	WithSupportPowerActivationOverlay:
 		RequiresCondition: !build-incomplete
 		Sequence: smoke
 	GrantCondition@RenegadeOut:
@@ -5134,7 +5126,7 @@ ATWR:
 	WithBuildingBib:
 		HasMinibib: True
 	Turreted:
-		TurnSpeed: 255
+		TurnSpeed: 1023
 		Offset: 128,128,384
 	Armament@PRIMARY:
 		Weapon: TowerMissle
@@ -5235,14 +5227,13 @@ GTWR:
 	Cargo:
 		Types: Infantry
 		MaxWeight: 1
-		PipCount: 1
 		InitialUnits: e1
 	BodyOrientation:
 		QuantizedFacings: 8
 	DetectCloaked:
 		Range: 3c0
 	Turreted:
-		TurnSpeed: 255
+		TurnSpeed: 1023
 	Power:
 		Amount: -5
 	IgnoresDisguise:
@@ -5251,6 +5242,9 @@ GTWR:
 		Bounds: 24,24
 	RenderRangeCircle:
 		FallbackRange: 6c0
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 
 GUN:
 	Inherits: ^Defense
@@ -5273,8 +5267,8 @@ GUN:
 	WithBuildingBib:
 		HasMinibib: True
 	Turreted:
-		TurnSpeed: 12
-		InitialFacing: 56
+		TurnSpeed: 48
+		InitialFacing: 224
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
@@ -5289,8 +5283,7 @@ GUN:
 		Range: 3c0
 	Power:
 		Amount: -8
-	BodyOrientation:
-		UseClassicFacingFudge: True
+	ClassicFacingBodyOrientation:
 	Selectable:
 		Bounds: 24,24
 
@@ -5321,7 +5314,7 @@ SAM:
 	RevealsShroud:
 		Range: 8c0
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 40
 		InitialFacing: 0
 		RealignDelay: -1
 	-WithSpriteBody:
@@ -5331,7 +5324,6 @@ SAM:
 		MuzzleSequence: muzzle
 	AmmoPool:
 		Ammo: 1
-		PipCount: 0
 	ReloadAmmoPool@1:
 		Delay: 60
 	AttackPopupTurreted:
@@ -5342,12 +5334,12 @@ SAM:
 	-RenderDetectionCircle:
 	Power:
 		Amount: -2
-	BodyOrientation:
-		UseClassicFacingFudge: True
+	ClassicFacingBodyOrientation:
 	Targetable:
 		TargetTypes: Ground, C4, Structure, DetonateAttack, Defense, AItagAvoid
 	Selectable:
 		Bounds: 48,24
+	-WithAmmoPipsDecoration:
 
 FTUR:
 	Inherits: ^Defense
@@ -5374,7 +5366,7 @@ FTUR:
 	WithBuildingBib:
 		HasMinibib: True
 	Turreted:
-		TurnSpeed: 255
+		TurnSpeed: 1023
 		Offset: 0,0,112
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
@@ -5436,7 +5428,7 @@ CTUR:
 	WithBuildingBib:
 		HasMinibib: True
 	Turreted:
-		TurnSpeed: 255
+		TurnSpeed: 1023
 		Offset: 0,0,112
 	Armament:
 		Weapon: ChemLauncher
@@ -5476,14 +5468,13 @@ PBOX:
 	WithBuildingBib:
 		HasMinibib: True
 	Turreted:
-		TurnSpeed: 255
+		TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:
 	BodyOrientation:
 		QuantizedFacings: 8
 	Cargo:
 		Types: Infantry
 		MaxWeight: 1
-		PipCount: 1
 		InitialUnits: e1
 	AttackGarrisoned:
 		Armaments: pillbox
@@ -5497,6 +5488,9 @@ PBOX:
 	DetectCloaked:
 		Range: 6c0
 	IgnoresDisguise:
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 
 SBAG:
 	Inherits: ^Wall
@@ -5522,7 +5516,6 @@ SBAG:
 	ProximityExternalCondition@COVER:
 		Condition: Infantry.sandbag
 		Range: 1c255
-	ConditionManager:
 
 CYCL:
 	Inherits: ^Wall
@@ -5582,9 +5575,9 @@ BRIK:
 		Type: concrete
 	RenderSprites:
 		-Palette: staticterrain
-	SelfHealing:
+	ChangesHealth:
 		Delay: 10
-		HealIfBelow: 50
+		StartIfBelow: 50
 		DamageCooldown: 200
 
 VGATE:
@@ -5668,7 +5661,7 @@ TGD:
 	Replacement:
 		ReplaceableTypes: Spike
 	ProximityExternalCondition@SPIKE:
-		ValidStances: Ally, Neutral, Enemy
+		ValidRelationships: Ally, Neutral, Enemy
 		Condition: Spike.proximity
 		Range: 10c0
 		AffectsParent: True
@@ -5713,7 +5706,6 @@ TGD:
 		Color: D46F6F
 	-GivesBounty:
 	SelectionDecorations:
-		RenderSelectionBars: False
 
 ^TGD_AFTER_DEATH_BASE:
 	Explodes:
@@ -5737,7 +5729,6 @@ TGD:
 	RenderSprites:
 		Image: spike
 	SelectionDecorations:
-		RenderSelectionBars: True
 
 TGDRED:
 	Inherits@1: TGD
@@ -5843,7 +5834,7 @@ MCV:
 	Transforms:
 		IntoActor: fact
 		Offset: -1,-1
-		Facing: 108
+		Facing: 432
 		TransformSounds: constru2.aud, hvydoor1.aud
 		NoTransformNotification: BuildingCannotPlaceAudio
 		RequiresCondition: !solesurvivorgame
@@ -5902,7 +5893,7 @@ MOV:
 		Range: 14c0
 	Transforms:
 		IntoActor: outpost
-		Facing: 108
+		Facing: 432
 		TransformSounds: constru2.aud, hvydoor1.aud
 		NoTransformNotification: BuildingCannotPlaceAudio
 	MustBeDestroyed:
@@ -6007,9 +5998,8 @@ HARV:
 	WithDecoration@TIB_ARMOR:
 		Image: pips
 		Sequence: pip-tib_armor
-		ReferencePoint: Top, Left
 		RequiresCondition: arm_harv
-		ValidStances: Ally
+		ValidRelationships: Ally
 		RequiresSelection: True
 	Valued:
 		Cost: 1600
@@ -6054,7 +6044,6 @@ HARV:
 	WithDockingAnimation:
 	Harvester:
 		Resources: Tiberium, BlueTiberium, RedTiberium
-		PipCount: 7
 		Capacity: 20
 		BaleLoadDelay: 12
 		BaleUnloadDelay: 6
@@ -6070,6 +6059,10 @@ HARV:
 		Actor: HARV.Husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
+	WithHarvesterPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 7
 
 HARV.Husk:
 	Inherits: ^Husk
@@ -6088,7 +6081,6 @@ HARV_BOOST_ON:
 		Image: harv
 	Harvester:
 		Resources: Tiberium, BlueTiberium, RedTiberium
-		PipCount: 7
 		Capacity: 20
 		BaleLoadDelay: 12
 		BaleUnloadDelay: 1
@@ -6105,6 +6097,10 @@ HARV_BOOST_ON:
 		Actor: HARV_BOOST_ON.Husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
+	WithHarvesterPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 7
 HARV_BOOST_ON.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -6122,7 +6118,6 @@ HARV_BOOST_OFF:
 		Image: harv
 	Harvester:
 		Resources: Tiberium, BlueTiberium, RedTiberium
-		PipCount: 7
 		Capacity: 20
 		BaleLoadDelay: 12
 		BaleUnloadDelay: 6
@@ -6139,6 +6134,10 @@ HARV_BOOST_OFF:
 		Actor: HARV_BOOST_OFF.Husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
+	WithHarvesterPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 7
 HARV_BOOST_OFF.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -6186,7 +6185,7 @@ APC:
 		Description: Armed infantry transport.\n  Strong vs Infantry\n  Weak vs Vehicles
 		BuildDuration: 210
 	Mobile:
-		TurnSpeed: 8
+		TurnSpeed: 32
 		Speed: 72
 		RequiresCondition: !notmobile
 	Health:
@@ -6204,10 +6203,12 @@ APC:
 	Cargo:
 		Types: Infantry, Doctor
 		MaxWeight: 5
-		PipCount: 5
 		LoadingCondition: notmobile
 	SpawnActorOnDeath:
 		Actor: APC.Husk
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 APC.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -6232,7 +6233,7 @@ JEEP:
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 		BuildDuration: 210
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 40
 		Speed: 115
 	Health:
 		HP: 1450
@@ -6241,7 +6242,7 @@ JEEP:
 	RevealsShroud:
 		Range: 8c0
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 40
 		Offset: -85,0,128
 	Armament:
 		Weapon: MachineGun
@@ -6294,7 +6295,7 @@ MTNK:
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
-		TurnSpeed: 5
+		TurnSpeed: 20
 	Armament:
 		Weapon: MTNK-Weapon-1
 		Recoil: 128
@@ -6336,7 +6337,7 @@ HTNK:
 		BuildDuration: 750
 	Mobile:
 		Speed: 45
-		TurnSpeed: 3
+		TurnSpeed: 12
 		-RequiresCondition:
 	Health:
 		HP: 11500
@@ -6346,7 +6347,7 @@ HTNK:
 		Range: 6c0
 	WithSpriteTurret:
 	Turreted:
-		TurnSpeed: 3
+		TurnSpeed: 12
 	Armament@PRIMARY:
 		Weapon: HTNK-Weapon-1
 		LocalOffset: 900,180,340, 900,-180,340
@@ -6362,9 +6363,9 @@ HTNK:
 		MuzzleSequence: muzzle
 	AttackTurreted:
 	WithMuzzleOverlay:
-	SelfHealing:
+	ChangesHealth:
 		Delay: 10
-		HealIfBelow: 50
+		StartIfBelow: 50
 		DamageCooldown: 200
 	SpawnActorOnDeath:
 		Actor: HTNK.Husk
@@ -6400,7 +6401,7 @@ HARTY:
 		BuildDuration: 450
 	Mobile:
 		Speed: 45
-		TurnSpeed: 3
+		TurnSpeed: 12
 		-RequiresCondition:
 	Health:
 		HP: 11500
@@ -6422,9 +6423,9 @@ HARTY:
 		Weapon: ArtilleryShellExplode
 		EmptyWeapon: UnitExplode
 		LoadedChance: 75
-	SelfHealing:
+	ChangesHealth:
 		Delay: 10
-		HealIfBelow: 50
+		StartIfBelow: 50
 		DamageCooldown: 200
 	SpawnActorOnDeath:
 		Actor: HARTY.Husk
@@ -6460,7 +6461,7 @@ MSAM: #spectere
 		BuildDuration: 450
 	Mobile:
 		Speed: 90
-		TurnSpeed: 4
+		TurnSpeed: 16
 	Health:
 		HP: 2400
 	Armor:
@@ -6468,7 +6469,7 @@ MSAM: #spectere
 	RevealsShroud:
 		Range: 8c0
 	Turreted:
-		TurnSpeed: 255
+		TurnSpeed: 1023
 		Offset: -256,0,128
 	Armament@PRIMARY:
 		Weapon: MultipleMissiles
@@ -6532,6 +6533,9 @@ MNLYGDI:
 	RenderDetectionCircle:
 	Explodes:
 		Weapon: APMine
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 
 MNLYNOD:
 	Inherits: ^Tank
@@ -6571,6 +6575,9 @@ MNLYNOD:
 	RenderDetectionCircle:
 	Explodes:
 		Weapon: ATMine
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 
 BGGY:
 	Inherits: ^Vehicle
@@ -6588,7 +6595,7 @@ BGGY:
 		Description: Fast scout and anti-infantry vehicle.\n Can carry 1 infantry\n  Strong vs Infantry\n  Weak vs Tanks
 		BuildDuration: 150
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 40
 		Speed: 130
 		RequiresCondition: !notmobile
 	Health:
@@ -6598,7 +6605,7 @@ BGGY:
 	RevealsShroud:
 		Range: 8c0
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 40
 		Offset: -43,0,128
 	Armament:
 		Weapon: MachineGun
@@ -6612,8 +6619,10 @@ BGGY:
 	Cargo:
 		Types: Infantry, Doctor
 		MaxWeight: 1
-		PipCount: 1
 		LoadingCondition: notmobile
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 BGGY.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -6638,7 +6647,7 @@ BIKE:
 		Description: Fast scout vehicle, armed with\nrockets.\nCan attack Aircraft.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
 		BuildDuration: 180
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 40
 		Speed: 160
 	Health:
 		HP: 800
@@ -6678,7 +6687,7 @@ LTNK:
 		Description: Fast, light tank.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
 		BuildDuration: 240
 	Mobile:
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Speed: 70
 	Health:
 		HP: 2400
@@ -6687,7 +6696,7 @@ LTNK:
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
-		TurnSpeed: 7
+		TurnSpeed: 28
 	Armament:
 		Weapon: LTNK-Weapon-1
 		Recoil: 85
@@ -6727,7 +6736,7 @@ MLRS: #mantis for lack of AA or until i make a new nod AA vehicle unit
 		BuildDuration: 360
 	Mobile:
 		Speed: 100
-		TurnSpeed: 7
+		TurnSpeed: 28
 	Health:
 		HP: 1875
 	Armor:
@@ -6735,7 +6744,7 @@ MLRS: #mantis for lack of AA or until i make a new nod AA vehicle unit
 	RevealsShroud:
 		Range: 8c0
 	Turreted:
-		TurnSpeed: 8
+		TurnSpeed: 32
 		Offset: -128,0,128
 		RealignDelay: 0
 	Armament:
@@ -6743,7 +6752,6 @@ MLRS: #mantis for lack of AA or until i make a new nod AA vehicle unit
 		LocalOffset: 0,-171,0, 0,171,0
 	AmmoPool:
 		Ammo: 2
-		PipCount: 0
 	AttackTurreted:
 	WithSpriteTurret:
 	RenderRangeCircle:
@@ -6753,6 +6761,7 @@ MLRS: #mantis for lack of AA or until i make a new nod AA vehicle unit
 	ReloadAmmoPool@1:
 		Delay: 45
 		Count: 1
+	-WithAmmoPipsDecoration:
 MLRS.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -6780,7 +6789,7 @@ ARTY: #specter
 		Description: Long-range artillery.\n  Strong vs Infantry, Vehicles and Buildings
 		BuildDuration: 450
 	Mobile:
-		TurnSpeed: 4
+		TurnSpeed: 16
 		Speed: 90
 	Health:
 		HP: 2400
@@ -6828,7 +6837,7 @@ FTNK:
 		Description: Armored flame-throwing vehicle.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Tanks
 		BuildDuration: 360
 	Mobile:
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Speed: 75
 	Health:
 		HP: 3700
@@ -6869,7 +6878,7 @@ CTNK:
 		Description: Heavily armored Chemical-throwing vehicle.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Defence
 		BuildDuration: 360
 	Mobile:
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Speed: 75
 	Health:
 		HP: 4440
@@ -6911,7 +6920,7 @@ CTNK:
 	RevealsShroud:
 		Range: 5c0
 	Turreted:
-		TurnSpeed: 4
+		TurnSpeed: 16
 	Armament:
 		Weapon: 3TNK-Weapon-1
 		Recoil: 128
@@ -6971,7 +6980,7 @@ DTRK:
 	-ProducibleWithLevel:
 	-Carryable:
 	AttackFrontal:
-		FacingTolerance: 128
+		FacingTolerance: 512
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	GrantConditionOnAttack:
@@ -6996,7 +7005,7 @@ STNK:
 		Description: Long-range missile tank that can cloak.\nCan attack Aircraft.\nHas weak armor. Can be spotted by defense structures.\n  Strong vs Vehicles, Infantry\n  Weak vs Tanks and defences.
 		BuildDuration: 540
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 40
 		Speed: 120
 	Health:
 		HP: 1875
@@ -7056,7 +7065,7 @@ MRJ:
 		Offset: -256,0,256
 	ProximityExternalCondition@JAMMER:
 		Range: 14c0
-		ValidStances: Enemy, Neutral
+		ValidRelationships: Enemy, Neutral
 		Condition: jammed
 	WithRangeCircle@JAMMER:
 		Type: jammer
@@ -7064,7 +7073,7 @@ MRJ:
 		Color: 0000FF80
 	JamsMissiles:
 		Range: 5c0
-		DeflectionStances: Neutral, Enemy
+		DeflectionRelationships: Neutral, Enemy
 	RenderJammerCircle:
 	DetectCloaked:
 		Range: 5c0
@@ -7085,7 +7094,7 @@ C17:
 	Valued:
 		Cost: 2000
 	Aircraft:
-		TurnSpeed: 10
+		TurnSpeed: 40
 		Speed: 400
 		Repulsable: False
 		MaximumPitch: 36
@@ -7097,7 +7106,6 @@ C17:
 		Type: AT-28
 	Cargo:
 		MaxWeight: 10
-		PipCount: 10
 	DamageMultiplier@INVULNERABLE:
 		Modifier: 0
 	Contrail@1:
@@ -7117,6 +7125,9 @@ C17:
 		PlayerPalette: playerRA
 	Buildable:
 		Description: Drops vehicle reinforcements on Airstrips
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 
 C17D:
 	Inherits: C17
@@ -7129,7 +7140,7 @@ C17D:
 	Armor:
 		Type: AT-28
 	Aircraft:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 250
 		Repulsable: False
 		MaximumPitch: 36
@@ -7139,7 +7150,6 @@ C17D:
 	Cargo:
 		MaxWeight: 10
 	SelectionDecorations:
-		RenderSelectionBars: False
 	Tooltip:
 		Name: C17
 	Contrail@1:
@@ -7177,7 +7187,7 @@ C17D.Husk:
 	Contrail@2:
 		Offset: -598,683,0
 	Aircraft:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 180
 	SmokeTrailWhenDamaged:
 		Offset: -853,0,171
@@ -7211,7 +7221,7 @@ F22:
 		Range: 10c0
 		Type: CenterPosition
 	AttackAircraft:
-		FacingTolerance: 20
+		FacingTolerance: 80
 		Armaments: primary, secondary, tertiary
 	Armament@PRIMARY:
 		Name: primary
@@ -7246,10 +7256,9 @@ F22:
 		Ammo: 1
 		AmmoCondition: airbomb
 		ReloadDelay: 400
-		PipType: Red
 	Aircraft:
-		InitialFacing: 192
-		TurnSpeed: 5
+		InitialFacing: 768
+		TurnSpeed: 20
 		Speed: 190
 		RepulsionSpeed: 40
 		MaximumPitch: 56
@@ -7272,12 +7281,22 @@ F22:
 		PlayerPalette: playerRA
 	JamsMissiles:
 		Range: 2c0
-		DeflectionStances: Enemy
+		DeflectionRelationships: Enemy
 		Chance: 30
 	AppearsOnRadar:
 		UseLocation: False
-		ValidStances: Ally
-F22.Husk
+		ValidRelationships: Ally
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		FullSequence: pip-red
+F22.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: F22
@@ -7287,7 +7306,7 @@ F22.Husk
 	Contrail@2:
 		Offset: -598,683,0
 	Aircraft:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 180
 	SmokeTrailWhenDamaged:
 		Offset: -853,0,171
@@ -7321,7 +7340,7 @@ ARTYFIRE:
 	Valued:
 		Cost: 2000
 	Aircraft:
-		TurnSpeed: 4
+		TurnSpeed: 16
 		Speed: 300
 		Repulsable: False
 		CruiseAltitude: 18000
@@ -7363,8 +7382,8 @@ HELI:
 		Description: Attack Helicopter.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 		BuildDuration: 270
 	Aircraft:
-		InitialFacing: 224
-		TurnSpeed: 4
+		InitialFacing: 896
+		TurnSpeed: 16
 		Speed: 180
 		TurnToLand: True
 		IdleBehavior: None
@@ -7395,16 +7414,14 @@ HELI:
 		Name: HeliAGGunA
 		Ammo: 20
 		ReloadCount: 1
-		PipCount: 0
 		AmmoCondition: ammoG
 	AmmoPool@HeliMissilesA:
 		Name: HeliMissilesA
 		Ammo: 8
-		PipCount: 5
 		ReloadCount: 8
 		AmmoCondition: ammoM
 	AttackAircraft:
-		FacingTolerance: 20
+		FacingTolerance: 80
 	WithIdleOverlay@ROTORAIR:
 		Offset: 0,0,85
 		Sequence: rotor
@@ -7423,12 +7440,17 @@ HELI:
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 30,24
+	-WithAmmoPipsDecoration:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 5
 HELI.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Apache Longbow
 	Aircraft:
-		TurnSpeed: 4
+		TurnSpeed: 16
 		Speed: 186
 	RevealsShroud:
 		Range: 10c0
@@ -7453,8 +7475,8 @@ ORCA:
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 		BuildDuration: 330
 	Aircraft:
-		InitialFacing: 224
-		TurnSpeed: 4
+		InitialFacing: 896
+		TurnSpeed: 16
 		Speed: 175
 		TurnToLand: True
 		IdleBehavior: None
@@ -7474,10 +7496,9 @@ ORCA:
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
 	AttackAircraft:
-		FacingTolerance: 20
+		FacingTolerance: 80
 	AmmoPool:
 		Ammo: 8
-		PipCount: 8
 		ReloadCount: 2
 		AmmoCondition: ammo
 	Rearmable:
@@ -7494,12 +7515,15 @@ ORCA:
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 30,24
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 ORCA.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Orca
 	Aircraft:
-		TurnSpeed: 4
+		TurnSpeed: 16
 		Speed: 186
 	RevealsShroud:
 		Range: 10c0
@@ -7514,7 +7538,7 @@ A10:
 	Valued:
 		Cost: 500
 	Aircraft:
-		TurnSpeed: 4
+		TurnSpeed: 16
 		Speed: 200
 		Repulsable: False
 	Health:
@@ -7559,7 +7583,7 @@ A10.Husk:
 	Contrail@2:
 		Offset: -598,683,0
 	Aircraft:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 180
 	SmokeTrailWhenDamaged:
 		Offset: -853,0,171
@@ -7590,7 +7614,7 @@ TRAN:
 		BuildDuration: 150
 	Aircraft:
 		IdleBehavior: Land
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 160
 		InitialFacing: 0
 		LandableTerrainTypes: Clear,Rough,Road,Ore,Beach,Tiberium,BlueTiberium,RedTiberium
@@ -7623,8 +7647,7 @@ TRAN:
 	Cargo:
 		Types: Infantry, Doctor
 		MaxWeight: 10
-		PipCount: 10
-		PassengerFacing: 224
+		PassengerFacing: 896
 	SpawnActorOnDeath:
 		Actor: TRAN.Husk
 	Explodes:
@@ -7635,12 +7658,15 @@ TRAN:
 	Selectable:
 		DecorationBounds: 41,41
 		Class: Chinook
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 TRAN.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Chinook Transport
 	Aircraft:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 140
 	RevealsShroud:
 		Range: 8c0
@@ -7673,7 +7699,7 @@ OSPREY:
 		BuildDuration: 150
 	Aircraft:
 		IdleBehavior: Land
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 160
 		InitialFacing: 0
 		LandableTerrainTypes: Clear,Rough,Road,Ore,Beach,Tiberium,BlueTiberium,RedTiberium
@@ -7723,16 +7749,18 @@ OSPREY:
 	Cargo:
 		Types: Infantry, Doctor
 		MaxWeight: 5
-		PipCount: 5
-		PassengerFacing: 128
+		PassengerFacing: 512
 	Selectable:
 		DecorationBounds: 66,52
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 OSPREY.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: V-22 Osprey
 	Aircraft:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 140
 	RevealsShroud:
 		Range: 8c0
@@ -7755,7 +7783,7 @@ OSPREY.delivery:
 		Name: V-22 Osprey
 	Aircraft:
 		IdleBehavior: LeaveMap
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 326
 		InitialFacing: 0
 		LandableTerrainTypes: Clear,Rough,Road,Ore,Beach,Tiberium,BlueTiberium,RedTiberium
@@ -7791,14 +7819,13 @@ C130:
 		Type: AT-28
 	Aircraft:
 		CruiseAltitude: 4560
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 200
 		Repulsable: False
 		MaximumPitch: 56
 	Cargo:
 		MaxWeight: 10
 	SelectionDecorations:
-		RenderSelectionBars: False
 	Tooltip:
 		Name: C-130
 	SpawnActorOnDeath:
@@ -7819,7 +7846,7 @@ C130.Husk:
 	Tooltip:
 		Name: C-130
 	Aircraft:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Speed: 149
 	SmokeTrailWhenDamaged@0:
 		Offset: -432,560,0
@@ -7858,7 +7885,7 @@ SS:
 	Armor:
 		Type: AT-28
 	Mobile:
-		TurnSpeed: 4
+		TurnSpeed: 16
 		Speed: 72
 	RevealsShroud:
 		Range: 1c0
@@ -7924,7 +7951,7 @@ MSUB:
 	Armor:
 		Type: AT-28
 	Mobile:
-		TurnSpeed: 3
+		TurnSpeed: 12
 		Speed: 90
 	RevealsShroud:
 		Range: 8c0
@@ -7992,7 +8019,7 @@ PT:
 	Armor:
 		Type: AT-28
 	Mobile:
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Speed: 72
 	RevealsShroud:
 		Range: 7c0
@@ -8000,7 +8027,7 @@ PT:
 	RevealsShroud@GAPGEN:
 		Range: 5c0
 	Turreted:
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Offset: 512,0,0
 	Armament@PRIMARY:
 		Weapon: 2Inch
@@ -8042,7 +8069,7 @@ DD:
 	Armor:
 		Type: AT-28
 	Mobile:
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Speed: 60
 	RevealsShroud:
 		Range: 6c0
@@ -8051,11 +8078,11 @@ DD:
 		Range: 5c0
 	Turreted@PRIMARY:
 		Turret: primary
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Offset: -900,0,128
 	Turreted@SECONDARY:
 		Turret: secondary
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Offset: 900,0,128
 	Armament@PRIMARY:
 		Weapon: Stinger
@@ -8105,7 +8132,7 @@ CA:
 	Armor:
 		Type: AT-28
 	Mobile:
-		TurnSpeed: 3
+		TurnSpeed: 12
 		Speed: 45
 	RevealsShroud:
 		Range: 7c0
@@ -8115,11 +8142,11 @@ CA:
 	Turreted@PRIMARY:
 		Turret: primary
 		Offset: -896,0,128
-		TurnSpeed: 3
+		TurnSpeed: 12
 	Turreted@SECONDARY:
 		Turret: secondary
 		Offset: 768,0,128
-		TurnSpeed: 3
+		TurnSpeed: 12
 	Armament@PRIMARY:
 		Turret: primary
 		Weapon: 8Inch
@@ -8160,7 +8187,7 @@ LST:
 		BuildDuration: 750
 	Mobile:
 		InitialFacing: 0
-		TurnSpeed: 4
+		TurnSpeed: 16
 		Speed: 80
 		RequiresCondition: !notmobile
 		Locomotor: lcraft
@@ -8184,14 +8211,16 @@ LST:
 	Cargo:
 		Types: Infantry, Vehicle
 		MaxWeight: 5
-		PipCount: 5
-		PassengerFacing: 2
+		PassengerFacing: 8
 		LoadingCondition: notmobile
 	RenderSprites:
 		PlayerPalette: playerRA
 		Scale: 0.8
 	Selectable:
 		Bounds: 48,48
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 
 LSTRA:
 	Inherits: ^Ship
@@ -8225,11 +8254,13 @@ LSTRA:
 	Cargo:
 		Types: Infantry, Vehicle
 		MaxWeight: 5
-		PipCount: 5
 		PassengerFacing: 0
 		LoadingCondition: notmobile
 	Selectable:
 		DecorationBounds: 36,36
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 
 BOAT:
 	Inherits: ^Ship
@@ -8250,7 +8281,7 @@ BOAT:
 		Range: 7c0
 		Type: CenterPosition
 	Turreted:
-		TurnSpeed: 5
+		TurnSpeed: 20
 		Offset: 0,896,171
 	Armament:
 		Weapon: BoatMissile
@@ -8296,12 +8327,12 @@ GUNBOAT:
 	Armor:
 		Type: AT-28
 	Mobile:
-		TurnSpeed: 2
+		TurnSpeed: 8
 		Speed: 42
 	RevealsShroud:
 		Range: 7c0
 	Turreted:
-		TurnSpeed: 7
+		TurnSpeed: 28
 		Offset: 2250,0,200
 	Armament:
 		Weapon: TurretGunBoatGun
@@ -8371,7 +8402,6 @@ SNIPER:
 	AmmoPool@SniperAmmo:
 		Name: SniperAmmo
 		Ammo: 10
-		PipCount: 0
 	AutoTarget:
 		ScanRadius: 15
 	AttackSounds:
@@ -8395,9 +8425,10 @@ SNIPER:
 	WithDecoration@SNIPER:
 		Image: pips
 		Sequence: pip-sniper
-		ReferencePoint: Top, Center
-		ValidStances: Ally
+		Position: Top
+		ValidRelationships: Ally
 		RequiresSelection: False
+	-WithAmmoPipsDecoration:
 
 E2:
 	Inherits: ^Soldier
@@ -8460,14 +8491,14 @@ MEDI:
 	RevealsShroud:
 		Range: 3c0
 	Passenger:
-		PipType: Blue
+		CustomPipType: blue
 		Voice: Action
 	Armament:
 		Weapon: Heal
 		Cursor: heal
 		OutsideRangeCursor: heal
-		TargetStances: Ally
-		ForceTargetStances: Ally
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
 	AutoTarget:
 	AttackFrontal:
 	WithInfantryBody:
@@ -8515,15 +8546,15 @@ MECH:
 	RevealsShroud:
 		Range: 3c0
 	Passenger:
-		PipType: Blue
+		CustomPipType: blue
 		Voice: Move
 	AutoTarget:
 	Armament:
 		Weapon: Repair
 		Cursor: repair
 		OutsideRangeCursor: repair
-		TargetStances: Ally
-		ForceTargetStances: None
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
 	AttackFrontal:
 		Voice: Move
 	WithInfantryBody:
@@ -8566,7 +8597,6 @@ E1:
 	AmmoPool@VehGrenadeANDBullets:
 		Name: VehGrenadeANDBulletsA
 		Ammo: 2
-		PipCount: 0
 	Armament@Gren:
 		Name: secondary
 		Weapon: FragGrenade
@@ -8593,6 +8623,7 @@ E1:
 		Delay: 4
 		Count: 1
 		ResetOnFire: False
+	-WithAmmoPipsDecoration:
 
 E3:
 	Inherits: ^Soldier
@@ -8660,7 +8691,7 @@ E6:
 	Armor:
 		Type: AT-13
 	Passenger:
-		PipType: Yellow
+		CustomPipType: yellow
 	-ProducibleWithLevel:
 	SoundOnDamageTransition:
 		DamagedSounds: inftakingfire1.wav, inftakingfire2.wav, inftakingfire3.wav, inftakingfire4.wav
@@ -8768,7 +8799,7 @@ SPECOPS:
 	RevealsShroud:
 		Range: 5c0
 	Passenger:
-		PipType: Red
+		CustomPipType: red
 		Voice: Move
 	Disguise:
 		Voice: Move
@@ -8776,7 +8807,7 @@ SPECOPS:
 	Infiltrates:
 		EnterBehaviour: Dispose
 		PlayerExperience: 100
-		ValidStances: Enemy, Neutral
+		ValidRelationships: Enemy, Neutral
 		Types: SpyInfiltrate
 		Notification:
 	AutoTarget:
@@ -8791,8 +8822,7 @@ SPECOPS:
 		Image: pips
 		Sequence: pip-disguise
 		Palette: playerRA
-		ReferencePoint: Top, Right
-		ZOffset: 256
+		Position: TopRight
 		RequiresCondition: disguise
 		RequiresSelection: True
 	IgnoresDisguise:
@@ -8870,7 +8900,6 @@ SOLESURVIVOR:
 		Type: AT-13
 	Tooltip:
 		Name: Sole Survivor
-	ConditionManager:
 	ProvidesPrerequisite:
 		Prerequisite: solesurvivor
 	SoundOnDamageTransition:
@@ -8903,7 +8932,7 @@ RMBO:
 	Armor:
 		Type: AT-21
 	Passenger:
-		PipType: Red
+		CustomPipType: red
 		Voice: Move
 	RevealsShroud:
 		Range: 6c0
@@ -9083,7 +9112,6 @@ VICE:
 	Inherits@1: ^CombatUnit
 	Inherits@2: ^SpriteActor
 	Huntable:
-	ConditionManager:
 	Health:
 		HP: 300
 	Armor:
@@ -9281,7 +9309,7 @@ V19.Captured:
 OILRIG:
 	Inherits: ^TechBuilding
 	CashTricklerBar:
-		DisplayStances: Ally
+		DisplayRelationships: Ally
 		Color: c5c5c5
 	CashTrickler:
 		Amount: 10
@@ -10657,9 +10685,6 @@ SPLIT2:
 		Sequence: idle-lightsg
 		Palette: lights_Green_05
 		IsPlayerPalette: False
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5001
 SPLIT3:
 	Inherits: ^TibTree
 	RenderSprites:
@@ -10673,9 +10698,6 @@ SPLIT3:
 		Sequence: idle-lightsg
 		Palette: lights_Green_05
 		IsPlayerPalette: False
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5001
 SPLITBLUE:
 	Inherits: ^TibTree
 	RenderSprites:
@@ -10694,9 +10716,6 @@ SPLITBLUE:
 		Sequence: idle-lightsb
 		Palette: lights_Blue_05
 		IsPlayerPalette: False
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5002
 SPLITRED:
 	Inherits: ^TibTree
 	RenderSprites:
@@ -10714,9 +10733,6 @@ SPLITRED:
 		Sequence: idle-lightsr
 		Palette: lights_Red_05
 		IsPlayerPalette: False
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5003
 
 #This below is a "hack" that allows for spikes to be build on tib trees. In esence this adds a dummy terrain. Personaly I think this is very unprofecional, might be a smart solution on my part but still I wish I dint had to do it, and spend countless hours on figuring stuff like this one, and then forget what ive have done and force my self to re invent the wheel just to understand what I have done. Oh well.
 
@@ -10728,9 +10744,6 @@ DUMMY_GREEN_TIB_TREE:
 	-SeedsResource:
 	Replaceable:
 		Types: Spike
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5001
 DUMMY_BLUE_TIB_TREE:
 	Inherits: SPLITBLUE
 	RenderSprites:
@@ -10739,9 +10752,6 @@ DUMMY_BLUE_TIB_TREE:
 	-SeedsResource:
 	Replaceable:
 		Types: Spike
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5002
 DUMMY_RED_TIB_TREE:
 	Inherits: SPLITRED
 	RenderSprites:
@@ -10750,9 +10760,6 @@ DUMMY_RED_TIB_TREE:
 	-SeedsResource:
 	Replaceable:
 		Types: Spike
-	LaysTerrain:
-		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
-		Template: 5003
 
 ROCK1:
 	Inherits: ^Rock

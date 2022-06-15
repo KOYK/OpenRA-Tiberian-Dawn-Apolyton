@@ -30,7 +30,7 @@ Rockets:
 		Blockable: false
 		Inaccuracy: 128
 		Image: DRAGON
-		HorizontalRateOfTurn: 15
+		HorizontalRateOfTurn: 60
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 298
@@ -55,7 +55,7 @@ BikeRockets:
 		Blockable: false
 		Inaccuracy: 128
 		Image: DRAGON
-		HorizontalRateOfTurn: 10
+		HorizontalRateOfTurn: 40
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 213
@@ -81,7 +81,7 @@ HeliMissiles:
 		Blockable: false
 		Inaccuracy: 128
 		Image: DRAGON
-		HorizontalRateOfTurn: 20
+		HorizontalRateOfTurn: 80
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 256
@@ -106,7 +106,7 @@ OrcaAGMissiles:
 		Blockable: false
 		Inaccuracy: 128
 		Image: DRAGON
-		HorizontalRateOfTurn: 20
+		HorizontalRateOfTurn: 80
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 256
@@ -131,7 +131,7 @@ OrcaAAMissiles:
 		Blockable: false
 		Inaccuracy: 128
 		Image: DRAGON
-		HorizontalRateOfTurn: 20
+		HorizontalRateOfTurn: 80
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 298
@@ -156,7 +156,7 @@ MammothMissiles:
 		Blockable: false
 		Inaccuracy: 128
 		Image: DRAGON
-		HorizontalRateOfTurn: 20
+		HorizontalRateOfTurn: 80
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 341
@@ -192,8 +192,8 @@ F22Missiles:
 		Blockable: false
 		Inaccuracy: 128
 		LockOnProbability: 80
-		HorizontalRateOfTurn:  3
-		VerticalRateOfTurn: 4
+		HorizontalRateOfTurn: 12
+		VerticalRateOfTurn: 16
 		Image: DRAGON
 		TrailImage: smokey
 		ContrailLength: 8
@@ -257,7 +257,7 @@ MultipleMissiles.stnk:
 		Blockable: false
 		Inaccuracy: 213
 		Image: DRAGON
-		HorizontalRateOfTurn: 10
+		HorizontalRateOfTurn: 40
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 213
@@ -286,7 +286,7 @@ BoatMissile:
 		Blockable: false
 		Inaccuracy: 426
 		Image: DRAGON
-		HorizontalRateOfTurn: 5
+		HorizontalRateOfTurn: 20
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 170
@@ -318,7 +318,7 @@ TowerMissle:
 		Blockable: false
 		Inaccuracy: 128
 		Image: DRAGON
-		HorizontalRateOfTurn: 20
+		HorizontalRateOfTurn: 80
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 298
@@ -346,7 +346,7 @@ SAMMissile:
 		Arm: 0
 		Blockable: false
 		Image: MISSILE
-		HorizontalRateOfTurn: 20
+		HorizontalRateOfTurn: 80
 		Speed: 426
 		RangeLimit: 11c614
 		TrailImage: smokey
@@ -372,7 +372,7 @@ Patriot:
 		Image: patriot
 		TrailImage: smokey
 		ContrailLength: 8
-		HorizontalRateOfTurn: 20
+		HorizontalRateOfTurn: 80
 		Speed: 300
 		RangeLimit: 10c819
 	Warhead@1Dam: SpreadDamage
