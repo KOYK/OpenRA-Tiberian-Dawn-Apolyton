@@ -65,6 +65,7 @@ Rules:
 	tda|lobby_options.yaml
 
 	tda|rules.yaml
+	tda|d2kpatch.yaml
 
 	tda|bots/bot_profiles.yaml
 	tda|bots/bot_shared.yaml
