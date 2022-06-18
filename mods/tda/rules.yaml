@@ -946,6 +946,38 @@ FLARE:
 		Categories: System
 	Interactable:
 
+^BasicFlag:
+	Inherits@1: ^CombatUnit
+	Inherits@2: ^SpriteActor
+	Inherits@shape: ^1x1Shape
+	Inherits@handicaps: ^PlayerHandicaps
+	Selectable:
+		Priority: 3
+	Targetable:
+		TargetTypes: Ground, C4, Structure, DetonateAttack
+	Armor:
+		Type: Wood
+	WithSpriteBody:
+	AcceptsDeliveredCash:
+	ProximityCaptor:
+		Types: Flag, Player
+	RenderSprites:
+		PlayerPalette: playerRA
+		Image: basicflag
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	WithBuildingBib:
+		HasMinibib: True
+	Tooltip:
+		Name: Flag
+		GenericName: Flag
+		GenericStancePrefix: true
+		GenericVisibility: Ally, Enemy
+	FrozenUnderFog:
+	MapEditorData:
+		Categories: System
+
 FLAG_STARTING_UNITS:
 	Inherits: ^BasicFlag
 	Building:
@@ -961,6 +993,11 @@ FLAG_STARTING_UNITS:
 		Cost: 2000
 	ProvidesPrerequisite:
 		Prerequisite: flag_starting_units
+	Mobile:
+		TurnSpeed: 32
+		Speed: 72
+		RequiresCondition: notmobile
+		Locomotor: foot
 	Health:
 		HP: 1000
 	RevealsShroud:
@@ -2781,37 +2818,7 @@ Player:
 	MapEditorData:
 		Categories: System
 
-^BasicFlag:
-	Inherits@1: ^CombatUnit
-	Inherits@2: ^SpriteActor
-	Inherits@shape: ^1x1Shape
-	Inherits@handicaps: ^PlayerHandicaps
-	Selectable:
-		Priority: 3
-	Targetable:
-		TargetTypes: Ground, C4, Structure, DetonateAttack
-	Armor:
-		Type: Wood
-	WithSpriteBody:
-	AcceptsDeliveredCash:
-	ProximityCaptor:
-		Types: Flag, Player
-	RenderSprites:
-		PlayerPalette: playerRA
-		Image: basicflag
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	WithBuildingBib:
-		HasMinibib: True
-	Tooltip:
-		Name: Flag
-		GenericName: Flag
-		GenericStancePrefix: true
-		GenericVisibility: Ally, Enemy
-	FrozenUnderFog:
-	MapEditorData:
-		Categories: System
+
 
 ^Mine:
 	Inherits: ^SpriteActor
