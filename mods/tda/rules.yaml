@@ -2474,7 +2474,8 @@ Player:
 	WithDeathAnimation:
 		UseDeathTypeSuffix: False
 		DeathSequence: damaged-idle
-		FallbackSequence: dead
+		FallbackSequence: damaged-idle
+	-WithMakeAnimation:
 	Health:
 		HP: 400
 	Tooltip:
