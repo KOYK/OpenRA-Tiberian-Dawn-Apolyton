@@ -2473,7 +2473,7 @@ Player:
 		Notification: BuildingLost
 	WithDeathAnimation:
 		UseDeathTypeSuffix: False
-		DeathSequence: dead
+		DeathSequence: damaged-idle
 		FallbackSequence: dead
 	Health:
 		HP: 400
