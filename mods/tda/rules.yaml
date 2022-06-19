@@ -3526,6 +3526,7 @@ NUKE:
 		RequiresCondition: !PowerPlantUpgrade.proximity
 	Sellable:
 		RequiresCondition: !PowerPlantUpgrade.proximity || PowerPlantUpgrade.proximity
+		SkipMakeAnimation: false
 	Exit:
 	ProductionQueue@Nod:
 		Type: PowerPlantUpgrade.Nod
@@ -3568,6 +3569,9 @@ NUKE:
 	GrantConditionOnDamageState@UPGRADED_ON:
 		ValidDamageStates: Heavy, Critical
 		Condition: Damaged
+	WithMakeAnimation:
+		Sequence: make
+		BodyNames: body, bodyup
 	WithDeathAnimation:
 		UseDeathTypeSuffix: False
 		DeathSequence: dead
@@ -3587,10 +3591,12 @@ NUKE:
 		StartSequence: make
 		Sequence: idle
 		RequiresCondition: !PowerPlantUpgrade.proximity
+		Name: body
 	WithSpriteBody@UPGRADED_ON:
 		StartSequence: upgraded_make
 		Sequence: upgraded_idle
 		RequiresCondition: PowerPlantUpgrade.proximity && !Damaged
+		Name: bodyup
 	WithIdleOverlay@DAMAGED_UPGRADED_ON:
 		Sequence: upgraded_damaged-idle
 		StartSequence: upgraded_make
