@@ -228,6 +228,7 @@
 		Green: 1.000
 		Blue: 1.000
 		Ambient: 1.000
+
 World:
 	Inherits: ^BaseWorld
 	ChatCommands:
@@ -5323,7 +5324,6 @@ GUN:
 		Range: 3c0
 	Power:
 		Amount: -8
-	ClassicFacingBodyOrientation:
 	Selectable:
 		Bounds: 24,24
 
@@ -5374,7 +5374,6 @@ SAM:
 	-RenderDetectionCircle:
 	Power:
 		Amount: -2
-	ClassicFacingBodyOrientation:
 	Targetable:
 		TargetTypes: Ground, C4, Structure, DetonateAttack, Defense, AItagAvoid
 	Selectable:
@@ -10775,6 +10774,10 @@ SPLIT2:
 		Sequence: idle-lightsg
 		Palette: lights_Green_05
 		IsPlayerPalette: False
+	D2kBuilding:
+		AllowInvalidPlacement: true
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		ConcreteTemplate: 5001
 SPLIT3:
 	Inherits: ^TibTree
 	RenderSprites:
@@ -10788,6 +10791,10 @@ SPLIT3:
 		Sequence: idle-lightsg
 		Palette: lights_Green_05
 		IsPlayerPalette: False
+	D2kBuilding:
+		AllowInvalidPlacement: true
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		ConcreteTemplate: 5001
 SPLITBLUE:
 	Inherits: ^TibTree
 	RenderSprites:
@@ -10806,6 +10813,10 @@ SPLITBLUE:
 		Sequence: idle-lightsb
 		Palette: lights_Blue_05
 		IsPlayerPalette: False
+	D2kBuilding:
+		AllowInvalidPlacement: true
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		ConcreteTemplate: 5002
 SPLITRED:
 	Inherits: ^TibTree
 	RenderSprites:
@@ -10823,6 +10834,10 @@ SPLITRED:
 		Sequence: idle-lightsr
 		Palette: lights_Red_05
 		IsPlayerPalette: False
+	D2kBuilding:
+		AllowInvalidPlacement: true
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		ConcreteTemplate: 5003
 
 #This below is a "hack" that allows for spikes to be build on tib trees. In esence this adds a dummy terrain. Personaly I think this is very unprofecional, might be a smart solution on my part but still I wish I dint had to do it, and spend countless hours on figuring stuff like this one, and then forget what ive have done and force my self to re invent the wheel just to understand what I have done. Oh well.
 
@@ -10834,6 +10849,10 @@ DUMMY_GREEN_TIB_TREE:
 	-SeedsResource:
 	Replaceable:
 		Types: Spike
+	D2kBuilding:
+		AllowInvalidPlacement: true
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		ConcreteTemplate: 5001
 DUMMY_BLUE_TIB_TREE:
 	Inherits: SPLITBLUE
 	RenderSprites:
@@ -10842,6 +10861,10 @@ DUMMY_BLUE_TIB_TREE:
 	-SeedsResource:
 	Replaceable:
 		Types: Spike
+	D2kBuilding:
+		AllowInvalidPlacement: true
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		ConcreteTemplate: 5002
 DUMMY_RED_TIB_TREE:
 	Inherits: SPLITRED
 	RenderSprites:
@@ -10850,6 +10873,10 @@ DUMMY_RED_TIB_TREE:
 	-SeedsResource:
 	Replaceable:
 		Types: Spike
+	D2kBuilding:
+		AllowInvalidPlacement: true
+		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
+		ConcreteTemplate: 5003
 
 ROCK1:
 	Inherits: ^Rock
