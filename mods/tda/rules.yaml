@@ -1951,7 +1951,7 @@ Player:
 		RequiresCondition: HitByTiberium
 	Health:
 	Armor:
-		Type: None
+		Type: AT-13
 	RevealsShroud:
 		Range: 5c0
 	Mobile:
@@ -9133,6 +9133,7 @@ COMMANDER:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		StandSequences: stand
+	-TakeCover:
 	Armament@PILLBOX:
 		Name: pillbox
 		Weapon: USP45

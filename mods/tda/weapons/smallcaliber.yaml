@@ -24,11 +24,10 @@ Sniper2:
 	InvalidTargets: Vehicle, Water, Structure, Wall, Husk, Tank
 	ReloadDelay: 70
 	Range: 10c0
-	Projectile: Bullet
-		Speed: 1c682
+	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
-		Damage: 400
+		Damage: 20000
 		ValidTargets: Infantry
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 
@@ -37,15 +36,14 @@ SilencedPPK:
 	Inherits@2: ^ImpactHitForceBulletLight
 	Inherits@3: ^Sniper
 	ReloadDelay: 40
-	Range: 8c0
+	Range: 6c0
 	Report: silencer.aud
 	ValidTargets: Ground, Infantry
-	InvalidTargets: Vehicle, Tank, Water, Structure, Wall, Husk
-	Projectile: Bullet
-		Speed: 1c682
-	Warhead@1Dam: TargetDamage
-		Spread: 128
-		Damage: 30
+	InvalidTargets: Vehicle, Water, Structure, Wall, Husk, Tank
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 42
+		Damage: 20000
 		ValidTargets: Infantry
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 
