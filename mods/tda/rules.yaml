@@ -8382,6 +8382,7 @@ BOAT:
 		QuantizedFacings: 2
 	WithGunboatBody:
 		Sequence: left # Just a work-around to avoid crash
+	-WithFacingSpriteBody:
 	Selectable:
 		Bounds: 42,24
 		DecorationBounds: 42,24
@@ -9131,6 +9132,7 @@ COMMANDER:
 	AttackFrontal:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
+		StandSequences: stand
 	Armament@PILLBOX:
 		Name: pillbox
 		Weapon: USP45
