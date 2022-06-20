@@ -212,17 +212,8 @@
 	ResourceRenderer:
 		RenderTypes: Tiberium, BlueTiberium, RedTiberium
 	# ----TDA ADDITIONS--- #
-	ActorSpawnManager@SHIM:
-		Minimum: 1
-		Maximum: 10000000
-		SpawnInterval: 1
-		Actors: TibShimmering
-		Owner: Neutral
-		Types: TibShimmeringType
 	BuildableTerrainLayer:
 		Palette: terrain
-	LuaScript:
-		Scripts: tda|data/environment/daynight.lua
 	GlobalLightingPaletteEffect:
 		Red: 1.000
 		Green: 1.000
@@ -399,6 +390,16 @@ World:
 		ShellmapRoot: MENU_BACKGROUND
 	ScriptTriggers:
 	TimeLimitManager:
+	# ----TDA ADDITIONS--- #
+	ActorSpawnManager@SHIM:
+		Minimum: 1
+		Maximum: 10000000
+		SpawnInterval: 1
+		Actors: TibShimmering
+		Owner: Neutral
+		Types: TibShimmeringType
+	LuaScript:
+		Scripts: tda|data/environment/daynight.lua
 
 EditorWorld:
 	Inherits: ^BaseWorld
@@ -2180,6 +2181,7 @@ FLAG_STARTING_UNITS:
 	#	Condition: Ship
 	RepairableNear:
 		RepairActors: shipyard_nod, shipyard_gdi
+		Voice: Action
 	WithFacingSpriteBody:
 
 ^Building:
@@ -2309,9 +2311,9 @@ FLAG_STARTING_UNITS:
 	Valued:
 		Cost: 2500
 	RepairsUnits:
-		HpPerStep: 1000
+		HpPerStep: 500
 		StartRepairingNotification: Repairing
-		FinishRepairingNotification: UnitRepaired
+		FinishRepairingNotification: null
 		PlayerExperience: 15
 	-SpawnActorsOnSell:
 	RallyPoint:
