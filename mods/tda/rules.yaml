@@ -1237,6 +1237,7 @@ FLARE:
 		GenericStancePrefix: true
 		GenericVisibility: Ally, Enemy
 	FrozenUnderFog:
+	-HiddenUnderFog:
 	MapEditorData:
 		Categories: System
 
