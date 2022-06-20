@@ -409,6 +409,54 @@ EditorWorld:
 	LoadWidgetAtGameStart:
 	EditorActionManager:
 
+^BasePlayer:
+	AlwaysVisible:
+	Shroud:
+
+EditorPlayer:
+	Inherits: ^BasePlayer
+
+Player:
+	Inherits: ^BasePlayer
+	ProximityCaptor:
+		Types: Player
+	PlaceBuilding:
+	TechTree:
+	SupportPowerManager:
+	ScriptTriggers:
+	MissionObjectives:
+	ConquestVictoryConditions:
+	PowerManager:
+	AllyRepair:
+	PlayerResources:
+	DeveloperMode:
+		CheckboxDisplayOrder: 8
+	BaseAttackNotifier:
+	PlayerStatistics:
+	FrozenActorLayer:
+	PlaceBeacon:
+	ProvidesTechPrerequisite@low:
+		Name: Low
+		Prerequisites: techlevel.low
+		Id: low
+	ProvidesTechPrerequisite@medium:
+		Name: Medium
+		Prerequisites: techlevel.low, techlevel.medium
+		Id: medium
+	ProvidesTechPrerequisite@nosuper:
+		Name: No Powers
+		Prerequisites: techlevel.low, techlevel.medium, techlevel.high
+		Id: nopowers
+	ProvidesTechPrerequisite@all:
+		Name: Unrestricted
+		Prerequisites: techlevel.low, techlevel.medium, techlevel.high, techlevel.superweapons
+		Id: unrestricted
+	GrantConditionOnPrerequisiteManager:
+	ResourceStorageWarning:
+	PlayerExperience:
+	GameSaveViewportManager:
+	PlayerRadarTerrain:
+
 ^Palettes:
 	GlobalLightingPaletteEffect:
 		ExcludePalettes: ra2foricamos, flashyeffectra, flashyeffect, effect, effectra, alpha, chrome, lights_Red_Pal, lights_Red_50, lights_Red_05, lights_Blue_Pal, lights_Blue_50, lights_Blue_05, lights_Green_Pal, lights_Green_50, lights_Green_05, lights_Gray_Pal, lights_Gray_50, lights_Gray_05, PlayerColorLights, PlayerColorLights_RA
@@ -515,6 +563,218 @@ EditorWorld:
 		Filename: temperat.pal
 		AllowModifiers: false
 		ShadowIndex: 4
+	#Classic PALETTES-------------------------------------------------------------------------------------------------------------------------------------------------
+	PaletteFromFile@terrain-desert:
+		Name: terrain
+		Tileset: DESERT
+		Filename: desert.pal
+		ShadowIndex: 4
+	PaletteFromFile@terrain-winter:
+		Name: terrain
+		Tileset: WINTER
+		Filename: winter.pal
+		ShadowIndex: 4
+	PaletteFromFile@terrain-snow:
+		Name: terrain
+		Tileset: SNOW
+		Filename: snowTD.pal
+		ShadowIndex: 4
+	PaletteFromFile@terrain-temperat:
+		Name: terrain
+		Tileset: TEMPERAT
+		Filename: temperat.pal
+		ShadowIndex: 4
+	PaletteFromFile@terrain-jungle:
+		Name: terrain
+		Tileset: JUNGLE
+		Filename: jungle.pal
+		ShadowIndex: 4
+	PaletteFromFile@staticterrain-desert:
+		Name: staticterrain
+		Tileset: DESERT
+		Filename: desert.pal
+		ShadowIndex: 4
+	PaletteFromFile@staticterrain-winter:
+		Name: staticterrain
+		Tileset: WINTER
+		Filename: winter.pal
+		ShadowIndex: 4
+	PaletteFromFile@staticterrain-snow:
+		Name: staticterrain
+		Tileset: SNOW
+		Filename: snowTD.pal
+		ShadowIndex: 4
+	PaletteFromFile@staticterrain-temperat:
+		Name: staticterrain
+		Tileset: TEMPERAT
+		Filename: temperat.pal
+		ShadowIndex: 4
+	PaletteFromFile@staticterrain-jungle:
+		Name: staticterrain
+		Tileset: JUNGLE
+		Filename: jungle.pal
+		ShadowIndex: 4
+	PaletteFromFile@ra2foricamos:
+		Name: ra2foricamos
+		Filename: ra2foricamos.pal
+		ShadowIndex: 3
+		AllowModifiers: false
+	PaletteFromFile@chrome:
+		Name: chrome
+		CursorPalette: true
+		Filename: temperat.pal
+		ShadowIndex: 3
+		AllowModifiers: false
+	PaletteFromFile@beaconposter:
+		Name: beaconposter
+		Filename: temperat.pal
+		ShadowIndex: 3
+	PaletteFromFile@effect:
+		Name: effect
+		Filename: temperat.pal
+		ShadowIndex: 4
+	PaletteFromFile@colorpicker:
+		Name: colorpicker
+		Filename: temperat.pal
+		ShadowIndex: 4
+		AllowModifiers: false
+	PaletteFromFile@snowRA:
+		Name: snowRA
+		Filename: snowRA.pal
+		ShadowIndex: 3
+		AllowModifiers: True
+	PaletteFromRGBA@submerged:
+		Name: submerged
+		R: 0
+		G: 0
+		B: 0
+		A: 140
+	PaletteFromRGBA@shadow:
+		Name: shadow
+		R: 0
+		G: 0
+		B: 0
+		A: 140
+	PaletteFromRGBA@cloak:
+		Name: cloak
+		R: 0
+		G: 0
+		B: 0
+		A: 140
+	PaletteFromRGBA@highlight:
+		Name: highlight
+		R: 255
+		G: 255
+		B: 255
+		A: 128
+	PaletteFromRGBA@moveflash:
+		Name: moveflash
+		R: 255
+		G: 255
+		B: 255
+		A: 64
+	PaletteFromRGBA@disabled:
+		Name: disabled
+		R: 0
+		G: 0
+		B: 0
+		A: 180
+	ShroudPalette@shroud:
+		Name: shroud
+	ShroudPalette@fog:
+		Name: fog
+		Fog: true
+	FixedColorPalette@GreenTiberium:
+		Base: terrain
+		Name: greentiberium
+		Color: 20CF08
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	FixedColorPalette@BlueTiberium:
+		Base: terrain
+		Name: bluetiberium
+		Color: 89BAFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	FixedColorPalette@RedTiberium:
+		Base: terrain
+		Name: redtiberium
+		Color: f43b26
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PlayerColorPalette:
+		BasePalette: NoTerrain
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromFile@NoTerrain:
+		Name: NoTerrain
+		Filename: noterrain.pal
+		ShadowIndex: 4
+	PaletteFromFile@playerRA:
+		Name: playerRA
+		Filename: temperatRA.pal
+		ShadowIndex: 4
+	PlayerColorPalette@playerRA:
+		BaseName: playerRA
+		BasePalette: playerRA
+		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+	PaletteFromFile@shipyard:
+		Name: shipyard
+		Filename: shipyard.pal
+		ShadowIndex: 4
+	PlayerColorPalette@shipyard:
+		BaseName: shipyard
+		BasePalette: shipyard
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PlayerHighlightPalette:
+	MenuPaletteEffect:
+		MenuEffect: Desaturated
+	CloakPaletteEffect:
+	RotationPaletteEffect:
+		ExcludeTilesets: JUNGLE, TEMPERAT, SNOW, WINTER, DESERT
+	RotationPaletteEffect@water:
+		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
+		RotationBase: 32
+		RotationRange: 7
+		RotationStep: 0.20
+		ExcludeTilesets: SNOW
+	RotationPaletteEffect@ocean:
+		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
+		RotationBase: 224
+		RotationRange: 2
+		RotationStep: 0.10
+		ExcludeTilesets: SNOW
+	RotationPaletteEffect@waterRA:
+		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
+		Palettes: snowRA
+		RotationBase: 96
+		RotationRange: 7
+		RotationStep: 0.20
+		ExcludeTilesets: JUNGLE, TEMPERAT, WINTER, DESERT
+	RotationPaletteEffect@UnitsRA:
+		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
+		Palettes: playerRA
+		RotationBase: 230
+		RotationRange: 10
+		RotationStep: 0.20
+		ExcludeTilesets: JUNGLE, TEMPERAT, WINTER, DESERT
+	RotationPaletteEffect@shipyard:
+		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
+		Palettes: shipyard
+		RotationBase: 32
+		RotationRange: 7
+		RotationStep: 0.25
+	PaletteFromFile@depth:
+		Name: depth
+		Filename: depth.pal
+	VoxelNormalsPalette@normals:
+		Name: normals
+		Type: RedAlert2
+	#Type: RedAlert2 or TiberianSun
+	PaletteFromFile@playerTS:
+		Name: playerTS
+		Filename: TS.pal
+		ShadowIndex: 1
+	PlayerColorPalette@playerTS:
+		BasePalette: playerTS
+		BaseName: playerTS
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
 
 barracks.upgraded:
 	AlwaysVisible:
@@ -558,6 +818,7 @@ TibShimmering:
 		CrushedSequence: removed
 		UseDeathTypeSuffix: False
 		FallbackSequence: removed
+		DeathSequence: removed
 	HitShape:
 		Type: Circle
 			Radius: 1
@@ -1043,267 +1304,6 @@ FLAG_STARTING_UNITS:
 	MapEditorData:
 		Categories: System
 	Interactable:
-
-^BasePlayer:
-	AlwaysVisible:
-	Shroud:
-
-EditorPlayer:
-	Inherits: ^BasePlayer
-
-Player:
-	Inherits: ^BasePlayer
-	ProximityCaptor:
-		Types: Player
-	PlaceBuilding:
-	TechTree:
-	SupportPowerManager:
-	ScriptTriggers:
-	MissionObjectives:
-	ConquestVictoryConditions:
-	PowerManager:
-	AllyRepair:
-	PlayerResources:
-	DeveloperMode:
-		CheckboxDisplayOrder: 8
-	BaseAttackNotifier:
-	PlayerStatistics:
-	FrozenActorLayer:
-	PlaceBeacon:
-	ProvidesTechPrerequisite@low:
-		Name: Low
-		Prerequisites: techlevel.low
-		Id: low
-	ProvidesTechPrerequisite@medium:
-		Name: Medium
-		Prerequisites: techlevel.low, techlevel.medium
-		Id: medium
-	ProvidesTechPrerequisite@nosuper:
-		Name: No Powers
-		Prerequisites: techlevel.low, techlevel.medium, techlevel.high
-		Id: nopowers
-	ProvidesTechPrerequisite@all:
-		Name: Unrestricted
-		Prerequisites: techlevel.low, techlevel.medium, techlevel.high, techlevel.superweapons
-		Id: unrestricted
-	GrantConditionOnPrerequisiteManager:
-	ResourceStorageWarning:
-	PlayerExperience:
-	GameSaveViewportManager:
-	PlayerRadarTerrain:
-
-^Palettes:
-	PaletteFromFile@terrain-desert:
-		Name: terrain
-		Tileset: DESERT
-		Filename: desert.pal
-		ShadowIndex: 4
-	PaletteFromFile@terrain-winter:
-		Name: terrain
-		Tileset: WINTER
-		Filename: winter.pal
-		ShadowIndex: 4
-	PaletteFromFile@terrain-snow:
-		Name: terrain
-		Tileset: SNOW
-		Filename: snowTD.pal
-		ShadowIndex: 4
-	PaletteFromFile@terrain-temperat:
-		Name: terrain
-		Tileset: TEMPERAT
-		Filename: temperat.pal
-		ShadowIndex: 4
-	PaletteFromFile@terrain-jungle:
-		Name: terrain
-		Tileset: JUNGLE
-		Filename: jungle.pal
-		ShadowIndex: 4
-	PaletteFromFile@staticterrain-desert:
-		Name: staticterrain
-		Tileset: DESERT
-		Filename: desert.pal
-		ShadowIndex: 4
-	PaletteFromFile@staticterrain-winter:
-		Name: staticterrain
-		Tileset: WINTER
-		Filename: winter.pal
-		ShadowIndex: 4
-	PaletteFromFile@staticterrain-snow:
-		Name: staticterrain
-		Tileset: SNOW
-		Filename: snowTD.pal
-		ShadowIndex: 4
-	PaletteFromFile@staticterrain-temperat:
-		Name: staticterrain
-		Tileset: TEMPERAT
-		Filename: temperat.pal
-		ShadowIndex: 4
-	PaletteFromFile@staticterrain-jungle:
-		Name: staticterrain
-		Tileset: JUNGLE
-		Filename: jungle.pal
-		ShadowIndex: 4
-	PaletteFromFile@ra2foricamos:
-		Name: ra2foricamos
-		Filename: ra2foricamos.pal
-		ShadowIndex: 3
-		AllowModifiers: false
-	PaletteFromFile@chrome:
-		Name: chrome
-		CursorPalette: true
-		Filename: temperat.pal
-		ShadowIndex: 3
-		AllowModifiers: false
-	PaletteFromFile@beaconposter:
-		Name: beaconposter
-		Filename: temperat.pal
-		ShadowIndex: 3
-	PaletteFromFile@effect:
-		Name: effect
-		Filename: temperat.pal
-		ShadowIndex: 4
-	PaletteFromFile@colorpicker:
-		Name: colorpicker
-		Filename: temperat.pal
-		ShadowIndex: 4
-		AllowModifiers: false
-	PaletteFromFile@snowRA:
-		Name: snowRA
-		Filename: snowRA.pal
-		ShadowIndex: 3
-		AllowModifiers: True
-	PaletteFromRGBA@submerged:
-		Name: submerged
-		R: 0
-		G: 0
-		B: 0
-		A: 140
-	PaletteFromRGBA@shadow:
-		Name: shadow
-		R: 0
-		G: 0
-		B: 0
-		A: 140
-	PaletteFromRGBA@cloak:
-		Name: cloak
-		R: 0
-		G: 0
-		B: 0
-		A: 140
-	PaletteFromRGBA@highlight:
-		Name: highlight
-		R: 255
-		G: 255
-		B: 255
-		A: 128
-	PaletteFromRGBA@moveflash:
-		Name: moveflash
-		R: 255
-		G: 255
-		B: 255
-		A: 64
-	PaletteFromRGBA@disabled:
-		Name: disabled
-		R: 0
-		G: 0
-		B: 0
-		A: 180
-	ShroudPalette@shroud:
-		Name: shroud
-	ShroudPalette@fog:
-		Name: fog
-		Fog: true
-	FixedColorPalette@GreenTiberium:
-		Base: terrain
-		Name: greentiberium
-		Color: 20CF08
-		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
-	FixedColorPalette@BlueTiberium:
-		Base: terrain
-		Name: bluetiberium
-		Color: 89BAFF
-		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
-	FixedColorPalette@RedTiberium:
-		Base: terrain
-		Name: redtiberium
-		Color: f43b26
-		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
-	PlayerColorPalette:
-		BasePalette: NoTerrain
-		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
-	PaletteFromFile@NoTerrain:
-		Name: NoTerrain
-		Filename: noterrain.pal
-		ShadowIndex: 4
-	PaletteFromFile@playerRA:
-		Name: playerRA
-		Filename: temperatRA.pal
-		ShadowIndex: 4
-	PlayerColorPalette@playerRA:
-		BaseName: playerRA
-		BasePalette: playerRA
-		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
-	PaletteFromFile@shipyard:
-		Name: shipyard
-		Filename: shipyard.pal
-		ShadowIndex: 4
-	PlayerColorPalette@shipyard:
-		BaseName: shipyard
-		BasePalette: shipyard
-		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
-	PlayerHighlightPalette:
-	MenuPaletteEffect:
-		MenuEffect: Desaturated
-	CloakPaletteEffect:
-	RotationPaletteEffect:
-		ExcludeTilesets: JUNGLE, TEMPERAT, SNOW, WINTER, DESERT
-	RotationPaletteEffect@water:
-		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
-		RotationBase: 32
-		RotationRange: 7
-		RotationStep: 0.20
-		ExcludeTilesets: SNOW
-	RotationPaletteEffect@ocean:
-		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
-		RotationBase: 224
-		RotationRange: 2
-		RotationStep: 0.10
-		ExcludeTilesets: SNOW
-	RotationPaletteEffect@waterRA:
-		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
-		Palettes: snowRA
-		RotationBase: 96
-		RotationRange: 7
-		RotationStep: 0.20
-		ExcludeTilesets: JUNGLE, TEMPERAT, WINTER, DESERT
-	RotationPaletteEffect@UnitsRA:
-		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
-		Palettes: playerRA
-		RotationBase: 230
-		RotationRange: 10
-		RotationStep: 0.20
-		ExcludeTilesets: JUNGLE, TEMPERAT, WINTER, DESERT
-	RotationPaletteEffect@shipyard:
-		ExcludePalettes: flashyeffectra, flashyeffect, effect, effectra, staticterrain, staticdesert, staticplayer, chrome, alpha, ra2foricamos, NoTerrain, player
-		Palettes: shipyard
-		RotationBase: 32
-		RotationRange: 7
-		RotationStep: 0.25
-	PaletteFromFile@depth:
-		Name: depth
-		Filename: depth.pal
-	VoxelNormalsPalette@normals:
-		Name: normals
-		Type: RedAlert2
-	#Type: RedAlert2 or TiberianSun
-	PaletteFromFile@playerTS:
-		Name: playerTS
-		Filename: TS.pal
-		ShadowIndex: 1
-	PlayerColorPalette@playerTS:
-		BasePalette: playerTS
-		BaseName: playerTS
-		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
 
 ^CaptureManager:
 	EditorOnlyTooltip@32:
@@ -2320,6 +2320,10 @@ Player:
 		IsPlayerPalette: True
 	Power:
 		Amount: -5
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+		DeathSequence: damaged-idle
+		FallbackSequence: damaged-idle
 	DetectCloaked:
 		CloakTypes: Underwater
 		Range: 10c0
@@ -2529,6 +2533,10 @@ Player:
 		Action: ChangeOwner
 	#GrantCondition@UnitType:
 	#	Condition: TechBuilding
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+		DeathSequence: idle
+		FallbackSequence: idle
 
 ^CivField:
 	Inherits: ^CivBuilding
@@ -2694,7 +2702,6 @@ Player:
 		GenericName: Destroyed Plane
 	Aircraft:
 	FallsToEarth:
-		Spins: False
 		Moves: True
 		Velocity: 86
 		Explosion: PlaneCrash
@@ -2749,7 +2756,6 @@ Player:
 		TakeOffOnResupply: true
 		VTOL: true
 	FallsToEarth:
-		Spins: True
 		Moves: False
 		Explosion: HeliCrash
 	Tooltip:
@@ -4009,13 +4015,12 @@ HAND:
 		Range: 5c0
 	WithBuildingBib:
 	RallyPoint:
-		Offset: 1,2
+		Path: 1,2
 	Exit@1:
 		SpawnOffset: 512,1024,0
 		ExitCell: 1,2
 	Production:
 		Produces: Infantry.Nod, Infantry.Nodda
-	WithDeliveryAnimation:
 	ProductionQueue@NodInfantry:
 		Type: Infantry.Nod
 		Group: Infantry
@@ -4134,7 +4139,7 @@ WEAP:
 		Sequence: build-top
 		RequiresCondition: !build-incomplete
 	RallyPoint:
-		Offset: 0,2
+		Path: 0,2
 	Exit@1:
 		SpawnOffset: -512,-512,0
 		ExitCell: 0,1
@@ -4207,7 +4212,7 @@ AFLD:
 	WithDeliveryAnimation:
 		RequiresCondition: !build-incomplete
 	RallyPoint:
-		Offset: 4,2
+		Path: 4,2
 	Exit@1:
 		SpawnOffset: -1024,0,0
 		ExitCell: 3,1
@@ -5029,7 +5034,7 @@ EYE:
 		Modifier: 0
 	FreeActor:
 		Actor: renegate
-		SpawnOffset	1,2:
+		SpawnOffset: 1,2
 		AllowRespawn: True
 		EditorFreeActorDisplayOrder: 4
 		RequiresCondition: !disabled && !powerdown && !build-incomplete && !being-demolished
@@ -6122,6 +6127,10 @@ HARV_BOOST_ON:
 	WithHarvestAnimation:
 	WithDockingAnimation:
 	RenderSprites:
+		FactionImages:
+			nod: harv.nod
+			nodda: harv.nod
+			gdi: harv.gdi
 		Image: harv
 	Harvester:
 		Resources: Tiberium, BlueTiberium, RedTiberium
@@ -6159,6 +6168,10 @@ HARV_BOOST_OFF:
 	WithHarvestAnimation:
 	WithDockingAnimation:
 	RenderSprites:
+		FactionImages:
+			nod: harv.nod
+			nodda: harv.nod
+			gdi: harv.gdi
 		Image: harv
 	Harvester:
 		Resources: Tiberium, BlueTiberium, RedTiberium
@@ -9494,7 +9507,7 @@ BARR:
 	RevealsShroud:
 		Range: 5c0
 	RallyPoint:
-		Offset: 1,2
+		Path: 1,2
 	Exit@1:
 		SpawnOffset: -170,810,0
 		ExitCell: 1,2
@@ -9609,6 +9622,7 @@ PORT:
 		MustBeClear: true
 		Sticky: true
 		Permanent: false
+	-WithDeathAnimation:
 
 V19_DES:
 	Inherits: ^TechBuilding
@@ -10839,7 +10853,7 @@ SPLITRED:
 		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
 		ConcreteTemplate: 5003
 
-#This below is a "hack" that allows for spikes to be build on tib trees. In esence this adds a dummy terrain. Personaly I think this is very unprofecional, might be a smart solution on my part but still I wish I dint had to do it, and spend countless hours on figuring stuff like this one, and then forget what ive have done and force my self to re invent the wheel just to understand what I have done. Oh well.
+#This below is a "hack" that allows for spikes to be build on tib trees. In esence this adds a dummy terrain. Personaly I think this is very unprofecional, might be a smart solution on my part but still I wish I dint had to do it, and spend countless hours on figuring stuff like this one, and then forget what ive have done and force my self to re invent the wheel just to understand what I have done. Oh well. oh btw stop stealing from my mod!
 
 DUMMY_GREEN_TIB_TREE:
 	Inherits: SPLIT3
