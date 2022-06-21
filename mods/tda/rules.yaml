@@ -1210,7 +1210,6 @@ FLARE:
 	Interactable:
 
 ^BasicFlag:
-	Inherits@1: ^CombatUnit
 	Inherits@2: ^SpriteActor
 	Inherits@shape: ^1x1Shape
 	Inherits@handicaps: ^PlayerHandicaps
@@ -1238,7 +1237,6 @@ FLARE:
 		GenericStancePrefix: true
 		GenericVisibility: Ally, Enemy
 	FrozenUnderFog:
-	-HiddenUnderFog:
 	MapEditorData:
 		Categories: System
 
@@ -1257,11 +1255,7 @@ FLAG_STARTING_UNITS:
 		Cost: 2000
 	ProvidesPrerequisite:
 		Prerequisite: flag_starting_units
-	Mobile:
-		TurnSpeed: 32
-		Speed: 72
-		RequiresCondition: notmobile
-		Locomotor: foot
+
 	Health:
 		HP: 1000
 	RevealsShroud:
@@ -1310,8 +1304,6 @@ FLAG_STARTING_UNITS:
 ^CaptureManager:
 	CaptureManager:
 		PreventsAutoTarget: True
-	CapturableProgressBlink:
-		Interval: 10
 
 ^CapturableBuilding:
 	Inherits: ^CaptureManager
@@ -1319,6 +1311,10 @@ FLAG_STARTING_UNITS:
 		Types: Building
 		ValidRelationships: Enemy, Neutral
 		CancelActivity: False
+	CapturableProgressBlink:
+		Interval: 10
+	CapturableProgressBar:
+		Color: FFA500
 
 ^CapturableTransport:
 	Inherits: ^CaptureManager
@@ -1326,6 +1322,10 @@ FLAG_STARTING_UNITS:
 		Types: Transport
 		ValidRelationships: Enemy, Neutral
 		CancelActivity: False
+	CapturableProgressBlink:
+		Interval: 10
+	CapturableProgressBar:
+		Color: FFA500
 
 ^CapturableHusk:
 	Inherits: ^CaptureManager
@@ -1333,6 +1333,10 @@ FLAG_STARTING_UNITS:
 		Types: Husk
 		ValidRelationships: Enemy, Neutral, Ally
 		CancelActivity: False
+	CapturableProgressBlink:
+		Interval: 10
+	CapturableProgressBar:
+		Color: FFA500
 
 ^CanCaptureBuilding:
 	Inherits: ^CaptureManager
@@ -1471,7 +1475,8 @@ FLAG_STARTING_UNITS:
 		Sequence: idle
 		OpeningSequence: open
 		Offset: 0,0,200
-		RequiresCondition: parachute && Vehicle
+		RequiresCondition: parachute
+		#RequiresCondition: parachute && Vehicle
 	WithParachute@Large:
 		ShadowImage: parach-vshadow
 		ShadowSequence: idle
@@ -1480,7 +1485,8 @@ FLAG_STARTING_UNITS:
 		Sequence: idle
 		OpeningSequence: open
 		Offset: 0,0,200
-		RequiresCondition: parachute && Tank
+		RequiresCondition: parachute
+		#RequiresCondition: parachute && Tank
 	WithParachute@Small:
 		ShadowImage: parach-shadow
 		ShadowSequence: idle
@@ -1489,7 +1495,9 @@ FLAG_STARTING_UNITS:
 		Sequence: idle
 		OpeningSequence: open
 		Offset: 0,0,427
-		RequiresCondition: parachute && Infantry
+		RequiresCondition: parachute
+		#RequiresCondition: parachute && Infantry
+		#At some point I need to add unit types Infantry tank and vehicle, in order to assign the correct parachute, tbh though i like the dubble parachute lol
 
 ^GlobalTraits:
 	Inherits@1: ^Basic
@@ -2211,6 +2219,7 @@ FLAG_STARTING_UNITS:
 		Priority: 3
 	Targetable:
 		TargetTypes: Ground, C4, Structure, DetonateAttack
+		RequiresCondition: !being-demolished
 	Armor:
 		Type: AT-25
 	Building:
@@ -2269,7 +2278,7 @@ FLAG_STARTING_UNITS:
 	EngineerRepairable:
 	Sellable:
 		SellSounds: cashturn.aud
-		RequiresCondition: !build-incomplete && !being-demolished
+		RequiresCondition: !build-incomplete || !being-demolished
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 14
@@ -2456,6 +2465,8 @@ FLAG_STARTING_UNITS:
 
 ^CivBuilding:
 	Inherits: ^BaseBuilding
+	-WithMakeAnimation:
+	-Sellable:
 	ActorPreviewPlaceBuildingPreview:
 	ShakeOnDeath:
 	Guardable:
@@ -2490,7 +2501,6 @@ FLAG_STARTING_UNITS:
 		UseDeathTypeSuffix: False
 		DeathSequence: damaged-idle
 		FallbackSequence: damaged-idle
-	-WithMakeAnimation:
 	Health:
 		HP: 400
 	Tooltip:
@@ -2552,7 +2562,6 @@ FLAG_STARTING_UNITS:
 	-SelectionDecorations:
 	Tooltip:
 		GenericName: Field
-	-Targetable:
 	RenderSprites:
 		Palette: terrain
 	Interactable:
@@ -2658,8 +2667,6 @@ FLAG_STARTING_UNITS:
 		Types: TibShimmeringType
 	Replaceable:
 		Types: Spike
-	ExternalCondition@SPIKE:
-		Condition: Spike.proximity
 	Valued:
 		Cost: 750
 	MapEditorData:
@@ -2986,7 +2993,6 @@ GMINE:
 		ResourceType: BlueTiberium
 		Interval: 110
 		MaxRange: 10
-		RequiresCondition: !Spike.proximity
 	WithIdleAnimation:
 	Tooltip:
 		Name: Blossom Tree (blue)
@@ -3538,7 +3544,7 @@ NUKE:
 		Produces: PowerPlantUpgrade.Nod, PowerPlantUpgrade.Nodda, PowerPlantUpgrade.GDI
 		RequiresCondition: !PowerPlantUpgrade.proximity
 	Sellable:
-		RequiresCondition: !PowerPlantUpgrade.proximity || PowerPlantUpgrade.proximity
+		RequiresCondition: !build-incomplete && !being-demolished || !PowerPlantUpgrade.proximity || PowerPlantUpgrade.proximity
 		SkipMakeAnimation: false
 	Exit:
 	ProductionQueue@Nod:
@@ -3585,6 +3591,7 @@ NUKE:
 	WithMakeAnimation:
 		Sequence: make
 		BodyNames: body, bodyup
+		Condition: build-incomplete
 	WithDeathAnimation:
 		UseDeathTypeSuffix: False
 		DeathSequence: dead
@@ -3979,6 +3986,8 @@ PYLE:
 		RequiresCondition: hazmatsuits
 		ValidRelationships: Ally, Neutral
 		RequiresSelection: True
+	GrantExternalConditionToProduced:
+		Condition: produced
 
 PYLESOLE:
 	Inherits: PYLE
@@ -4094,6 +4103,8 @@ HAND:
 		RequiresCondition: hazmatsuits
 		ValidRelationships: Ally, Neutral
 		RequiresSelection: True
+	GrantExternalConditionToProduced:
+		Condition: produced
 
 HANDSOLE:
 	Inherits: HAND
@@ -4777,7 +4788,7 @@ HPAD:
 		AffectsParent: False
 	Sellable:
 		RefundPercent: 30
-		RequiresCondition: !Repairing
+		RequiresCondition: !Repairing || !build-incomplete || !being-demolished
 	ExternalCondition@REPAIRING:
 		Condition: Repairing
 	Valued:
@@ -4870,7 +4881,7 @@ AFLDRA:
 		AffectsParent: False
 	Sellable:
 		RefundPercent: 30
-		RequiresCondition: !Repairing
+		RequiresCondition: !Repairing || !build-incomplete || !being-demolished
 	ExternalCondition@REPAIRING:
 		Condition: Repairing
 	Valued:
@@ -5759,7 +5770,9 @@ TGD:
 	WithRangeCircle:
 		Range: 10c0
 		Color: D46F6F
-	-GivesBounty:
+	GivesBounty:
+		RequiresCondition: !build-incomplete && global-bounty
+		Percentage: 5
 	SelectionDecorations:
 
 ^TGD_AFTER_DEATH_BASE:
@@ -6015,7 +6028,7 @@ HARV:
 		CloakDelay: 90
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
-		RequiresCondition: !cloak-force-disabled && stl_harv
+		RequiresCondition: !cloak-force-disabled && stl_harv && cloak-crate-collected
 	GrantConditionOnDamageState@UNCLOAK:
 		Condition: cloak-force-disabled
 		ValidDamageStates: Critical
@@ -7066,6 +7079,7 @@ DTRK:
 		DeployedCondition: triggered
 	KillsSelf:
 		RequiresCondition: triggered
+		GrantsCondition: notmobile
 
 STNK:
 	Inherits: ^Vehicle
@@ -7095,7 +7109,7 @@ STNK:
 		CloakDelay: 90
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
-		RequiresCondition: !cloak-force-disabled
+		RequiresCondition: !cloak-force-disabled || cloak-crate-collected
 	GrantConditionOnDamageState@UNCLOAK:
 		Condition: cloak-force-disabled
 		ValidDamageStates: Critical
@@ -7340,6 +7354,7 @@ F22:
 		AmmoCondition: airbomb
 		ReloadDelay: 400
 	Aircraft:
+		CruisingCondition: cruising
 		InitialFacing: 768
 		TurnSpeed: 20
 		Speed: 190
@@ -7366,6 +7381,7 @@ F22:
 		Range: 2c0
 		DeflectionRelationships: Enemy
 		Chance: 30
+		RequiresCondition: cruising
 	AppearsOnRadar:
 		UseLocation: False
 		ValidRelationships: Ally
@@ -7682,6 +7698,7 @@ TRAN:
 	Inherits@ConMan: ^ConditionManager
 	Inherits@Capturable: ^CapturableTransport
 	-GainsExperience:
+	-GrantCondition@RANK-ELITE:
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -7772,6 +7789,7 @@ OSPREY:
 	Inherits@ConMan: ^ConditionManager
 	Inherits@Capturable: ^CapturableTransport
 	-GainsExperience:
+	-GrantCondition@RANK-ELITE:
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -8764,8 +8782,8 @@ E3:
 
 E6:
 	Inherits@1: ^Infantry
-	Inherits@CanCapture: ^CanCaptureBuilding
-	Inherits@CanCapture: ^CanCaptureTransport
+	Inherits@CanCaptureB: ^CanCaptureBuilding
+	Inherits@CanCaptureT: ^CanCaptureTransport
 	EngineerRepair:
 	RepairsBridges:
 	CaptureNotification:
@@ -8861,9 +8879,10 @@ E5:
 		LocalOffset: 341,0,256
 		FireDelay: 1
 		MuzzleSequence: muzzle
+	GrantCondition@HasHazmat:
+		Condition: hazmatsuits
 	AttackFrontal:
 	WithMuzzleOverlay:
-	-DamagedByTerrain:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	Armament@PILLBOX:
@@ -9046,6 +9065,8 @@ RMBO:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		IdleSequences: idle1,idle2,idle3
+	ExternalCondition@PRODUCED:
+		Condition: produced
 	VoiceAnnouncement:
 		RequiresCondition: produced
 		Voice: Build
@@ -9097,6 +9118,8 @@ RENEGATE:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		IdleSequences: idle1,idle2,idle3
+	ExternalCondition@PRODUCED:
+		Condition: produced
 	VoiceAnnouncement:
 		RequiresCondition: produced
 		Voice: Build
@@ -9110,8 +9133,6 @@ RENEGATE:
 		InitialStanceAI: AttackAnything
 		EnableStances: False
 	RejectsOrders:
-	GrantCondition@RenegadeOut:
-		Condition: renegadeout
 
 COMMANDER:
 	Inherits: ^Soldier
@@ -9610,7 +9631,9 @@ PORT:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	-EngineerRepairable:
-	-Targetable:
+	Targetable:
+		TargetTypes: null
+		RequiresCondition: !being-demolished
 	ProximityCapturable:
 		Range: 10c0
 		CaptorTypes: Vehicle, Tank, Infantry, Player
@@ -10811,7 +10834,6 @@ SPLITBLUE:
 		ResourceType: BlueTiberium
 		Interval: 110
 		MaxRange: 10
-		RequiresCondition: !Spike.proximity
 	WithIdleAnimation:
 	Tooltip:
 		Name: Blossom Tree (blue)
