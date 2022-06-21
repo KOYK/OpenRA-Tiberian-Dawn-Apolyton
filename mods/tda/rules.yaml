@@ -1308,55 +1308,64 @@ FLAG_STARTING_UNITS:
 	Interactable:
 
 ^CaptureManager:
-	EditorOnlyTooltip@32:
 	CaptureManager:
-		CapturingCondition: CapturingCon
-		BeingCapturedCondition: BeingCapturedCon
 		PreventsAutoTarget: True
+	CapturableProgressBlink:
+		Interval: 10
+
+^CapturableBuilding:
+	Inherits: ^CaptureManager
+	Capturable@Building:
+		Types: Building
+		ValidRelationships: Enemy, Neutral
+		CancelActivity: False
+
+^CapturableTransport:
+	Inherits: ^CaptureManager
+	Capturable@Transport:
+		Types: Transport
+		ValidRelationships: Enemy, Neutral
+		CancelActivity: False
+
+^CapturableHusk:
+	Inherits: ^CaptureManager
+	Capturable@Husk:
+		Types: Husk
+		ValidRelationships: Enemy, Neutral, Ally
+		CancelActivity: False
+
+^CanCaptureBuilding:
+	Inherits: ^CaptureManager
 	Captures@Building:
 		CaptureTypes: Building
 		PlayerExperience: 50
 		CaptureDelay: 100
 		ConsumedByCapture: True
 		PlayerExperienceRelationships: Enemy, Neutral
-		RequiresCondition: CapturesBuilding
 		Voice: Action
 		TargetLineColor: 19B41B
+
+^CanCaptureTransport:
+	Inherits: ^CaptureManager
 	Captures@Transport:
 		CaptureTypes: Transport
 		PlayerExperience: 50
 		CaptureDelay: 1
 		ConsumedByCapture: True
 		PlayerExperienceRelationships: Enemy, Neutral
-		RequiresCondition: CapturesTransport
 		Voice: Move
 		TargetLineColor: 19B41B
+
+^CanCaptureHusk:
+	Inherits: ^CaptureManager
 	Captures@Husk:
 		CaptureTypes: Husk
 		PlayerExperience: 50
 		CaptureDelay: 1
 		ConsumedByCapture: True
 		PlayerExperienceRelationships: Enemy, Neutral, Ally
-		RequiresCondition: CapturesHusk
 		Voice: Action
 		TargetLineColor: FFFF00
-	CapturableProgressBlink:
-		Interval: 10
-	Capturable@Building:
-		Types: Building
-		ValidRelationships: Enemy, Neutral
-		CancelActivity: False
-		RequiresCondition: CapturableBuilding
-	Capturable@Husk:
-		Types: Husk
-		ValidRelationships: Enemy, Neutral, Ally
-		CancelActivity: False
-		RequiresCondition: CapturableHusk
-	Capturable@Transport:
-		Types: Transport
-		ValidRelationships: Enemy, Neutral
-		CancelActivity: False
-		RequiresCondition: CapturableTransport
 
 ^AcceptsRepair:
 	Targetable@DAMAGED:
@@ -2189,7 +2198,7 @@ FLAG_STARTING_UNITS:
 	Inherits@2: ^SpriteActor
 	Inherits@shape: ^1x1Shape
 	Inherits@ConMan: ^ConditionManager
-	Inherits@CapMan: ^CaptureManager
+	Inherits@Capturable: ^CapturableBuilding
 	Inherits@ExternalCondition: ^ExternalCondition
 	Inherits@handicaps: ^PlayerHandicaps
 	ActorPreviewPlaceBuildingPreview:
@@ -2247,8 +2256,6 @@ FLAG_STARTING_UNITS:
 		RequiresBaseProvider: true
 		BuildSounds: constru2.aud, hvydoor1.aud
 		TerrainTypes: Clear,Road
-	GrantCondition@CapturableBuilding:
-		Condition: CapturableBuilding
 	MustBeDestroyed:
 		RequiredForShortGame: true
 	RepairableBuilding:
@@ -2518,9 +2525,7 @@ FLAG_STARTING_UNITS:
 
 ^TechBuilding:
 	Inherits: ^CivBuilding
-	Inherits@CapMan: ^CaptureManager
-	GrantCondition@CapturableBuilding:
-		Condition: CapturableBuilding
+	Inherits@Capturable: ^CapturableBuilding
 	CaptureNotification:
 		Notification: CivilianBuildingCaptured
 	EngineerRepairable:
@@ -2711,11 +2716,9 @@ FLAG_STARTING_UNITS:
 
 ^Husk:
 	Inherits: ^CommonHuskDefaults
-	Inherits@CapMan: ^CaptureManager
+	Inherits@Capturable: ^CapturableHusk
 	Husk:
 		AllowedTerrain: Clear, Rough, Road, Tiberium, BlueTiberium, Beach, RedTiberium
-	GrantCondition@CapturableHusk:
-		Condition: CapturableHusk
 	Targetable:
 		RequiresForceFire: True
 		TargetTypes: Ground, Husk
@@ -7677,9 +7680,7 @@ A10.Husk:
 TRAN:
 	Inherits@1: ^Helicopter
 	Inherits@ConMan: ^ConditionManager
-	Inherits@CapMan: ^CaptureManager
-	GrantCondition@CapturableTransport:
-		Condition: CapturableTransport
+	Inherits@Capturable: ^CapturableTransport
 	-GainsExperience:
 	Valued:
 		Cost: 500
@@ -7769,9 +7770,7 @@ TRAN.Husk:
 OSPREY:
 	Inherits@1: ^Helicopter
 	Inherits@ConMan: ^ConditionManager
-	Inherits@CapMan: ^CaptureManager
-	GrantCondition@CapturableTransport:
-		Condition: CapturableTransport
+	Inherits@Capturable: ^CapturableTransport
 	-GainsExperience:
 	Valued:
 		Cost: 500
@@ -8623,9 +8622,7 @@ MEDI:
 MECH:
 	Inherits: ^Infantry
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CapMan: ^CaptureManager
-	GrantCondition@CapturesHusk:
-		Condition: CapturesHusk
+	Inherits@CanCapture: ^CanCaptureHusk
 	CaptureNotification:
 		Notification: null
 		NewOwnerVoice: False
@@ -8767,11 +8764,8 @@ E3:
 
 E6:
 	Inherits@1: ^Infantry
-	Inherits@CapMan: ^CaptureManager
-	GrantCondition@CapturesBuilding:
-		Condition: CapturesBuilding
-	GrantCondition@CapturesTransport:
-		Condition: CapturesTransport
+	Inherits@CanCapture: ^CanCaptureBuilding
+	Inherits@CanCapture: ^CanCaptureTransport
 	EngineerRepair:
 	RepairsBridges:
 	CaptureNotification:
@@ -9012,9 +9006,7 @@ SOLESURVIVOR:
 RMBO:
 	Inherits: ^Soldier
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CapMan: ^CaptureManager
-	GrantCondition:
-		Condition: CapturesTransport
+	Inherits@CanCapture: ^CanCaptureTransport
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -9640,7 +9632,6 @@ V19_DES:
 		Name: Destroyed Oil Derrick
 	EditorOnlyTooltip:
 		Name: Use this
-	-GrantCondition@CapturableBuilding:
 	WithIdleOverlay:
 		StartSequence: fire-start
 		Sequence: fire-loop
