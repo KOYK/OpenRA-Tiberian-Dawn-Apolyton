@@ -2,7 +2,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Red Alert 2",
+			"name": "Tiberian Dawn Apolyton",
 			"type": "clr",
 			"linux": {
 				"type": "mono",
@@ -17,7 +17,7 @@
 			"args": [
 				"Engine.LaunchPath=${workspaceRoot}",
 				"Engine.ModSearchPaths=${workspaceRoot}/mods,./mods",
-				"Game.Mod=ra2",
+				"Game.Mod=tda",
 				"Debug.DisplayDeveloperSettings=true",
 			],
 		},
