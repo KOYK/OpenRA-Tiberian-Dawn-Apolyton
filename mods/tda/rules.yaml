@@ -10805,6 +10805,7 @@ SPLIT2:
 		Sequence: idle-lightsg
 		Palette: lights_Green_05
 		IsPlayerPalette: False
+	-Building:
 	D2kBuilding:
 		AllowInvalidPlacement: true
 		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
@@ -10822,6 +10823,7 @@ SPLIT3:
 		Sequence: idle-lightsg
 		Palette: lights_Green_05
 		IsPlayerPalette: False
+	-Building:
 	D2kBuilding:
 		AllowInvalidPlacement: true
 		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
@@ -10843,6 +10845,7 @@ SPLITBLUE:
 		Sequence: idle-lightsb
 		Palette: lights_Blue_05
 		IsPlayerPalette: False
+	-Building:
 	D2kBuilding:
 		AllowInvalidPlacement: true
 		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
@@ -10864,6 +10867,7 @@ SPLITRED:
 		Sequence: idle-lightsr
 		Palette: lights_Red_05
 		IsPlayerPalette: False
+	-Building:
 	D2kBuilding:
 		AllowInvalidPlacement: true
 		TerrainTypes: Clear, BlueTibTreeTerrain, GreenTibTreeTerrain, RedTibTreeTerrain
