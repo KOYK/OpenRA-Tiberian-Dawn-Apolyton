@@ -17,12 +17,12 @@ Tiberium Dawn Apolyton Credits:
 
     * abcdefg30: 
 	Helped a lot and more than I can count 
-	with lua and github.
+	with lua and github and engine updates.
 
     * Penev92: 
-	Made an unbelievable amount of work! to update
-	TDA	to the latest engine version! 
-	Thank you sir you	brought TDA back to life!
+	Made an unbelievable amount of work! to update TDA 
+	to the latest engine version! Thank you sir you 
+	brought TDA back to life!
 
     * MustaphaTR: 
 	Helped me with github and also spoted 
