@@ -56,6 +56,12 @@ Tiberium Dawn Apolyton Credits:
     * Flamewh33l: 
 	voice for the "Researcher" (not included yet)
 
+**Music Authors:**
+
+    * Moods:
+	MainMenu Theme - djent march!
+		Website: https://www.youtube.com/channel/UCLt8m49Gw0XsZV_RjZqfA7g?app=desktop
+
 **PlayTest Participants:**
 
     * Polemos
