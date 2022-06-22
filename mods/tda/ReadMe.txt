@@ -22,6 +22,8 @@ Version, and because of that this mod has a future!
 
 abcdefg30: Helped a lot and more than I can count with lua and github.
 
+Penev92: Made an unbelievable amount of work! to update	TDA	to the latest engine version! Thank you sir you	brought TDA back to life!
+
 MustaphaTR: Helped me with github and also spoted a lot of bugs, donated code for turning off\on weather effects.
 
 Abarrat: by playtesting and by providing servers
@@ -39,6 +41,10 @@ Voidwalker for doing a huge work on spawnmanager!
 
 Voice Actors:
 Flamewh: voice for the "Researcher" (not included yet)
+
+Music Authors:
+Moods: MainMenu Theme - djent march
+	Website: https://www.youtube.com/channel/UCLt8m49Gw0XsZV_RjZqfA7g?app=desktop
 
 PlayTest Participants:
 Polemos
