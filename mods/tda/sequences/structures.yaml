@@ -47,6 +47,25 @@ civ_church:
 	icon: churchicon.shp
 		AddExtension: False
 
+prop_lamp:
+	idle:
+		Start: 3
+	damaged-idle:
+		Start: 4
+		Length: 1
+	dead:
+		Start: 5
+		Tick: 800
+	make: 
+		Length: 3
+		Tick: 80
+	idle-lightsg: prop_light_effect
+		Offset: 0, 0
+		UseTilesetExtension: false
+		BlendMode: Additive
+		Length: *
+	icon: lighposticon
+
 oilrig:
 	idle:
 		Start: 0

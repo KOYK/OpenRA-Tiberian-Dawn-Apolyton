@@ -2238,6 +2238,15 @@ Player:
 	WithMakeAnimation:
 		Condition: build-incomplete
 
+^Decor1x1:
+	Inherits@Building: ^BaseBuilding
+	Interactable:
+	-SelectionDecorations:
+	MustBeDestroyed:
+		RequiredForShortGame: False
+	-ActorLostNotification:
+	-ShakeOnDeath:
+
 ^WaterBuilding:
 	Inherits: ^BaseBuilding
 	HitShape:
@@ -5832,6 +5841,64 @@ TGDBLUE:
 	-DamagedByTerrain:
 	CashTrickler:
 		Amount: 1400
+
+^LIGHPOST:
+	Inherits@^Decor1x1
+	RenderSprites:
+		Image: prop_lamp
+	Building:
+	Buildable:
+		BuildPaletteOrder: 300
+		Prerequisites: ~barracks
+		Description: Static light decoration\n  Strong vs Darkness\n  Weak vs Hooligans
+		BuildDuration: 10
+	Valued:
+		Cost: 100
+	Health:
+		HP: 1000
+	RevealsShroud:
+		Range: 6c0
+	Power:
+		Amount: -1
+
+LIGHPOST_NOD_RED:
+	Inherits@^LIGHPOST
+	Tooltip:
+		Name: Red LightPost
+	Buildable:
+		Queue: Defence.Nod
+		Prerequisites: ~disabled
+
+LIGHPOST_NOD_PURPLE:
+	Inherits@^LIGHPOST
+	Tooltip:
+		Name: Purple LightPost
+	Buildable:
+		Queue: Defence.Nodda
+		Prerequisites: ~disabled
+
+LIGHPOST_GDI_YELLOW:
+	Inherits@^LIGHPOST
+	Tooltip:
+		Name: Yellow LightPost
+	Buildable:
+		Queue: Defence.GDI
+		Prerequisites: ~disabled
+
+LIGHPOST_CIV_GRAY:
+	Inherits@^LIGHPOST
+	Tooltip:
+		Name: Gray LightPost
+	Buildable:
+		Queue: Defence.GDI, Defence.Nod, Defence.Nodda
+
+LIGHPOST_PLAYER_COLOR:
+	Inherits@^LIGHPOST
+	Tooltip:
+		Name: Custom LightPost
+	Buildable:
+		Queue: Defence.GDI, Defence.Nod, Defence.Nodda
+		Prerequisites: ~disabled
 
 #############################################################################################################
 #											Vehicles														#
