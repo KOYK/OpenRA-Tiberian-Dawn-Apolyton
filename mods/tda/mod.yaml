@@ -329,3 +329,6 @@ ModContent:
 		tda|installer/gdi95.yaml
 		tda|installer/nod95.yaml
 		tda|installer/origin.yaml
+
+DiscordService:
+	ApplicationId: 989134715317522432
