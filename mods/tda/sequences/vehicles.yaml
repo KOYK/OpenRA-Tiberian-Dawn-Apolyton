@@ -92,6 +92,8 @@ harv:
 		Length: 7
 	dock-loop: harvdump
 		Start: 7
+	icon: harv_icon_gdi.shp
+		AddExtension: False
 
 harv.gdi:
 	Inherits: harv
